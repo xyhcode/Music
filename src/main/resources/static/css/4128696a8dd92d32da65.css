@@ -164,7 +164,7 @@
   right: -16px;
   width: 110px;
   height: 110px;
-  background: url("f412d65.png") 50% no-repeat;
+  background: url("../pic/f412d65.png") 50% no-repeat;
   background-size: 100%;
   transition: all 0.3s ease-in-out;
 }

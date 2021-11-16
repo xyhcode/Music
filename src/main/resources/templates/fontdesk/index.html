@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>千千音乐-听见世界</title>
-    <link data-n-head="ssr" rel="icon" type="image/x-icon" th:href="@{/css/favicon.ico}" />
+    <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
     <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}" />
     <link rel="stylesheet" th:href="@{/css/f0c121bf9729755d1933.css}"/>
     <link rel="stylesheet" th:href="@{/css/4128696a8dd92d32da65.css}"/>
@@ -151,7 +151,7 @@
                                         </g>
                                     </g>
                                 </g>
-                            </svg> <img src="99e28d0.png" title="logo" alt="logo" style="display:none;"></a>
+                            </svg> <img th:src="@{/pic/99e28d0.png}" title="logo" alt="logo" style="display:none;"></a>
                         <ul class="header-nav fl" data-v-3e1e2180="" style="margin-left: 50px;">
                             <li class="fl" data-v-3e1e2180=""><a href="" class="nuxt-link-exact-active nuxt-link-active"
                                     data-v-3e1e2180="">首页</a></li>
@@ -178,10 +178,7 @@
                                                 <!----><span class="el-input__suffix"><span
                                                         class="el-input__suffix-inner"><i
                                                             class="iconfont el-input__icon"></i>
-                                                        <!---->
-                                                        <!---->
-                                                        <!---->
-                                                        <!---->
+
                                                     </span>
                                                     <!---->
                                                 </span>
@@ -890,80 +887,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="page-footer">
-                    <div class="footer-content">
-                        <div class="page-container clearfix">
-                            <div class="item fl">
-                                <div class="title">下载千千客户端</div>
-                                <div class="content clearfix">
-                                    <div class="fl download-item"><span class="iconfont"></span> <br>
-                                        Android版
-                                        <div class="ewm"><img src="9db68ae.jpg">
-                                            <p>微信扫一扫</p>
-                                        </div>
-                                    </div>
-                                    <div class="fl download-item"><span class="iconfont"></span> <br>iPhone版
-                                        <div class="ewm"><img src="9db68ae.jpg">
-                                            <p>微信扫一扫</p>
-                                        </div>
-                                    </div>
-                                    <div class="fl download-item"><span class="iconfont"></span> <br>Window版
-                                    </div>
-                                    <div class="fl download-item"><span class="iconfont"></span> <br>MAC版
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item fl">
-                                <div class="title">关于千千音乐</div>
-                                <ul>
-                                    <li><a href="https://music.taihe.com/feedback">意见反馈</a></li>
-                                    <li><a href="https://music.taihe.com/doc/contact">联系我们</a></li>
-                                    <li><a href="https://www.dmhmusic.com/" target="_blank">DMH数字音乐分发平台</a></li>
-                                </ul>
-                            </div>
-                            <div class="item fr">
-                                <div class="title">关注千千音乐</div>
-                                <div class="content clearfix"><a href="http://e.weibo.com/musicbaidu" target="_blank"
-                                        class="fl"><span class="iconfont"></span> 关注微博
-                                    </a>
-                                    <div class="fl"><span class="iconfont"></span> 微信公众号
-                                        <div class="ewm"><img src="c4db3c2.jpg">
-                                            <p>微信扫一扫</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-copyright">
-                        <div class="page-container">
-                            <div>
-                                <div>
-                                    Copyright 2018 © .TAIHE MUSIC GROUP. 深圳太乐文化科技有限公司版权所有
-                                    <a href="https://beian.miit.gov.cn/#/Integrated/index"
-                                        target="_blank">[粤ICP备17102508号-2]</a>
-                                </div>
-                                <div><span>信息网络传播视听许可证: 1910523</span>
-                                    |
-                                    <a target="_blank"
-                                        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502002309"
-                                        class="anbei"><img
-                                            src="urn:scrapbook:download:error:https://static0.qianqian.com/web/static/images/icon_police.png">
-                                        粤公网安备: 44030502002309号
-                                    </a>
-                                    |
-                                    <span>增值电信业务经营许可证: 粵B2-20180819</span>
-                                    |
-                                    <span>网络文化经营许可证号码: 粤网文[2018]0902-359号</span>
-                                </div>
-                            </div>
-                            <div class="feedback"><a href="mailto:jubao@taihe.com">举报邮箱: jubao@taihe.com</a>
-                                |
-                                <a href="https://music.taihe.com/feedback">反馈中心</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <footer th:replace="fontdesk/foot::footer-fragment"></footer>
             </div>
         </div>
     </div>
