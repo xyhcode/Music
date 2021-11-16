@@ -1,0 +1,68 @@
+.search-head .search-bar-box .search-bar input {
+  width: 600px;
+  padding-right: 50px;
+  border-color: #fff;
+  background: #fff;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}
+.search-head .search-bar-box .search-bar input:focus,
+.search-head .search-bar-box .search-bar input:hover {
+  border-color: #fff;
+}
+.search-head .search-bar-box .search-bar .el-input__suffix .iconfont {
+  font-size: 22px;
+}
+.search-head[data-v-3675b332] {
+  height: 18vw;
+  background: url("../images/4985994.png") 50% no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.search-head .search-bar-box[data-v-3675b332] {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  margin-top: -25px;
+  text-align: center;
+}
+.search-head .search-bar-box .search-bar[data-v-3675b332] {
+  display: inline-block;
+}
+.search-content[data-v-3675b332] {
+  margin-top: 50px;
+}
+.search-content .head .title[data-v-3675b332] {
+  font-size: 28px;
+  float: left;
+  margin-right: 45px;
+}
+.search-content .head .el-tabs[data-v-3675b332] {
+  overflow: hidden;
+}
+.search-content .content .el-pagination[data-v-3675b332],
+.search-content .content[data-v-3675b332] {
+  margin-top: 30px;
+}
+.search-content .content .song-box[data-v-3675b332] {
+  min-height: 1184px;
+}
+.search-content .content .song-box .el-button[data-v-3675b332] {
+  margin-bottom: 20px;
+  padding: 12px 31px;
+}
+.search-content .content .song-box .el-button .iconfont[data-v-3675b332] {
+  font-size: 12px;
+}
+.search-content .content .artist-box[data-v-3675b332] {
+  min-height: 820px;
+}
+.search-content .content .albums-box[data-v-3675b332] {
+  min-height: 1002px;
+  margin-top: 10px;
+}
+.search-content .content .albums-box .el-pagination[data-v-3675b332] {
+  margin-top: 0;
+}

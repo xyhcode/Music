@@ -1,0 +1,28 @@
+.filter-box[data-v-bb45b0b4] {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.filter-box .filter-group[data-v-bb45b0b4] {
+  margin-top: 20px;
+}
+.filter-box .filter-group li[data-v-bb45b0b4] {
+  height: 30px;
+  line-height: 30px;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  text-align: center;
+  padding: 0 16px;
+  border-radius: 15px;
+}
+.filter-box .filter-group li.current[data-v-bb45b0b4] {
+  color: #fff;
+  background: #e61723;
+}
+.list-box[data-v-bb45b0b4] {
+  margin: 30px 0;
+}
+.list-box .list-item[data-v-bb45b0b4] {
+  margin-bottom: 20px;
+  display: inline-block;
+  cursor: pointer;
+}

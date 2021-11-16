@@ -1,0 +1,98 @@
+.tag-list-pop ul {
+  font-size: 13px;
+}
+.tag-list-pop ul li {
+  float: left;
+  margin: 5px;
+}
+.tag-list-pop ul li .item {
+  display: block;
+  width: 70px;
+  padding: 0 2px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  background: #f8f8f8;
+  text-align: center;
+  cursor: pointer;
+}
+.tag-list-pop ul li .item.current,
+.tag-list-pop ul li .nuxt-link-exact-active {
+  background: #e61723;
+  color: #fff;
+}
+.filter-data-box[data-v-0869570c] {
+  font-size: 13px;
+}
+.filter-data-box li[data-v-0869570c] {
+  float: left;
+  margin: 10px 10px 0 0;
+}
+.filter-data-box li .item[data-v-0869570c],
+.filter-data-box li .more[data-v-0869570c] {
+  display: block;
+  width: 70px;
+  padding: 0 2px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 20px;
+  background: #f8f8f8;
+  text-align: center;
+  cursor: pointer;
+}
+.filter-data-box li .current[data-v-0869570c] {
+  background: #e61723;
+  color: #fff;
+}
+.filter-data-box li .more[data-v-0869570c] {
+  color: #909399;
+  cursor: pointer;
+}
+.filter-data-box li .more i[data-v-0869570c] {
+  display: inline-block;
+  vertical-align: 2px;
+  width: 8px;
+  height: 6px;
+  background: url("d8526b3125354dc148ea542e8b20667913f6d49c.png");
+}
+.filter-data-box li .more.current[data-v-0869570c] {
+  background: #e61723;
+  color: #fff;
+}
+.filter-data-box li .more.current i[data-v-0869570c] {
+  background: url("f934db0326631a4dd9082293f6331b965c7cb702.png");
+}
+.filter-box[data-v-5ea8f978] {
+  margin: 40px -10px 0 0;
+}
+.filter-box .filter-group[data-v-5ea8f978] {
+  margin-left: 22px;
+  width: 240px;
+}
+.filter-box .filter-group.language-group[data-v-5ea8f978] {
+  margin-left: 0;
+  width: 160px;
+}
+.filter-box .filter-group .title[data-v-5ea8f978] {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.filter-box .filter-group .title .iconfont[data-v-5ea8f978] {
+  font-weight: 600;
+  font-size: 14px;
+}
+.list-head[data-v-5ea8f978] {
+  margin-top: 55px;
+}
+.list-head h2[data-v-5ea8f978] {
+  font-size: 28px;
+}
+.list-head h2 .iconfont[data-v-5ea8f978] {
+  font-size: 10px;
+  vertical-align: 10px;
+  color: #909399;
+  cursor: pointer;
+}
+.el-pagination[data-v-5ea8f978] {
+  margin-top: 30px;
+}

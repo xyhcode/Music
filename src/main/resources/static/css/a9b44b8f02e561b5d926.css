@@ -1,0 +1,90 @@
+.vip-privilege-box .item[data-v-69b7b2aa] {
+  background: #f8f8f8;
+  text-align: center;
+  padding: 50px 0;
+}
+.vip-privilege-box .item .iconfont[data-v-69b7b2aa] {
+  font-size: 76px;
+  color: #b39c78;
+  border: 2px solid #b39c78;
+  border-radius: 50%;
+}
+.vip-privilege-box .item .name[data-v-69b7b2aa] {
+  margin: 20px 0 8px;
+  font-size: 20px;
+}
+.vip-privilege-box .item .intro[data-v-69b7b2aa] {
+  color: #909399;
+}
+.head-box[data-v-a5fd420e] {
+  background: #333;
+}
+.head-box .head-content-box[data-v-a5fd420e] {
+  padding-top: 50px;
+}
+.head-box .head-content-box > .fl[data-v-a5fd420e] {
+  margin-top: 65px;
+}
+.head-box .head-content-box > .fl .avatar[data-v-a5fd420e],
+.head-box .head-content-box > .fl .info[data-v-a5fd420e] {
+  display: inline-block;
+  vertical-align: middle;
+}
+.head-box .head-content-box > .fl .avatar[data-v-a5fd420e] {
+  position: relative;
+}
+.head-box .head-content-box > .fl .avatar .user-vip-icon[data-v-a5fd420e] {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+}
+.head-box
+  .head-content-box
+  > .fl
+  .avatar
+  .user-vip-icon
+  .iconfont[data-v-a5fd420e] {
+  position: relative;
+  z-index: 1;
+  font-size: 36px;
+  color: #d8c7aa;
+}
+.head-box .head-content-box > .fl .info[data-v-a5fd420e] {
+  color: #fff;
+  margin-left: 30px;
+}
+.head-box .head-content-box > .fl .info .name[data-v-a5fd420e] {
+  font-size: 24px;
+}
+.head-box .head-content-box > .fl .info .tool[data-v-a5fd420e] {
+  margin-top: 28px;
+}
+.head-box .head-content-box > .fl .info a[data-v-a5fd420e] {
+  color: #fff;
+}
+.head-box .head-content-box > .fr[data-v-a5fd420e] {
+  width: 680px;
+  height: 250px;
+  background: url("../images/f09046e.png") 50% no-repeat;
+}
+.head-box .head-content-box > .fr .info[data-v-a5fd420e] {
+  padding: 0 60px;
+  margin-top: 65px;
+}
+.head-box .head-content-box > .fr .info .title[data-v-a5fd420e] {
+  font-size: 36px;
+}
+.head-box .head-content-box > .fr .info .el-button.is-round[data-v-a5fd420e] {
+  padding: 17px 40px;
+  border-radius: 25px;
+  background: #333;
+  margin-top: 25px;
+}
+.content-box .group-title[data-v-a5fd420e] {
+  margin: 100px 0 40px;
+  text-align: center;
+  font-size: 28px;
+}
+.content-box .tracklist-box[data-v-a5fd420e] {
+  margin-bottom: 60px;
+}
