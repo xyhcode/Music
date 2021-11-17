@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.music.dao.SingerDao">
+    <select id="seall" resultType="Singer">
+        select * from singer
+    </select>
+
+    <insert id="singadd" parameterType="Singer">
+        insert into singer(siname,siintro,siimg,siarea,sitype) values (#{siname},#{siintro},#{siimg},#{siarea},#{sitype});
+    </insert>
+</mapper>

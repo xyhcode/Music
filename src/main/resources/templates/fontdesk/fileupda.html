@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script>
+        // 音频加载完成后的一系列操作
+        function duration(){
+            var myVid = document.getElementById("audio");
+            // console.log("duration  ",myVid);
+            if(myVid != null){
+                myVid.load();
+                myVid.oncanplay = function () {
+                    $("#st").val(timeToMinute(myVid.duration));
+                }
+            }
+        }
+
+        // 秒转换分钟00:00:00格式
+        function timeToMinute(times){
+            var t='';
+            if(times > -1){
+                var hour = Math.floor(times/3600);
+                var min = Math.floor(times/60) % 60;
+                var sec = times % 60;
+                if(min < 10){t += "0";}
+                t += min + ":";
+                if(sec < 10){t += "0";}
+                t += sec.toFixed(2);
+            }
+            t=t.substring(0,t.length-3);
+            return t;
+
+        }
+
+        //附件展示
+        $(function () {
+            $("#smp3").change(function () {
+                var objUrl = getObjectURL(this.files[0]);
+                $("#audio").attr("src", objUrl);
+                duration();
+            });
+
+        });
+
+        //获取上传图片路径
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) { // basic
+                url = window.createObjectURL(file);
+            } else if (window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+    </script>
+</head>
+<body>
+<h1>歌曲添加</h1>
+<form action="ftest" method="post" enctype="multipart/form-data">
+    歌手ID：<input type="text" name="siid"/><br/>
+    歌曲名称：<input type="text" name="soname"/><br/>
+    mp3地址：<input type="file" id="smp3" name="multipart"/><br/>
+    歌词地址：<input type="file" name="multipart"/><br/>
+    图片地址：<input type="file" name="multipart"/><br/>
+    时间：<input type="text" name="sotime" id="st" readonly="readonly"/><br/>
+    出版时间：<input type="date" name="publish"/><br/>
+    <button type="submit">添加</button>
+</form>
+<audio id="audio" controls="" style="display: none;"></audio>
+
+
+<hr>
+<h1>歌手添加 <a href="https://music.taihe.com/artist">参考链接</a></h1>
+<form action="singer" method="post" enctype="multipart/form-data">
+    歌手姓名：<input type="text" name="siname"/><br/>
+    歌手介绍(随便复制几行)：<br><textarea style="min-height: 80px;min-width:400px;resize: none;" name="siintro"></textarea><br/>
+    歌手图片：<input type="file" name="multipart" /><br/>
+    歌手地区(填数字)：<input type="text" name="siarea"/><span style="color: red">1：其他、2：内地、3：港台、4：欧美、5：韩国、6：日本</span><br/>
+    歌手类型(填数字)：<input type="text" name="sitype"/><span style="color: red">1：男、2：女、3：组合、4：乐队</span><br>
+    <button type="submit">添加</button>
+</form>
+</body>
+</html>
