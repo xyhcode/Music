@@ -1,0 +1,106 @@
+.info-box[data-v-014d094a] {
+    background: #f8f8f8;
+}
+.info-box .info-content[data-v-014d094a] {
+    padding: 40px 0;
+}
+.info-box .info-content .avatar[data-v-014d094a] {
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 60px;
+}
+.info-box .info-content .avatar .el-image[data-v-014d094a] {
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-out;
+}
+.info-box .info-content .avatar:hover .el-image[data-v-014d094a] {
+    transform: scale(1.05);
+}
+.info-box .info-content .avatar .image-slot[data-v-014d094a],
+.info-box .info-content .avatar .image-slot img[data-v-014d094a] {
+    width: 100%;
+    height: 100%;
+}
+.info-box .info-content .info[data-v-014d094a] {
+    overflow: hidden;
+}
+.info-box .info-content .info h1[data-v-014d094a] {
+    font-size: 30px;
+    font-weight: 600;
+}
+.info-box .info-content .info .intro[data-v-014d094a] {
+    max-height: 56px;
+    line-height: 28px;
+    overflow: hidden;
+    color: #909399;
+    margin-top: 50px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    position: relative;
+}
+.info-box .info-content .info .intro .more[data-v-014d094a] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #e61723;
+    background: #f8f8f8;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.info-box .info-content .info .works[data-v-014d094a] {
+    font-size: 16px;
+    margin-top: 50px;
+}
+.info-box .info-content .info .works .collect-btn[data-v-014d094a] {
+    float: left;
+    background-color: #fff;
+    border-radius: 40px;
+}
+.info-box
+.info-content
+.info
+.works
+.collect-btn
+.collected
+.iconfont[data-v-014d094a] {
+    color: #e61723;
+}
+.info-box .info-content .info .works span[data-v-014d094a] {
+    cursor: pointer;
+    display: block;
+    padding: 10px 25px;
+    text-align: center;
+}
+.works-box[data-v-014d094a] {
+    width: 1200px;
+    margin: 50px auto 80px;
+}
+.works-box .head .title[data-v-014d094a] {
+    font-size: 28px;
+    float: left;
+    margin-right: 45px;
+}
+.works-box .head .el-tabs[data-v-014d094a] {
+    overflow: hidden;
+}
+.works-box .content[data-v-014d094a] {
+    margin-top: 30px;
+}
+.works-box .content .song-box .el-button[data-v-014d094a] {
+    margin-bottom: 20px;
+    padding: 12px 31px;
+}
+.works-box .content .song-box .el-button .iconfont[data-v-014d094a] {
+    font-size: 12px;
+}
+.works-box .content .song-box .el-pagination[data-v-014d094a] {
+    margin-top: 40px;
+}
+.works-box .content .albums-box[data-v-014d094a] {
+    margin-top: 10px;
+}
