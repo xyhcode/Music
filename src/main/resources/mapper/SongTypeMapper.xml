@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.music.dao.SongTypeDao">
+    <select id="sein" resultType="SongType">
+        select * from songtype limit 0,11
+    </select>
+
+    <select id="seall" resultType="SongType">
+        select * from songtype where sottype=#{sottype}
+    </select>
+</mapper>

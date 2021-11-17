@@ -281,29 +281,10 @@
                         </div>
                     </div>
                     <div class="tag-box pr" data-v-4e77c644="" data-v-8ac97446="">
-                        <div class="tag-box-inside box-inside" data-v-4e77c644=""><a
-                                href="https://music.taihe.com/songlist?subCateId=2376" data-v-4e77c644="">流行</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2377" data-v-4e77c644="">摇滚</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2378" data-v-4e77c644="">民谣</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2379" data-v-4e77c644="">电子</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2380" data-v-4e77c644="">影视原声</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2381" data-v-4e77c644="">ACG</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2383" data-v-4e77c644="">新世纪</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2384" data-v-4e77c644="">爵士</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2385" data-v-4e77c644="">古典</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2386" data-v-4e77c644="">乡村</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2387" data-v-4e77c644="">说唱</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2388" data-v-4e77c644="">世界音乐</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2389" data-v-4e77c644="">古风</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2390" data-v-4e77c644="">儿歌</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2391" data-v-4e77c644="">朋克</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2392" data-v-4e77c644="">布鲁斯</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2393" data-v-4e77c644="">RnB/Soul</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2394" data-v-4e77c644="">金属</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2396" data-v-4e77c644="">英伦</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2397" data-v-4e77c644="">民族</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2398" data-v-4e77c644="">后摇</a><a
-                                href="https://music.taihe.com/songlist?subCateId=2399" data-v-4e77c644="">拉丁</a></div>
+                        <div class="tag-box-inside box-inside" data-v-4e77c644="">
+                            <!--标签-->
+                            <a th:each="insoty:${inso}" th:text="${insoty.sotname}" th:href="${insoty.sotid}" data-v-4e77c644=""></a>
+                        </div>
                         <a href="https://music.taihe.com/songlist" class="more" data-v-729db4d6=""
                             data-v-4e77c644=""></a>
                     </div>
