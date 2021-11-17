@@ -2,6 +2,7 @@ package com.it.music.entity;
 
 /**
  * @author 羡羡
+ * 歌曲
  */
 public class Song {
     public int soid;

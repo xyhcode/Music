@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.music.dao.FeatureDao">
+    <select id="sefe" resultType="Feature">
+        select * from feature
+    </select>
+
+    <insert id="inadd" parameterType="Feature">
+        insert into feature(fetitle,feurl,feplays) values (#{fetitle},#{feurl},#{feplays});
+    </insert>
+</mapper>

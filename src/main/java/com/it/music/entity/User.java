@@ -2,7 +2,6 @@ package com.it.music.entity;
 
 /**
  * @author 羡羡
- *
  * 用户表
  */
 public class User {
