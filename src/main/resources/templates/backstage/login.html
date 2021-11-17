@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+	
+	<!--图标库-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    
+	<link rel="stylesheet" th:href="@{/css/hloginstyle.css}" type="text/css" />
+	
+</head>
+
+<body>
+    <div id="app">
+        <div class="content">
+
+            <div class="content_input">
+                <div class="title">
+                    <p>管理员登录</p>
+                </div>
+                <el-input v-model="UserName" clearable placeholder="用户名"></el-input>
+                <el-input v-model="PassWord" clearable show-password placeholder="密码"></el-input>
+                <div class="content_button">
+                    <el-button type="primary" @click="SignIn">登录</el-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" th:src="@{/js/ribbon.js}"></script>
+<!-- 先引入 Vue -->
+<script type="text/javascript"  th:src="@{/js/vue.js}"></script>
+<!-- 引入组件库 -->
+<script type="text/javascript"  th:src="@{/js/hloginindex.js}"></script>
+<script type="text/javascript" >
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                UserName: '',
+                PassWord: ''
+            }
+        },
+        methods: {
+            SignIn() {
+                let that = this;
+                let username = that.UserName;
+                let password = that.PassWord;
+                if (!username) {
+                    this.$notify.error({
+                        title: '错误',
+                        message: '用户名不能为空'
+                    });
+                    return;
+                } else if (!password) {
+                    this.$notify.error({
+                        title: '错误',
+                        message: '密码不能为空'
+                    });
+                    return;
+                } else {
+                    this.$message({
+                        message: '恭喜你，通过了！',
+                        type: 'success'
+                    });
+                    setTimeout(() => {
+                        this.$notify({
+                            title: '没得办法就这一页',
+                            message: '自己点 “X” 吧！',
+                            position: 'top-left'
+                        });
+                    }, 2000)
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
