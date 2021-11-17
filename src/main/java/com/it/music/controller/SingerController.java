@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author 羡羡
+ * @author lingjing
  */
 @Controller
-public class MusicController {
+public class SingerController {
 
-    @GetMapping({"/", "/index", "index.html"})
+    @GetMapping({"/singer", "/singer.html"})
     public String index(){
-        System.out.println("index");
-        return "fontdesk/index";
+        System.out.println("singer");
+        return "fontdesk/singer";
     }
 }
