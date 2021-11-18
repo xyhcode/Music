@@ -47,7 +47,7 @@ public class FileUpdae {
      * @throws IOException
      */
     @RequestMapping("/ftest")
-    public ModelAndView file(int siid, String soname, String sotime, String publish,MultipartFile[] multipart) throws IOException {
+    public ModelAndView file(int siid, String soname, String sotime, String publish,int sovip,MultipartFile[] multipart) throws IOException {
         String mpadd="";
         String lryadd="";
         String simg="";
@@ -89,7 +89,7 @@ public class FileUpdae {
             }
         }
         ModelAndView mv=new ModelAndView();
-        Song so=new Song(siid,soname,mpadd,lryadd,simg,sotime,publish);
+        Song so=new Song(siid,soname,mpadd,lryadd,simg,sotime,publish,sovip);
         int n=soser.songadd(so);
         if(n>0){
             mv.setViewName("redirect:fjq");

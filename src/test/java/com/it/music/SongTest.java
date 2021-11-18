@@ -22,7 +22,7 @@ public class SongTest {
 
     @Test
     public void soadd(){
-        Song so=new Song(345,"测试","https://","htpps://","https://","05:04","2021/11/1");
+        Song so=new Song(345,"测试","https://","htpps://","https://","05:04","2021/11/1",0);
         int f=sodao.songadd(so);
         System.out.println(f);
     }

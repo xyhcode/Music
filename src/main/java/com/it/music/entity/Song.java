@@ -13,6 +13,7 @@ public class Song {
     public String soimg;
     public String sotime;
     public String publish;
+    public int sovip;
 
     public int getSoid() {
         return soid;
@@ -78,10 +79,15 @@ public class Song {
         this.publish = publish;
     }
 
-    public Song() {
+    public int getSovip() {
+        return sovip;
     }
 
-    public Song(int siid, String soname, String solink, String lyrics, String soimg, String sotime, String publish) {
+    public void setSovip(int sovip) {
+        this.sovip = sovip;
+    }
+
+    public Song(int siid, String soname, String solink, String lyrics, String soimg, String sotime, String publish, int sovip) {
         this.siid = siid;
         this.soname = soname;
         this.solink = solink;
@@ -89,9 +95,10 @@ public class Song {
         this.soimg = soimg;
         this.sotime = sotime;
         this.publish = publish;
+        this.sovip = sovip;
     }
 
-    public Song(int soid, int siid, String soname, String solink, String lyrics, String soimg, String sotime, String publish) {
+    public Song(int soid, int siid, String soname, String solink, String lyrics, String soimg, String sotime, String publish, int sovip) {
         this.soid = soid;
         this.siid = siid;
         this.soname = soname;
@@ -100,6 +107,7 @@ public class Song {
         this.soimg = soimg;
         this.sotime = sotime;
         this.publish = publish;
+        this.sovip = sovip;
     }
 
     @Override
@@ -113,6 +121,7 @@ public class Song {
                 ", soimg='" + soimg + '\'' +
                 ", sotime='" + sotime + '\'' +
                 ", publish='" + publish + '\'' +
+                ", sovip=" + sovip +
                 '}';
     }
 }
