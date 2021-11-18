@@ -10,4 +10,8 @@
     <insert id="singadd" parameterType="Singer">
         insert into singer(siname,siintro,siimg,siarea,sitype) values (#{siname},#{siintro},#{siimg},#{siarea},#{sitype});
     </insert>
+
+    <select id="seindx" resultType="Singer">
+        select * from singer order by rand() limit 6
+    </select>
 </mapper>

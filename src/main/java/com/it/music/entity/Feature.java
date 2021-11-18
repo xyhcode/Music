@@ -9,6 +9,7 @@ public class Feature {
     public String fetitle;
     public String feurl;
     public int feplays;
+    public String cover;
 
     public int getFeid() {
         return feid;
@@ -42,20 +43,30 @@ public class Feature {
         this.feplays = feplays;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public Feature() {
     }
 
-    public Feature(String fetitle, String feurl, int feplays) {
+    public Feature(String fetitle, String feurl, int feplays, String cover) {
         this.fetitle = fetitle;
         this.feurl = feurl;
         this.feplays = feplays;
+        this.cover = cover;
     }
 
-    public Feature(int feid, String fetitle, String feurl, int feplays) {
+    public Feature(int feid, String fetitle, String feurl, int feplays, String cover) {
         this.feid = feid;
         this.fetitle = fetitle;
         this.feurl = feurl;
         this.feplays = feplays;
+        this.cover = cover;
     }
 
     @Override
@@ -65,6 +76,7 @@ public class Feature {
                 ", fetitle='" + fetitle + '\'' +
                 ", feurl='" + feurl + '\'' +
                 ", feplays=" + feplays +
+                ", cover='" + cover + '\'' +
                 '}';
     }
 }

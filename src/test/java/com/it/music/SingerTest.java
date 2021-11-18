@@ -27,4 +27,10 @@ public class SingerTest {
         int a=sind.singadd(sin);
         System.out.println(a);
     }
+
+    @Test
+    public void seinde(){
+       List lis= sind.seindx();
+       System.out.println(lis);
+    }
 }

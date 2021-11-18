@@ -20,4 +20,9 @@ public interface FeatureService {
      * @return
      */
     public int inadd(Feature fe);
+
+    /**
+     * 随机查询视频
+     */
+    public List seindex();
 }

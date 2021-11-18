@@ -26,4 +26,10 @@ public class SongTest {
         int f=sodao.songadd(so);
         System.out.println(f);
     }
+
+    @Test
+    public void sonser(){
+        List lis=sodao.songseing();
+        System.out.println(lis);
+    }
 }

@@ -24,4 +24,10 @@ public class FeatureServiceimpl implements FeatureService {
         int fein=fdao.inadd(fe);
         return fein;
     }
+
+    @Override
+    public List seindex() {
+        List lis=fdao.seindex();
+        return lis;
+    }
 }

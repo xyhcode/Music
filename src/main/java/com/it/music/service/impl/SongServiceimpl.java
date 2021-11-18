@@ -38,4 +38,20 @@ public class SongServiceimpl implements SongService {
         int soad=sodao.songadd(son);
         return soad;
     }
+
+    /**
+     * 所有随机查询
+     * @return
+     */
+    @Override
+    public List seind() {
+        List lis=sodao.seind();
+        return lis;
+    }
+
+    @Override
+    public List songseing() {
+        List lis=sodao.songseing();
+        return lis;
+    }
 }

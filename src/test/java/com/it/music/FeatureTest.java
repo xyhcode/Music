@@ -22,8 +22,15 @@ public class FeatureTest {
 
     @Test
     public void inadd(){
-        Feature fer=new Feature("测试","https://",167);
+        Feature fer=new Feature("测试","https://",167,"");
         int ad=fe.inadd(fer);
         System.out.println(ad);
+    }
+
+
+    @Test
+    public void feinde(){
+        List lis=fe.seindex();
+        System.out.println(lis);
     }
 }

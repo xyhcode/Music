@@ -10,4 +10,8 @@
     <insert id="inadd" parameterType="Feature">
         insert into feature(fetitle,feurl,feplays) values (#{fetitle},#{feurl},#{feplays});
     </insert>
+
+    <select id="seindex" resultType="Feature">
+        select * from feature order by rand() limit 4
+    </select>
 </mapper>

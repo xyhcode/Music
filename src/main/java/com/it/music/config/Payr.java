@@ -31,7 +31,7 @@ public class Payr {
         AlipayTradePrecreateModel model = new AlipayTradePrecreateModel();
 
         /** 商户订单号，商户自定义，需保证在商户端不重复，如：20200612000001 **/
-        model.setOutTradeNo("20200612000001");
+        model.setOutTradeNo("20210612000001");
 
         /** 销售产品码，固定值：FACE_TO_FACE_PAYMENT **/
         model.setProductCode("FACE_TO_FACE_PAYMENT");

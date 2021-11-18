@@ -10,4 +10,29 @@
     <insert id="songadd" parameterType="Song">
        insert into song(siid,soname,solink,lyrics,soimg,sotime,publish) values (#{siid},#{soname},#{solink},#{lyrics},#{soimg},#{sotime},#{publish});
     </insert>
+
+
+    <resultMap id="songse" type="SongSing">
+        <id property="soid" column="soid"></id>
+        <result property="siid" column="siid"></result>
+        <result property="soname" column="soname"></result>
+        <result property="solink" column="solink"></result>
+        <result property="lyrics" column="lyrics"></result>
+        <result property="soimg" column="soimg"></result>
+        <result property="sotime" column="sotime"></result>
+        <result property="publish" column="publish"></result>
+        <result property="sovip" column="sovip"></result>
+        <association property="sing" javaType="Singer">
+            <id property="siid" column="siid"/>
+            <result property="siname" column="siname"/>
+            <result property="siintro" column="siintro"/>
+            <result property="siimg" column="siimg"/>
+            <result property="siarea" column="siarea"/>
+            <result property="sitype" column="sitype"/>
+        </association>
+    </resultMap>
+    <select id="songseing" resultMap="songse">
+        select * from song as a inner join singer as b on a.siid=b.siid ORDER BY rand() limit 6;
+    </select>
+
 </mapper>

@@ -166,7 +166,7 @@ public class FileUpdae {
             CosFileupload.upfile(file.getInputStream(),"music/voide/"+pna);
             feurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/"+pna;
         }
-        Feature fe=new Feature(fetitle,feurl,feplays);
+        Feature fe=new Feature(fetitle,feurl,feplays,"");
         int ff=fese.inadd(fe);
         if(ff>0){
             mv.setViewName("redirect:fjq");

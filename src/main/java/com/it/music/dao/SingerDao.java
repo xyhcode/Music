@@ -22,4 +22,10 @@ public interface SingerDao {
      * @return
      */
     public int singadd(Singer sin);
+
+    /**
+     * 查询所有显示首页随机
+     * @return
+     */
+    public List seindx();
 }

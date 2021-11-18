@@ -304,79 +304,19 @@
                                         data-v-3b4aa7ea="">
                                         <!---->
                                         <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-3b4aa7ea="">
-                                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                            <div th:each="songl:${songli}" class="tracklist-item fl" data-v-1e40aea8="">
                                                 <div class="poster" data-v-1e40aea8="">
                                                     <div class="el-image" data-v-1e40aea8="">
                                                         <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_100000015.jpg}"
-                                                                class="el-image__inner" />
+                                                            <img th:src="${songl.solimg}"
+                                                                 class="el-image__inner" />
                                                         </div>
                                                         <!---->
                                                     </div>
                                                     <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                            data-v-1e40aea8=""></span></div>
+                                                                                                   data-v-1e40aea8=""></span></div>
                                                 </div>
-                                                <div class="name" data-v-1e40aea8="">世界步行日 | 感受生活的模样</div>
-                                                <!---->
-                                            </div>
-                                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                                <div class="poster" data-v-1e40aea8="">
-                                                    <div class="el-image" data-v-1e40aea8="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_100000015.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                            data-v-1e40aea8=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-1e40aea8="">【ACG】猛男听了也落泪</div>
-                                                <!---->
-                                            </div>
-                                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                                <div class="poster" data-v-1e40aea8="">
-                                                    <div class="el-image" data-v-1e40aea8="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_100000015.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                            data-v-1e40aea8=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-1e40aea8="">一词，一曲，一故事[励志篇]</div>
-                                                <!---->
-                                            </div>
-                                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                                <div class="poster" data-v-1e40aea8="">
-                                                    <div class="el-image" data-v-1e40aea8="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_100000015.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                            data-v-1e40aea8=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-1e40aea8="">田馥甄第32届金曲奖封“后”</div>
-                                                <!---->
-                                            </div>
-                                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                                <div class="poster" data-v-1e40aea8="">
-                                                    <div class="el-image" data-v-1e40aea8="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_100000015.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                            data-v-1e40aea8=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-1e40aea8="">购物专用BGM，快来抄作业！</div>
+                                                <div class="name" data-v-1e40aea8="" th:text="${songl.soltitle}"></div>
                                                 <!---->
                                             </div>
                                         </div>
@@ -403,250 +343,27 @@
                                         <!---->
                                         <div data-v-e4e4f4ca="" class="shoufa-items el-row"
                                             style="margin-left: -10px; margin-right: -10px;">
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062132485" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0105/M00/8D/8F/ChR45GGM67uAFaTBAALqJW1-m_A691.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">娇而不傲(Remix)</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">精彩强Sir</span>
 
-                                                        </div>
+                                            <div data-v-e4e4f4ca="" th:each="nsong:${newsong}" class="el-col el-col-8" style="padding-left: 10px; padding-right: 10px;">
+                                                <a data-v-e4e4f4ca="" href="/song/T10062132485" class="">
+                                                <div data-v-e4e4f4ca="" class="poster">
+                                                    <div data-v-e4e4f4ca="" class="bg"></div>
+                                                    <div data-v-e4e4f4ca="" class="el-image"><img
+                                                            th:src="${nsong.soimg}"
+                                                            class="el-image__inner">
                                                     </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062354540" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0103/M00/8E/81/ChR45WGSC7mABS_hABN8dAS4I_g956.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
+                                                </div>
+                                                <div data-v-e4e4f4ca="" class="info">
+                                                    <div data-v-e4e4f4ca="" class="title ellipsis" th:text="${nsong.soname}"></div>
+                                                    <div data-v-e4e4f4ca="" class="artist ellipsis">
+                                                        <span data-v-e4e4f4ca="" th:text="${nsong.sing.siname}"></span>
                                                     </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">Back to my feet
-                                                        </div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">Dear my friends</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062132472" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8B/7A/ChR45WGM6vGASAt-AAHFY_GM3J4317.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">独家改版(DJ版)</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">精彩强Sir</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062132459" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8B/91/ChR45GGM7euAKpyLAAKet15dFuk515.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">神曲新改(DJ版)</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">精彩强Sir</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062354587" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0103/M00/8E/9C/ChR45GGSC7OALoKzAAOSpRuAVY0607.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">笼中鸟</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">The Shark 大逃鲨</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062135638" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8C/06/ChR45GGOJU-AMxirAAZleQP3YBI640.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">
-                                                            荣耀天成（大型纪录片《紫禁城》主题歌）</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">张新成</span>
-                                                            /
-                                                            <span data-v-e4e4f4ca="">周昭妍（Miumiu）</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                        </div>
-                                    </div>
-                                    <div data-v-e4e4f4ca="" class="el-carousel__item"
-                                        style="transform: translateX(1200px) scale(1);">
-                                        <!---->
-                                        <div data-v-e4e4f4ca="" class="shoufa-items el-row"
-                                            style="margin-left: -10px; margin-right: -10px;">
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062186251" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0103/M00/8B/FB/ChR45WGOK_SAKSkwAAFVCI_W0E0710.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">有你有我（伴奏）</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">陈容斌</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062354589" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0103/M00/8E/9C/ChR45GGSC7uAIwrDAAvc2Cdmvdc187.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">feel bad</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">Dear my friends</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062354503" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8E/67/ChR45WGSC4iAVPL-AAPJCBo1Q4g709.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">惊蛰</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">零蛋先生</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062098095" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0103/M00/8E/80/ChR45WGSC5qAIQW5AACWz2o0saY535.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">ASHES</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">白皮书乐队</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062354504" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8E/67/ChR45WGSC4iAVPL-AAPJCBo1Q4g709.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">一季此生</div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">零蛋先生</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
-                                            <div data-v-e4e4f4ca="" class="el-col el-col-8"
-                                                style="padding-left: 10px; padding-right: 10px;"><a data-v-e4e4f4ca=""
-                                                    href="/song/T10062132431" class="">
-                                                    <div data-v-e4e4f4ca="" class="poster">
-                                                        <div data-v-e4e4f4ca="" class="bg"></div>
-                                                        <div data-v-e4e4f4ca="" class="el-image"><img
-                                                                src="https://img01.dmhmusic.com/0102/M00/8B/7B/ChR45WGM7SWAdNO6AACOvhHCEHM119.jpg@w_120,h_120"
-                                                                class="el-image__inner">
-                                                            <!---->
-                                                        </div>
-                                                    </div>
-                                                    <div data-v-e4e4f4ca="" class="info">
-                                                        <div data-v-e4e4f4ca="" class="title ellipsis">3LAU-Touch(Remix)
-                                                        </div>
-                                                        <div data-v-e4e4f4ca="" class="artist ellipsis"><span
-                                                                data-v-e4e4f4ca="">精彩强Sir</span>
-
-                                                        </div>
-                                                    </div>
-                                                </a></div>
+                                                </div>
+                                               </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -660,111 +377,21 @@
                                 <div class=" artistlist-box" data-v-42602e08="" data-v-067d84e1="">
                                     <div class="el-row" style="margin-left:-15px;margin-right:-15px;"
                                         data-v-42602e08="">
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
+
+                                        <div class="el-col el-col-4" th:each="hotsing:${hotsin}" style="padding-left:15px;padding-right:15px;"
+                                             data-v-42602e08="">
                                             <div class="artistlist-item" data-v-42602e08="">
                                                 <div class="avatar" data-v-42602e08="">
                                                     <div class="el-image" data-v-42602e08="">
                                                         <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
+                                                            <img th:src="${hotsing.siimg}"
+                                                                 class="el-image__inner" />
                                                         </div>
                                                         <!---->
                                                     </div>
                                                 </div>
                                                 <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">陈善仪</div>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
-                                            <div class="artistlist-item" data-v-42602e08="">
-                                                <div class="avatar" data-v-42602e08="">
-                                                    <div class="el-image" data-v-42602e08="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">彭佳慧</div>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
-                                            <div class="artistlist-item" data-v-42602e08="">
-                                                <div class="avatar" data-v-42602e08="">
-                                                    <div class="el-image" data-v-42602e08="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">徐佳莹</div>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
-                                            <div class="artistlist-item" data-v-42602e08="">
-                                                <div class="avatar" data-v-42602e08="">
-                                                    <div class="el-image" data-v-42602e08="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">林志炫</div>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
-                                            <div class="artistlist-item" data-v-42602e08="">
-                                                <div class="avatar" data-v-42602e08="">
-                                                    <div class="el-image" data-v-42602e08="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">never young beach
-                                                    </div>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;"
-                                            data-v-42602e08="">
-                                            <div class="artistlist-item" data-v-42602e08="">
-                                                <div class="avatar" data-v-42602e08="">
-                                                    <div class="el-image" data-v-42602e08="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000032.jpg}"
-                                                                class="el-image__inner" />
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                                <div class="info" data-v-42602e08="">
-                                                    <div class="name ellipsis" data-v-42602e08="">痛仰乐队</div>
+                                                    <div class="name ellipsis" data-v-42602e08="" th:text="${hotsing.siname}"></div>
                                                     <!---->
                                                 </div>
                                             </div>
@@ -786,74 +413,22 @@
                                         style="transform:translateX(0px) scale(1);ms-transform:translateX(0px) scale(1);webkit-transform:translateX(0px) scale(1);"
                                         data-v-dd80d96e="">
                                         <div class="videolist-box clearfix" data-v-540441ab="" data-v-dd80d96e="">
-                                            <div class="videolist-item fl" data-v-540441ab="">
-                                                <div class="poster" data-v-540441ab="">
-                                                    <div class="el-image" data-v-540441ab="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000038.jpg}" class="el-image__inner"/>
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-540441ab=""><span class="iconfont"
-                                                            data-v-540441ab=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-540441ab="">隔云相见(《您好！母亲大人》推广曲）母子版MV</div>
-                                                <div class="o-info" data-v-540441ab="">
-                                                    <p data-v-540441ab=""><span data-v-540441ab="">徐秉龙</span>
 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="videolist-item fl" data-v-540441ab="">
-                                                <div class="poster" data-v-540441ab="">
-                                                    <div class="el-image" data-v-540441ab="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000038.jpg}" class="el-image__inner"/>
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-540441ab=""><span class="iconfont"
-                                                            data-v-540441ab=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-540441ab="">Soufflé</div>
-                                                <div class="o-info" data-v-540441ab="">
-                                                    <p data-v-540441ab=""><span data-v-540441ab="">许光汉</span>
 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="videolist-item fl" data-v-540441ab="">
+                                            <div class="videolist-item fl" th:each="void:${feli}" data-v-540441ab="">
                                                 <div class="poster" data-v-540441ab="">
                                                     <div class="el-image" data-v-540441ab="">
                                                         <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000038.jpg}" class="el-image__inner"/>
+                                                            <img th:src="${void.cover}" class="el-image__inner"/>
                                                         </div>
                                                         <!---->
                                                     </div>
                                                     <div class="play-bar" data-v-540441ab=""><span class="iconfont"
-                                                            data-v-540441ab=""></span></div>
+                                                                                                   data-v-540441ab=""></span></div>
                                                 </div>
-                                                <div class="name" data-v-540441ab="">字里行间（大型纪录片《紫禁城》主题歌）</div>
+                                                <div class="name" data-v-540441ab="" th:text="${void.fetitle}"></div>
                                                 <div class="o-info" data-v-540441ab="">
-                                                    <p data-v-540441ab=""><span data-v-540441ab="">张碧晨</span>
-
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="videolist-item fl" data-v-540441ab="">
-                                                <div class="poster" data-v-540441ab="">
-                                                    <div class="el-image" data-v-540441ab="">
-                                                        <div class="el-image__placeholder">
-                                                            <img th:src="@{/pic/ia_200000038.jpg}" class="el-image__inner"/>
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                    <div class="play-bar" data-v-540441ab=""><span class="iconfont"
-                                                            data-v-540441ab=""></span></div>
-                                                </div>
-                                                <div class="name" data-v-540441ab="">《我的错 My Fault》MV Teaser</div>
-                                                <div class="o-info" data-v-540441ab="">
-                                                    <p data-v-540441ab=""><span data-v-540441ab="">Mike张怀颢</span>
+                                                    <p data-v-540441ab=""><span data-v-540441ab=""></span>
 
                                                     </p>
                                                 </div>

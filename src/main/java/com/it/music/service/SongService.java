@@ -21,4 +21,16 @@ public interface SongService {
      * @return
      */
     public int songadd(Song son);
+
+    /**
+     * 所有随机查询
+     * @return
+     */
+    public List seind();
+
+    /**
+     * 所有查询歌对应的歌手
+     * @return
+     */
+    public List songseing();
 }

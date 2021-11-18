@@ -37,4 +37,10 @@ public class SingerServiceimpl implements SingerService {
         int sinad=sing.singadd(sin);
         return sinad;
     }
+
+    @Override
+    public List seindx() {
+        List ls=sing.seindx();
+        return ls;
+    }
 }
