@@ -163,8 +163,14 @@ public class FileUpdae {
             //图片名字设置时间戳
             String pna = time + "." + filna;
             System.out.println("图片名：" + pna);
-            CosFileupload.upfile(file.getInputStream(),"music/voide/"+pna);
-            feurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/"+pna;
+
+            if(file.getOriginalFilename().endsWith(".mp4")){
+                CosFileupload.upfile(file.getInputStream(),"music/voide/"+pna);
+                feurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/"+pna;
+            }else {
+                CosFileupload.upfile(file.getInputStream(),"music/img/"+pna);
+                feurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/"+pna;
+            }
         }
         Feature fe=new Feature(fetitle,feurl,feplays,"");
         int ff=fese.inadd(fe);
