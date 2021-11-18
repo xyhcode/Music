@@ -83,5 +83,8 @@ public class MusicController {
         return "fontdesk/morevide";
     }
 
-
+    @RequestMapping("/test")
+    public String tes1(){
+        return "fontdesk/grvidetails";
+    }
 }
