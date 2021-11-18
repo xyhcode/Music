@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.music.dao.PlayListDao">
+
+    <resultMap id="songse" type="SongSing">
+        <id property="soid" column="soid"></id>
+        <result property="siid" column="siid"></result>
+        <result property="soname" column="soname"></result>
+        <result property="solink" column="solink"></result>
+        <result property="lyrics" column="lyrics"></result>
+        <result property="soimg" column="soimg"></result>
+        <result property="sotime" column="sotime"></result>
+        <result property="publish" column="publish"></result>
+        <result property="sovip" column="sovip"></result>
+        <association property="sing" javaType="Singer">
+            <id property="siid" column="siid"/>
+            <result property="siname" column="siname"/>
+            <result property="siintro" column="siintro"/>
+            <result property="siimg" column="siimg"/>
+            <result property="siarea" column="siarea"/>
+            <result property="sitype" column="sitype"/>
+        </association>
+    </resultMap>
+
+    <select id="getSongList" resultMap="songse" parameterType="int">
+        select * from song as a inner join singer as b on a.siid=b.siid inner join playlist c on a.soid=c.soid  where c.usid=#{uid};
+    </select>
+
+</mapper>
