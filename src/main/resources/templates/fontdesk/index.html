@@ -153,7 +153,7 @@
                                 </g>
                             </svg> <img th:src="@{/pic/99e28d0.png}" title="logo" alt="logo" style="display:none;"></a>
                         <ul class="header-nav fl" data-v-3e1e2180="" style="margin-left: 50px;">
-                            <li class="fl" data-v-3e1e2180=""><a href="" class="nuxt-link-exact-active nuxt-link-active"
+                            <li class="fl" data-v-3e1e2180=""><a th:href="@{/}" class="nuxt-link-exact-active nuxt-link-active"
                                     data-v-3e1e2180="">首页</a></li>
                             <li class="fl" data-v-3e1e2180=""><a href="palylist.html"
                                     data-v-3e1e2180="">歌单</a></li>
@@ -415,7 +415,7 @@
                                         <div class="videolist-box clearfix" data-v-540441ab="" data-v-dd80d96e="">
 
 
-                                            <div class="videolist-item fl" th:each="void:${feli}" data-v-540441ab="">
+                                            <div class="videolist-item fl" th:each="void:${feli}" data-v-540441ab=""  th:onclick="indvodj([[${void.feid}]])">
                                                 <div class="poster" data-v-540441ab="">
                                                     <div class="el-image" data-v-540441ab="">
                                                         <div class="el-image__placeholder">
@@ -448,5 +448,9 @@
         </div>
     </div>
 </body>
-
+<script>
+    function indvodj(vid){
+        location.href="/videtail/"+vid;
+    }
+</script>
 </html>

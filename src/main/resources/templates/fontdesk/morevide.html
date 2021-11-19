@@ -138,7 +138,7 @@
                     </g>
                 </svg> <img th:src="@{/pic/99e28d0.png}" title="logo" alt="logo" style="display:none;"></a>
                     <ul class="header-nav fl" data-v-2a834836="">
-                        <li class="fl" data-v-2a834836=""><a href="https://music.taihe.com/" data-v-2a834836="">首页</a></li>
+                        <li class="fl" data-v-2a834836=""><a th:href="@{/}" data-v-2a834836="">首页</a></li>
                         <li class="fl" data-v-2a834836=""><a href="https://music.taihe.com/songlist"
                                                              data-v-2a834836="">歌单</a></li>
                         <li class="fl" data-v-2a834836=""><a href="https://music.taihe.com/artist"
@@ -241,7 +241,7 @@
                 <h2 data-v-5d0c675d="">精选视频</h2>
                 <div class="videolist-box clearfix" data-v-540441ab="" data-v-5d0c675d="">
 
-                    <div class="videolist-item fl" th:each="pvo:${pavo.list}" data-v-540441ab="">
+                    <div class="videolist-item fl" th:each="pvo:${pavo.list}" th:onclick="morvide([[${pvo.feid}]])" data-v-540441ab="">
                         <div class="poster" data-v-540441ab="">
                             <div class="el-image" data-v-540441ab="">
                                 <div class="el-image__placeholder">
@@ -285,6 +285,11 @@
     //下一页
     function last(lanumber) {
         location.href="/showvide/"+lanumber;
+    }
+
+    //视频点击
+    function morvide(movid){
+        location.href="/videtail/"+movid;
     }
 </script>
 </body>

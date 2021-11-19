@@ -8,7 +8,7 @@ public class SongList {
     public String soltitle;
     public String solintro;
     public String solimg;
-    public String sotid;
+    public int sotid;
     public String soid;
     public int usid;
 
@@ -44,11 +44,11 @@ public class SongList {
         this.solimg = solimg;
     }
 
-    public String getSotid() {
+    public int getSotid() {
         return sotid;
     }
 
-    public void setSotid(String sotid) {
+    public void setSotid(int sotid) {
         this.sotid = sotid;
     }
 
@@ -68,7 +68,10 @@ public class SongList {
         this.usid = usid;
     }
 
-    public SongList(String soltitle, String solintro, String solimg, String sotid, String soid, int usid) {
+    public SongList() {
+    }
+
+    public SongList(String soltitle, String solintro, String solimg, int sotid, String soid, int usid) {
         this.soltitle = soltitle;
         this.solintro = solintro;
         this.solimg = solimg;
@@ -77,7 +80,7 @@ public class SongList {
         this.usid = usid;
     }
 
-    public SongList(int solid, String soltitle, String solintro, String solimg, String sotid, String soid, int usid) {
+    public SongList(int solid, String soltitle, String solintro, String solimg, int sotid, String soid, int usid) {
         this.solid = solid;
         this.soltitle = soltitle;
         this.solintro = solintro;
@@ -94,7 +97,7 @@ public class SongList {
                 ", soltitle='" + soltitle + '\'' +
                 ", solintro='" + solintro + '\'' +
                 ", solimg='" + solimg + '\'' +
-                ", sotid='" + sotid + '\'' +
+                ", sotid=" + sotid +
                 ", soid='" + soid + '\'' +
                 ", usid=" + usid +
                 '}';

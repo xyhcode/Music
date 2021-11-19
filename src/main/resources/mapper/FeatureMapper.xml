@@ -14,4 +14,8 @@
     <select id="seindex" resultType="Feature">
         select * from feature order by rand() limit 4
     </select>
+
+    <select id="findidvoid" resultType="Feature">
+        select * from feature where feid=#{feid}
+    </select>
 </mapper>

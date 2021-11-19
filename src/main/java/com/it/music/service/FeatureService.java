@@ -25,4 +25,11 @@ public interface FeatureService {
      * 随机查询视频
      */
     public List seindex();
+
+    /**
+     * 通过ID查询下指定的视频
+     * @param feid
+     * @return
+     */
+    public Feature findidvoid(int feid);
 }

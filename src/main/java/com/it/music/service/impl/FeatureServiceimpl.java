@@ -30,4 +30,10 @@ public class FeatureServiceimpl implements FeatureService {
         List lis=fdao.seindex();
         return lis;
     }
+
+    @Override
+    public Feature findidvoid(int feid) {
+        Feature fe=fdao.findidvoid(feid);
+        return fe;
+    }
 }

@@ -33,4 +33,11 @@ public class FeatureTest {
         List lis=fe.seindex();
         System.out.println(lis);
     }
+
+
+    @Test
+    public void findinvoid(){
+       Feature fea=fe.findidvoid(1002);
+       System.out.println(fea);
+    }
 }

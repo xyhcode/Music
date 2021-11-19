@@ -2,6 +2,7 @@ package com.it.music.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.it.music.entity.Feature;
 import com.it.music.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,8 +84,10 @@ public class MusicController {
         return "fontdesk/morevide";
     }
 
-    @RequestMapping("/test")
-    public String tes1(){
+    @RequestMapping(path = "/videtail/{vid}",method = RequestMethod.GET)
+    public String viconf(ModelMap map,@PathVariable("vid") int vid){
+        Feature fea=fese.findidvoid(vid);
+        map.put("features",fea);
         return "fontdesk/grvidetails";
     }
 }

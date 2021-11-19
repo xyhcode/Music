@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it.music.dao.SongListDao">
     <select id="seind" resultType="SongList">
-        select * from songlist order by rand() limit 4
+        select * from songlist order by rand() limit 5
     </select>
 
     <select id="seall" resultType="SongList">

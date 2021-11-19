@@ -8,6 +8,10 @@
     <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}" />
     <link rel="stylesheet" th:href="@{/css/6db2c0cb5ca80010df7e.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
 </head>
 <body>
 <div data-server-rendered="true" id="__nuxt">
@@ -137,7 +141,7 @@
                     </g>
                 </svg> <img src="99e28d0.png" title="logo" alt="logo" style="display:none;"></a>
                     <ul class="header-nav fl" data-v-2a834836="">
-                        <li class="fl" data-v-2a834836=""><a href="https://music.taihe.com/"
+                        <li class="fl" data-v-2a834836=""><a th:href="@{/}"
                                                             data-v-2a834836="">首页</a></li>
                         <li class="fl" data-v-2a834836=""><a href="https://music.taihe.com/songlist"
                                                              data-v-2a834836="">歌单</a></li>
@@ -240,32 +244,18 @@
             <div class="container details-box mv-details-box page-main">
                 <div class="poster-box">
                     <div class="poster pr" >
-                        <div class="pr"><video autoplay controls class="video" style="width: 1200px" src="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/1637151856926.mp4"></video>
+                        <div class="pr"><video autoplay controls class="video" style="width: 1200px" th:src="${features.feurl}"></video>
                         </div>
                     </div>
                     <div class="info" >
-                        <h1 class="page-title">Soufflé</h1> <span class="info-line"> - </span>
-                        <div class="author-wrap"><span class="author">
-                                    许光汉
-                                </span>
-                            <!---->
-                            2021-11-05
+                        <h1 class="page-title" th:text="${features.fetitle}"></h1> <span class="info-line"></span>
+                        <div class="author-wrap"><span class="author"></span>
                         </div>
-                        <div class="play-num">2662次播放</div>
-                        <div class="num-wrap"><span class="iconfont icon-new fr"></span> <span
-                                class="iconfont icon-new fr" style="display:;"></span> <span
-                                class="iconfont icon-new collected fr" style="display:none;"></span></div>
-                    </div>
-                    <div class="share-box" data-v-8ca96088="">
-                        <div class="el-dialog__wrapper" style="display:none;" data-v-8ca96088="">
-                            <div role="dialog" aria-modal="true" aria-label="分享至"
-                                 class="el-dialog el-dialog--center share-content-pop" style="margin-top:15vh;">
-                                <div class="el-dialog__header"><span class="el-dialog__title">分享至</span><button
-                                        type="button" aria-label="Close" class="el-dialog__headerbtn"><i
-                                        class="el-dialog__close el-icon el-icon-close"></i></button></div>
-                                <!---->
-                                <!---->
-                            </div>
+                        <div class="play-num" th:text="${features.feplays+'次播放'}"></div>
+                        <div class="num-wrap">
+                            <span class="iconfont icon-new fr" id="sharbtn" th:data-clipboard-text="${'http://localhost:8090/videtail/'+features.feid}"></span>
+                            <span class="iconfont icon-new fr" style="display:block" id="ax"></span>
+                            <span class="iconfont icon-new collected fr" id="reai" style="display:none;"></span>
                         </div>
                     </div>
                 </div>
@@ -276,4 +266,31 @@
     </div>
 </div>
 </body>
+<script>
+    //分享
+    var clipboard = new ClipboardJS('#sharbtn');
+    clipboard.on('success', function (e) {
+        layer.msg("已复制，可粘贴！",{
+            offset: 't',
+            icon:1
+        });
+        e.clearSelection();
+    });
+
+    //点击爱心
+    $("#ax").click(function (){
+        if($(this).css("display") == "block"){
+            $(this).css("display", "none");
+            $("#reai").css("display", "block");
+        }
+    });
+
+    //取消爱心
+    $("#reai").click(function (){
+        if($(this).css("display") == "block"){
+            $("#ax").css("display",'block');
+            $("#reai").css("display", "none");
+        }
+    });
+</script>
 </html>
