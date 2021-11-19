@@ -2,8 +2,6 @@ package com.it.music.service;
 
 import com.it.music.entity.User;
 
-import java.util.List;
-
 /**
  * @author 羡羡
  *

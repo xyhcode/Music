@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it.music.dao.SongListDao">
+
     <select id="seind" resultType="SongList">
         select * from songlist order by rand() limit 5
     </select>
@@ -10,4 +9,9 @@
     <select id="seall" resultType="SongList">
         select * from songlist
     </select>
+
+    <select id="solall" resultType="SongList">
+        select * from songlist where sotid=#{sotid}
+    </select>
+
 </mapper>

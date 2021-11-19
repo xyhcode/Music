@@ -10,4 +10,9 @@
     <select id="seall" resultType="SongType">
         select * from songtype where sottype=#{sottype}
     </select>
+
+    <select id="getSongType" resultType="SongType">
+        select * from songtype where sotid=#{sotid}
+    </select>
+
 </mapper>

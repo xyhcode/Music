@@ -1,5 +1,8 @@
 package com.it.music.service;
 
+
+import com.it.music.entity.SongType;
+
 import java.util.List;
 
 /**
@@ -18,4 +21,19 @@ public interface SongTypeService {
      * @return
      */
     public List seall(int sottype);
+
+
+    /**
+     * 根据id查询指定类
+     * @param sotid
+     * @return
+     */
+    public SongType getSongType(int sotid);
+
+    /**
+     * 显示歌单类型
+     * @return
+     */
+    public Object[] setype();
+
 }

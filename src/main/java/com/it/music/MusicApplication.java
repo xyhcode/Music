@@ -3,6 +3,9 @@ package com.it.music;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author lingjing
+ */
 @SpringBootApplication
 public class MusicApplication {
 

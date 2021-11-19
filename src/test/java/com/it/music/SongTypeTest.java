@@ -25,4 +25,6 @@ public class SongTypeTest {
         List lis=soty.seall(1);
         System.out.println(lis);
     }
+
+
 }

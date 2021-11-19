@@ -13,7 +13,7 @@ import java.util.List;
  * @author lingjing
  */
 @Service
-public class SongListServiceimpl implements SongListService {
+public class SongListServiceImpl implements SongListService {
 
     @Autowired
     SongListDao solidao;

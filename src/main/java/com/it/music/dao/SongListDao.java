@@ -5,10 +5,12 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * @author 羡羡
+ * @author lingjing
  */
 @Mapper
 public interface SongListDao {
+
+
     /**
      * 随机查询首页的数据
      * @return
@@ -20,4 +22,13 @@ public interface SongListDao {
      * @return
      */
     public List seall();
+
+
+    /**
+     * 根据ID查询所有
+     * @param sotid
+     * @return
+     */
+    public List solall(int sotid);
+
 }
