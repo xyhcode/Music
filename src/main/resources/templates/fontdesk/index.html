@@ -283,16 +283,16 @@
                     <div class="tag-box pr" data-v-4e77c644="" data-v-8ac97446="">
                         <div class="tag-box-inside box-inside" data-v-4e77c644="">
                             <!--标签-->
-                            <a th:each="insoty:${inso}" th:text="${insoty.sotname}" th:href="${insoty.sotid}" data-v-4e77c644=""></a>
+                            <a th:each="insoty:${inso}" th:text="${insoty.sotname}" th:href="@{'/palylist.html?sotid='+${insoty.sotid}}" data-v-4e77c644=""></a>
                         </div>
-                        <a href="https://music.taihe.com/songlist" class="more" data-v-729db4d6=""
+                        <a href="palylist.html" class="more" data-v-729db4d6=""
                             data-v-4e77c644=""></a>
                     </div>
                     <div class="songlist-box mod" data-v-3b4aa7ea="" data-v-8ac97446="">
                         <div class="songlist-box-inside box-inside pr" data-v-3b4aa7ea="">
                             <div class="mod-header pr" data-v-08e1b94e="" data-v-3b4aa7ea="">
                                 <h2 class="title" data-v-08e1b94e="">热门歌单</h2> <a
-                                    href="https://music.taihe.com/songlist" class="more more" data-v-729db4d6=""
+                                    href="palylist.html" class="more more" data-v-729db4d6=""
                                     data-v-08e1b94e=""></a>
                             </div>
                             <div class="el-carousel el-carousel--horizontal" data-v-3b4aa7ea="">
