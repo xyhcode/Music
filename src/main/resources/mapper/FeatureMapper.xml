@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it.music.dao.FeatureDao">
     <select id="sefe" resultType="Feature">
-        select * from feature
+        select * from feature order by rand()
     </select>
 
     <insert id="inadd" parameterType="Feature">
