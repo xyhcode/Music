@@ -11,6 +11,105 @@
     <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}">
     <link rel="stylesheet" th:href="@{/css/8dd5b223e783ea899db7.css}">
     <link rel="stylesheet" th:href="@{/css/e0f2c22d19247a4f91ca.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:inline="javascript">
+        $(function (){
+            var szm=[[${sna}]];
+            var sdq=[[${sia}]];
+            var stp=[[${sity}]];
+
+            var is="";
+            if(szm==="all"){
+                is="<li class=\"fl current\" id='liall' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('all')\" data-v-bb45b0b4=\"\">全部</span></li>"
+            }else{
+                is="<li class=\"fl\" id='liall' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('all')\" data-v-bb45b0b4=\"\">全部</span></li>";
+            }
+            //循环26个字母
+            for(var i=0;i<26;i++){
+                var zm=String.fromCharCode((65+i));
+                if(szm===zm){
+                    is+=" <li class=\"fl current\" id='li"+zm+"' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('"+zm+"')\" data-v-bb45b0b4=\"\">"+zm+"</span></li>"
+                }
+                is+=" <li class=\"fl\" id='li"+zm+"' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('"+zm+"')\" data-v-bb45b0b4=\"\">"+zm+"</span></li>"
+            }
+            $("#allzm").append(is);
+
+            console.log(szm+" "+sdq+" "+stp);
+
+            if(szm!=="" && szm!=="all"){
+                $("#liall").attr("class","fl");
+                $("#li"+szm).attr("class","fl current");
+            }else{
+                $("#liall").attr("class","fl current");
+            }
+
+            if(sdq!=="" && sdq!=="0"){
+                $("#dql0").attr("class","fl");
+                $("#dql"+sdq).attr("class","fl current");
+            }else{
+                $("#dql0").attr("class","fl current");
+            }
+
+            if(stp!=="" && stp!=="0"){
+                $("#lbx0").attr("class","fl");
+                $("#lbx"+stp).attr("class","fl current");
+            }else{
+                $("#lbx0").attr("class","fl current");
+            }
+        })
+
+
+
+        let bifzm="all";
+        let bdq=0;
+        let blb=0;
+
+        var szm=[[${sna}]];
+        var sdq=[[${sia}]];
+        var stp=[[${sity}]];
+
+        if(bifzm!=="all"){
+            bifzm=szm;
+        }
+        if(bdq!=="0"){
+            bdq=sdq;
+        }
+        if(blb!=="0"){
+            blb=stp
+        }
+        //点击字母某个按钮
+        function xm(s){
+            bifzm=s;
+            const uli = $("#allzm li");
+            for(let g=0; g<uli.length; g++){
+                $(uli[g]).attr("class","fl");
+            }
+            $("#li"+s).attr("class","fl current");
+            location.href="/morsinger/"+bifzm+"/"+bdq+"/"+blb;
+        }
+
+        //点击地区
+        function dq(dqtype){
+            bdq=dqtype;
+            const dqul = $("#dq li");
+            for (let h=0; h<dqul.length; h++){
+                $(dqul[h]).attr("class","fl");
+            }
+            $("#dql"+dqtype).attr("class","fl current");
+            location.href="/morsinger/"+szm+"/"+bdq+"/"+blb;
+        }
+
+        //点击类别
+        function lb(lbid){
+            blb=lbid;
+            const lbs = $("#lbxb li");
+            for(let  j=0;j<lbs.length; j++){
+                $(lbs[j]).attr("class","fl");
+            }
+            $("#lbx"+lbid).attr("class","fl current");
+            location.href="/morsinger/"+szm+"/"+bdq+"/"+blb;
+        }
+    </script>
 </head>
 <body>
 <div data-server-rendered="true" id="__nuxt">
@@ -143,9 +242,9 @@
                     <ul class="header-nav fl" data-v-2a834836="">
                         <li class="fl" data-v-2a834836=""><a th:href="@{/}"
                                                              data-v-2a834836="">首页</a></li>
-                        <li class="fl" data-v-2a834836=""><a href="palylist.html" data-v-2a834836="">歌单</a>
+                        <li class="fl" data-v-2a834836=""><a href="/palylist.html" data-v-2a834836="">歌单</a>
                         </li>
-                        <li class="fl" data-v-2a834836=""><a href="singer.html" class="nuxt-link-active"
+                        <li class="fl" data-v-2a834836=""><a th:href="@{'/morsinger/all/0/0'}" class="nuxt-link-active"
                                                              data-v-2a834836="">歌手</a></li>
                         <li class="fl" data-v-2a834836=""><a href="vip.html" data-v-2a834836="">VIP</a></li>
                         <li class="fl" data-v-2a834836=""><span data-v-2a834836="">音乐盒</span></li>
@@ -248,357 +347,47 @@
             </div>
             <div class="container page-container page-main" data-v-bb45b0b4="">
                 <div class="filter-box" data-v-bb45b0b4="">
-                    <ul class="filter-group clearfix" data-v-bb45b0b4="">
-                        <li class="fl current" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">全部</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">A</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">B</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">C</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">D</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">E</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">F</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">G</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">H</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">I</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">J</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">K</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">L</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">M</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">N</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">O</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">P</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">Q</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">R</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">S</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">T</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">U</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">V</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">W</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">X</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">Y</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">Z</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">#</span></li>
+                    <ul class="filter-group clearfix" data-v-bb45b0b4="" id="allzm">
+
                     </ul>
-                    <ul class="filter-group clearfix" data-v-bb45b0b4="">
-                        <li class="fl current" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">全部</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">内地</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">港台</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">欧美</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">韩国</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">日本</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">其他</span></li>
+                    <ul class="filter-group clearfix" data-v-bb45b0b4="" id="dq">
+                        <li class="fl current" id="dql0" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(0)">全部</span></li>
+                        <li class="fl" id="dql1" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(1)">内地</span></li>
+                        <li class="fl" id="dql2" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(2)">港台</span></li>
+                        <li class="fl" id="dql3" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(3)">欧美</span></li>
+                        <li class="fl" id="dql4" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(4)">韩国</span></li>
+                        <li class="fl" id="dql5" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(5)">日本</span></li>
+                        <li class="fl" id="dql6" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="dq(6)">其他</span></li>
                     </ul>
-                    <ul class="filter-group clearfix" data-v-bb45b0b4="">
-                        <li class="fl current" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">全部</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">男</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">女</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">组合</span></li>
-                        <li class="fl" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="">乐队</span></li>
+                    <ul class="filter-group clearfix" data-v-bb45b0b4="" id="lbxb">
+                        <li class="fl current" id="lbx0" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="lb(0)">全部</span></li>
+                        <li class="fl" id="lbx1" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="lb(1)">男</span></li>
+                        <li class="fl" id="lbx2" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="lb(2)">女</span></li>
+                        <li class="fl" id="lbx3" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="lb(3)">组合</span></li>
+                        <li class="fl" id="lbx4" data-v-bb45b0b4=""><span class="item" data-v-bb45b0b4="" onclick="lb(4)">乐队</span></li>
                     </ul>
                 </div>
                 <div class=" artistlist-box" data-v-42602e08="" data-v-bb45b0b4="">
                     <div class="el-row" style="margin-left:-15px;margin-right:-15px;" data-v-42602e08="">
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
+
+                        <div class="el-col el-col-4" th:each="mos:${mosin}" th:onclick="gs([[${mos.siid}]])" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
                             <div class="artistlist-item" data-v-42602e08="">
                                 <div class="avatar" data-v-42602e08="">
                                     <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
+                                        <div class="el-image__placeholder">
+                                            <img th:src="${mos.siimg}" class="el-image__inner" style="object-fit: cover;"/>
+                                        </div>
                                         <!---->
                                     </div>
                                 </div>
                                 <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">周深</div>
+                                    <div class="name ellipsis" data-v-42602e08="" th:text="${mos.siname}"></div>
                                     <!---->
                                 </div>
                             </div>
                         </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">林俊杰</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">纯音乐</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">dBMusic</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">雯雯</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">卓依婷</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">张航</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">Jason</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">徐兵</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">Y星人/袁鑫怡</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">薛之谦</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-42602e08="">
-                            <div class="artistlist-item" data-v-42602e08="">
-                                <div class="avatar" data-v-42602e08="">
-                                    <div class="el-image" data-v-42602e08="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="info" data-v-42602e08="">
-                                    <div class="name ellipsis" data-v-42602e08="">PL Music</div>
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
-                </div>
-                <div class="list-box" data-v-bb45b0b4="">
-                    <div class="el-row" style="margin-left:-15px;margin-right:-15px;" data-v-bb45b0b4="">
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="蔡健雅" class="list-item ellipsis" data-v-bb45b0b4="">蔡健雅</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="许嵩" class="list-item ellipsis" data-v-bb45b0b4="">许嵩</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="李宇春" class="list-item ellipsis" data-v-bb45b0b4="">李宇春</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="大张伟" class="list-item ellipsis" data-v-bb45b0b4="">大张伟</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="金莎" class="list-item ellipsis" data-v-bb45b0b4="">金莎</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="林志炫" class="list-item ellipsis" data-v-bb45b0b4="">林志炫</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="猪迪克" class="list-item ellipsis" data-v-bb45b0b4="">猪迪克</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="孙玉镜" class="list-item ellipsis" data-v-bb45b0b4="">孙玉镜</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="陈善仪" class="list-item ellipsis" data-v-bb45b0b4="">陈善仪</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="DOMS" class="list-item ellipsis" data-v-bb45b0b4="">DOMS</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="By2" class="list-item ellipsis" data-v-bb45b0b4="">By2</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="方大同" class="list-item ellipsis" data-v-bb45b0b4="">方大同</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="徐佳莹" class="list-item ellipsis" data-v-bb45b0b4="">徐佳莹</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="赵紫骅" class="list-item ellipsis" data-v-bb45b0b4="">赵紫骅</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="华语群星" class="list-item ellipsis" data-v-bb45b0b4="">华语群星</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="洛天依" class="list-item ellipsis" data-v-bb45b0b4="">洛天依</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="杨胖雨" class="list-item ellipsis" data-v-bb45b0b4="">杨胖雨</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="VARIOUS" class="list-item ellipsis" data-v-bb45b0b4="">VARIOUS</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="F.i.r" class="list-item ellipsis" data-v-bb45b0b4="">F.i.r</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="彭佳慧" class="list-item ellipsis" data-v-bb45b0b4="">彭佳慧</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="Victor Music Arts, Inc." class="list-item ellipsis" data-v-bb45b0b4="">Victor
-                                Music Arts,
-                                Inc.
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="never young beach" class="list-item ellipsis" data-v-bb45b0b4="">never young
-                                beach
-                            </div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="歌浴森" class="list-item ellipsis" data-v-bb45b0b4="">歌浴森</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="戚薇" class="list-item ellipsis" data-v-bb45b0b4="">戚薇</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="配乐" class="list-item ellipsis" data-v-bb45b0b4="">配乐</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="老狼" class="list-item ellipsis" data-v-bb45b0b4="">老狼</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="许巍" class="list-item ellipsis" data-v-bb45b0b4="">许巍</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="島本　須美" class="list-item ellipsis" data-v-bb45b0b4="">島本　須美</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="小叉系" class="list-item ellipsis" data-v-bb45b0b4="">小叉系</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="庞龙" class="list-item ellipsis" data-v-bb45b0b4="">庞龙</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="痛仰乐队" class="list-item ellipsis" data-v-bb45b0b4="">痛仰乐队</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="阿杜" class="list-item ellipsis" data-v-bb45b0b4="">阿杜</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="陈佰生" class="list-item ellipsis" data-v-bb45b0b4="">陈佰生</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="Charles Brown" class="list-item ellipsis" data-v-bb45b0b4="">Charles Brown</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="三筒七条" class="list-item ellipsis" data-v-bb45b0b4="">三筒七条</div>
-                        </div>
-                        <div class="el-col el-col-4" style="padding-left:15px;padding-right:15px;" data-v-bb45b0b4="">
-                            <div title="袁成杰" class="list-item ellipsis" data-v-bb45b0b4="">袁成杰</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="el-pagination" data-v-bb45b0b4="">
-                    <button type="button" disabled="disabled" class="btn-prev"><i
-                            class="el-icon el-icon-arrow-left"></i></button>
-                    <ul class="el-pager">
-                        <li class="number active">1</li>
-                        <!---->
-                        <li class="number">2</li>
-                        <li class="number">3</li>
-                        <li class="number">4</li>
-                        <li class="number">5</li>
-                        <li class="number">6</li>
-                        <li class="el-icon more btn-quicknext el-icon-more"></li>
-                        <li class="number">1414</li>
-                    </ul>
-                    <button type="button" class="btn-next"><i class="el-icon el-icon-arrow-right"></i></button>
                 </div>
                 <!---->
             </div>
@@ -606,5 +395,11 @@
         </div>
     </div>
 </div>
+<script>
+    //点击歌手
+    function gs(cf) {
+        location.href="/singerdetails/"+cf;
+    }
+</script>
 </body>
 </html>

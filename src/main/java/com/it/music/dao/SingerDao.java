@@ -35,4 +35,12 @@ public interface SingerDao {
      * @return
      */
     public Singer getSinger(int siid);
+
+    public List seallsing();
+
+    public List sedq(int siarea);
+
+    public List sety(int sitype);
+
+    public List sedqty(Singer se);
 }

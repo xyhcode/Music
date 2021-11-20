@@ -61,13 +61,7 @@
     background-color: #fff;
     border-radius: 40px;
 }
-.info-box
-.info-content
-.info
-.works
-.collect-btn
-.collected
-.iconfont[data-v-014d094a] {
+.info-box .info-content .info .works .collect-btn .collected .iconfont[data-v-014d094a] {
     color: #e61723;
 }
 .info-box .info-content .info .works span[data-v-014d094a] {

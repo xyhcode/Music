@@ -1,5 +1,6 @@
 package com.it.music.service;
 
+import com.it.music.entity.SingerAll;
 import com.it.music.entity.Song;
 
 import java.util.List;
@@ -39,4 +40,10 @@ public interface SongService {
      * @return
      */
     public List getSongAll(String[] soid);
+
+    /**
+     * 查询指定歌手的歌
+     * @return
+     */
+    public SingerAll singerallsong(int siid);
 }

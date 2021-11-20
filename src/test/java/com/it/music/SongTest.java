@@ -1,6 +1,7 @@
 package com.it.music;
 
 import com.it.music.dao.SongDao;
+import com.it.music.entity.SingerAll;
 import com.it.music.entity.Song;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,10 @@ public class SongTest {
     }
 
 
+
+    @Test
+    public void singerallsong(){
+        SingerAll lis=sodao.singerallsong(345);
+        System.out.println(lis);
+    }
 }

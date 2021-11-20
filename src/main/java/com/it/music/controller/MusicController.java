@@ -3,14 +3,13 @@ package com.it.music.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.it.music.entity.Feature;
+import com.it.music.entity.SingerAll;
 import com.it.music.service.*;
+import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -60,7 +59,7 @@ public class MusicController {
     }
 
     /**
-     * 视频分页
+     * 更多视频
      * @param map
      * @return
      */
@@ -72,6 +71,13 @@ public class MusicController {
         map.put("pavo",pa);
         return "fontdesk/morevide";
     }
+
+    /**
+     * 视频分页
+     * @param map
+     * @param curr
+     * @return
+     */
     @RequestMapping(path = "/showvide/{curr}",method = RequestMethod.GET)
     public String show(ModelMap map, @PathVariable("curr") int curr){
         if(curr==0){
@@ -84,10 +90,46 @@ public class MusicController {
         return "fontdesk/morevide";
     }
 
+    /**
+     * 点击视频进入视频详情
+     * @param map
+     * @param vid 视频的ID
+     * @return
+     */
     @RequestMapping(path = "/videtail/{vid}",method = RequestMethod.GET)
     public String viconf(ModelMap map,@PathVariable("vid") int vid){
         Feature fea=fese.findidvoid(vid);
         map.put("features",fea);
         return "fontdesk/grvidetails";
+    }
+
+    /**
+     * 更多歌手
+     * @return
+     */
+    @RequestMapping(path="/morsinger/{sna}/{sia}/{sity}",method = RequestMethod.GET)
+    public String mosing(ModelMap map, @PathVariable("sna") String sna, @PathVariable("sia") int sia, @PathVariable("sity") int sity){
+        System.out.println("歌手字母："+sna+" "+"地区："+sia+" "+"歌手类型："+sity);
+        /*List ls=sinse.seallsing();*/
+        /*PageHelper.startPage(1,1);*/
+       /* List lis=sinse.morsinger(ls,sna,sia,sity);*/
+        List lis=sinse.morsinger(sna,sia,sity);
+        /*PageInfo pa=new PageInfo(lis,10);*/
+        map.put("mosin",lis);
+        map.put("sna",sna);
+        map.put("sia",sia);
+        map.put("sity",sity);
+        return "fontdesk/singer";
+    }
+
+    /**
+     * 歌手详情
+     * @return
+     */
+    @RequestMapping(path = "/singerdetails/{siid}",method = RequestMethod.GET)
+    public String singdta(ModelMap map,@PathVariable("siid") int siid){
+        SingerAll lis=songse.singerallsong(siid);
+        map.put("singde",lis);
+        return "fontdesk/singerdeta";
     }
 }

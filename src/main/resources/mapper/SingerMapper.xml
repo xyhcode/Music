@@ -19,4 +19,20 @@
         select * from singer where siid=#{siid}
     </select>
 
+
+    <select id="sedq" resultType="Singer">
+       select * from singer where siarea=#{siarea}
+    </select>
+
+    <select id="sety" resultType="Singer">
+       select * from singer where sitype=#{sitype}
+    </select>
+
+    <select id="sedqty" parameterType="Singer" resultType="Singer">
+        select * from singer where siarea=#{siarea} and sitype=#{sitype}
+    </select>
+
+    <select id="seallsing" resultType="Singer">
+        select * from singer
+    </select>
 </mapper>

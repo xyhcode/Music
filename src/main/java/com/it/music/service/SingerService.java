@@ -34,4 +34,36 @@ public interface SingerService {
      * @return
      */
     public Singer getSinger(int siid);
+
+
+    /**
+     * 查询字母
+     * @param firstle
+     * @return
+     */
+    public List  morsinger(String firstle,int dq,int lb);
+
+    /**
+     * 查询地区
+     * @param siarea
+     * @return
+     */
+    public List sedq(int siarea);
+
+    /**
+     * 查询类型
+     * @param sitype
+     * @return
+     */
+    public List sety(int sitype);
+
+    /**
+     * 类型地区联合查
+     * @param sin
+     * @return
+     */
+    public List sedqty(Singer sin);
+
+    public List seallsing();
+
 }

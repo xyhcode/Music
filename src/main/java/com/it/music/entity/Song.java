@@ -87,6 +87,9 @@ public class Song {
         this.sovip = sovip;
     }
 
+    public Song() {
+    }
+
     public Song(int siid, String soname, String solink, String lyrics, String soimg, String sotime, String publish, int sovip) {
         this.siid = siid;
         this.soname = soname;

@@ -1,6 +1,7 @@
 package com.it.music.service.impl;
 
 import com.it.music.dao.SongDao;
+import com.it.music.entity.SingerAll;
 import com.it.music.entity.Song;
 import com.it.music.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,11 @@ public class SongServiceimpl implements SongService {
     @Override
     public List getSongAll(String[] soid) {
         return sodao.getSongAll(soid);
+    }
+
+    @Override
+    public SingerAll singerallsong(int siid) {
+        SingerAll lis=sodao.singerallsong(siid);
+        return lis;
     }
 }

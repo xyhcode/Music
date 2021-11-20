@@ -1,5 +1,6 @@
 package com.it.music.dao;
 
+import com.it.music.entity.SingerAll;
 import com.it.music.entity.Song;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -42,4 +43,10 @@ public interface SongDao {
      * @return
      */
     public List getSongAll(String[] soid);
+
+    /**
+     * 查询指定歌手的歌
+     * @return
+     */
+    public SingerAll singerallsong(int siid);
 }

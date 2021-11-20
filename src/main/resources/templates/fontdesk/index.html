@@ -155,9 +155,9 @@
                         <ul class="header-nav fl" data-v-3e1e2180="" style="margin-left: 50px;">
                             <li class="fl" data-v-3e1e2180=""><a th:href="@{/}" class="nuxt-link-exact-active nuxt-link-active"
                                     data-v-3e1e2180="">首页</a></li>
-                            <li class="fl" data-v-3e1e2180=""><a href="palylist.html"
+                            <li class="fl" data-v-3e1e2180=""><a href="/palylist.html"
                                     data-v-3e1e2180="">歌单</a></li>
-                            <li class="fl" data-v-3e1e2180=""><a href="singer.html"
+                            <li class="fl" data-v-3e1e2180=""><a th:href="@{'/morsinger/all/0/0'}"
                                     data-v-3e1e2180="">歌手</a></li>
                             <li class="fl" data-v-3e1e2180=""><a href="vip.html"
                                     data-v-3e1e2180="">VIP</a></li>
@@ -370,7 +370,7 @@
                     <div class="artist-box mod" data-v-067d84e1="" data-v-8ac97446="">
                         <div class="artist-box-inside box-inside pr" data-v-067d84e1="">
                             <div class="mod-header pr" data-v-08e1b94e="" data-v-067d84e1="">
-                                <h2 class="title" data-v-08e1b94e="">热门歌手</h2> <a href="https://music.taihe.com/artist"
+                                <h2 class="title" data-v-08e1b94e="">热门歌手</h2> <a th:href="@{'/morsinger/all/0/0'}"
                                     class="more more" data-v-729db4d6="" data-v-08e1b94e=""></a>
                             </div>
                             <div class="artist-box-content" data-v-067d84e1="">
@@ -378,7 +378,7 @@
                                     <div class="el-row" style="margin-left:-15px;margin-right:-15px;"
                                         data-v-42602e08="">
 
-                                        <div class="el-col el-col-4" th:each="hotsing:${hotsin}" style="padding-left:15px;padding-right:15px;"
+                                        <div class="el-col el-col-4" th:each="hotsing:${hotsin}" th:onclick="singconf([[${hotsing.siid}]])" style="padding-left:15px;padding-right:15px;"
                                              data-v-42602e08="">
                                             <div class="artistlist-item" data-v-42602e08="">
                                                 <div class="avatar" data-v-42602e08="">
@@ -404,7 +404,7 @@
                     <div class="mv-box mod" data-v-dd80d96e="" data-v-8ac97446="">
                         <div class="songlist-box-inside box-inside pr" data-v-dd80d96e="">
                             <div class="mod-header pr" data-v-08e1b94e="" data-v-dd80d96e="">
-                                <h2 class="title" data-v-08e1b94e="">精选视频</h2> <a th:href="${'/morvide'}"
+                                <h2 class="title" data-v-08e1b94e="">精选视频</h2> <a th:href="@{'/morvide'}"
                                     class="more more" data-v-729db4d6="" data-v-08e1b94e=""></a>
                             </div>
                             <div class="el-carousel el-carousel--horizontal" data-v-dd80d96e="">
@@ -449,8 +449,14 @@
     </div>
 </body>
 <script>
+    //点击视频
     function indvodj(vid){
         location.href="/videtail/"+vid;
+    }
+
+    //点击歌手
+    function singconf(siid){
+        location.href="/singerdetails/"+siid;
     }
 </script>
 </html>
