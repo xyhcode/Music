@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
-public class IndexController {
+public class HIndexController {
 
     /**首页页面*/
     @RequestMapping({"/admin","/admin/index"})

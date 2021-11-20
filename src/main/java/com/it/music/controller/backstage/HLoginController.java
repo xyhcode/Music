@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author lingjing
  */
 @Controller
-public class LoginController {
+public class HLoginController {
 
     @RequestMapping({"/admin/login"})
     public String login(){
