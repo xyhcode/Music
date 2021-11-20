@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500</title>
+    <link rel="stylesheet" th:href="@{/css/ero.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script>
+        $(function() {
+            setTimeout(function(){
+                $('body').removeClass('loading');
+            }, 1000);
+        });
+    </script>
+</head>
+<body class="loading">
+<h1>500</h1>
+<h2>Unexpected Error <b th:text="${':( '+errmsg}"></b></h2>
+<div class="gears">
+    <div class="gear one">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="gear two">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="gear three">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</div>
+</body>
+</html>
