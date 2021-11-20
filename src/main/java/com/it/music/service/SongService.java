@@ -46,4 +46,11 @@ public interface SongService {
      * @return
      */
     public SingerAll singerallsong(int siid);
+
+
+    /**
+     * 搜索歌
+     * @return
+     */
+    public List searchdong(String soname);
 }

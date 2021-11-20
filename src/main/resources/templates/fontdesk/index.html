@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/4128696a8dd92d32da65.css}"/>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
     <script th:src="@{/layui/layui.js}"></script>
     <script>
         layui.use('carousel', function () {
@@ -170,13 +171,13 @@
                                         <div aria-haspopup="listbox" role="combobox" aria-owns="el-autocomplete-9720"
                                             class="el-autocomplete">
                                             <div class="el-input el-input--suffix">
-                                                <!----><input type="text" autocomplete="off" valuekey="value"
-                                                    placeholder="请输入歌名、歌词、歌手或专辑"
+                                                <!----><input type="text" id="seav" autocomplete="off" valuekey="value"
+                                                    placeholder="请输入歌名"
                                                     fetchsuggestions="function () { [native code] }"
                                                     selectwhenunmatched="true" debounce="300" placement="bottom-start"
                                                     popperappendtobody="true" class="el-input__inner" value="">
                                                 <!----><span class="el-input__suffix"><span
-                                                        class="el-input__suffix-inner"><i
+                                                        class="el-input__suffix-inner"><i onclick="srea()"
                                                             class="iconfont el-input__icon"></i>
 
                                                     </span>
@@ -462,6 +463,23 @@
     //热门歌单详情
     function gdxx(gid){
         location.href="/songdeta/"+gid;
+    }
+
+    //搜索输入框回车事件
+    $("#seav").keyup(function(){
+        if(event.keyCode == 13){
+            srea();
+        }
+    });
+
+    //搜索
+    function srea(){
+        const serval = $("#seav").val();
+        if(serval==""){
+
+        }else{
+            location.href="/search/"+serval;
+        }
     }
 </script>
 </html>

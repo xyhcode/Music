@@ -66,4 +66,10 @@ public class SongServiceimpl implements SongService {
         SingerAll lis=sodao.singerallsong(siid);
         return lis;
     }
+
+    @Override
+    public List searchdong(String soname) {
+        List lis=sodao.searchdong(soname);
+        return lis;
+    }
 }

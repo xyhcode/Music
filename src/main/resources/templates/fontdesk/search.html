@@ -11,6 +11,10 @@
     <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}">
     <link rel="stylesheet" th:href="@{/css/8dd5b223e783ea899db7.css}">
     <link rel="stylesheet" th:href="@{/css/11a0d0448cdee2cc3744.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script th:src="@{/layui/layui.js}"></script>
 </head>
 
 <body>
@@ -159,20 +163,17 @@
                                         <div aria-haspopup="listbox" role="combobox" aria-owns="el-autocomplete-3662"
                                             class="el-autocomplete">
                                             <div class="el-input el-input--suffix">
-                                                <!----><input type="text" autocomplete="off" valuekey="value"
-                                                    placeholder="请输入歌名、歌词、歌手或专辑"
-                                                    fetchsuggestions="function () { [native code] }"
-                                                    selectwhenunmatched="true" debounce="300" placement="bottom-start"
-                                                    popperappendtobody="true" class="el-input__inner" value="">
+                                                <!----><input type="text" id="seav" autocomplete="off" valuekey="value"
+                                                              placeholder="请输入歌名"
+                                                              fetchsuggestions="function () { [native code] }"
+                                                              selectwhenunmatched="true" debounce="300" placement="bottom-start"
+                                                              popperappendtobody="true" class="el-input__inner" value="">
                                                 <!----><span class="el-input__suffix"><span
-                                                        class="el-input__suffix-inner"><i
-                                                            class="iconfont el-input__icon"></i>
-                                                        <!---->
-                                                        <!---->
-                                                        <!---->
-                                                        <!---->
+                                                    class="el-input__suffix-inner"><i onclick="srea()"
+                                                                                      class="iconfont el-input__icon"></i>
+
                                                     </span>
-                                                    <!---->
+                                                <!---->
                                                 </span>
                                                 <!---->
                                                 <!---->
@@ -250,13 +251,13 @@
                                     <div aria-haspopup="listbox" role="combobox" aria-owns="el-autocomplete-6647"
                                         class="el-autocomplete">
                                         <div class="el-input el-input--suffix">
-                                            <!----><input type="text" autocomplete="off" valuekey="value"
+                                            <!----><input type="text" id="seavbig" autocomplete="off" valuekey="value"
                                                 placeholder="请输入歌名、歌词、歌手或专辑"
                                                 fetchsuggestions="function () { [native code] }"
                                                 selectwhenunmatched="true" debounce="300" placement="bottom-start"
-                                                popperappendtobody="true" class="el-input__inner" value="">
+                                                popperappendtobody="true" class="el-input__inner" th:value="${seval}">
                                             <!----><span class="el-input__suffix"><span
-                                                    class="el-input__suffix-inner"><i
+                                                    class="el-input__suffix-inner"><i onclick="sreav()"
                                                         class="iconfont el-input__icon"></i>
                                                     <!---->
                                                     <!---->
@@ -335,186 +336,34 @@
                                             <div class="album" data-v-7385b91b="">专辑</div>
                                             <div class="time" data-v-7385b91b="">时长</div>
                                         </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">1</div>
+                                        <li class="pr t clearfix" data-v-7385b91b="" th:each="cf:${sr}">
+                                            <div class="num" data-v-7385b91b="" th:text="${cfStat.count}">1</div>
                                             <div class="song ellipsis clearfix" data-v-7385b91b="">
                                                 <div class="song-box" data-v-7385b91b=""><a
                                                         href="https://music.taihe.com/song/T10046044309" target="self"
-                                                        data-v-7385b91b="">周杰伦</a>
+                                                        data-v-7385b91b="" th:text="${cf.soname}"></a>
                                                     <!---->
                                                 </div>
                                             </div>
                                             <div class="artist ellipsis" data-v-7385b91b=""><a
                                                     href="https://music.taihe.com/artist/A11062500" target="self"
-                                                    data-v-7385b91b="">山弟</a>
+                                                    data-v-7385b91b="" th:text="${cf.siname}"></a>
 
                                             </div>
                                             <div class="album ellipsis" data-v-7385b91b=""><a
                                                     href="https://music.taihe.com/album/P10002183008" target="self"
-                                                    data-v-7385b91b="">《周杰伦》</a>
+                                                    data-v-7385b91b="" th:text="${'《'+cf.soname+'》'}">《周杰伦》</a>
                                             </div>
-                                            <div class="time" data-v-7385b91b="">04:28</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
+                                            <div class="time" data-v-7385b91b="" th:text="${cf.sotime}">04:28</div>
+                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
+                                                <span class="iconfont play" data-v-3a201fd6=""></span>
+                                                <span th:id="${'ax'+cf.soid}" th:onclick="ax([[${cf.soid}]])">
+                                                <span class="iconfont favorite"  data-v-3a201fd6=""></span>
+                                            </span>
+                                                <span class="iconfont share" id="sharge" th:data-clipboard-text="${'http://localhost:8090/search/'+seval}" data-v-3a201fd6=""></span>
                                             </div>
                                         </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">2</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10049764968" target="self"
-                                                        data-v-7385b91b="">三年二班--周杰伦</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A10260920" target="self"
-                                                    data-v-7385b91b="">云游侠何然</a>
 
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002841084" target="self"
-                                                    data-v-7385b91b="">《三年二班--周杰伦》</a></div>
-                                            <div class="time" data-v-7385b91b="">01:07</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">3</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10046030682" target="self"
-                                                        data-v-7385b91b="">那时候，没有周杰伦（1）</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A10049513" target="self"
-                                                    data-v-7385b91b="">林海</a>
-
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002181241" target="self"
-                                                    data-v-7385b91b="">《在云端》</a>
-                                            </div>
-                                            <div class="time" data-v-7385b91b="">29:53</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">4</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10046030681" target="self"
-                                                        data-v-7385b91b="">那时候，没有周杰伦（2）</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A10049513" target="self"
-                                                    data-v-7385b91b="">林海</a>
-
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002181241" target="self"
-                                                    data-v-7385b91b="">《在云端》</a>
-                                            </div>
-                                            <div class="time" data-v-7385b91b="">33:02</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">5</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10046030680" target="self"
-                                                        data-v-7385b91b="">那时候，没有周杰伦（3）</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A10049513" target="self"
-                                                    data-v-7385b91b="">林海</a>
-
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002181241" target="self"
-                                                    data-v-7385b91b="">《在云端》</a>
-                                            </div>
-                                            <div class="time" data-v-7385b91b="">36:47</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">6</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10046224855" target="self"
-                                                        data-v-7385b91b="">青花瓷(Cover 周杰伦)</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A11068697" target="self"
-                                                    data-v-7385b91b="">任性的大叔爱飙歌</a>
-
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002212572" target="self"
-                                                    data-v-7385b91b="">《唱吧精选集13》</a></div>
-                                            <div class="time" data-v-7385b91b="">03:59</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
-                                        <li class="pr t clearfix" data-v-7385b91b="">
-                                            <div class="num" data-v-7385b91b="">7</div>
-                                            <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                                <div class="song-box" data-v-7385b91b=""><a
-                                                        href="https://music.taihe.com/song/T10045924357" target="self"
-                                                        data-v-7385b91b="">本草纲目+稻香+忍者 (原唱:周杰伦)</a>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                            <div class="artist ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/artist/A10402178" target="self"
-                                                    data-v-7385b91b="">JC练习生11队</a>
-
-                                            </div>
-                                            <div class="album ellipsis" data-v-7385b91b=""><a
-                                                    href="https://music.taihe.com/album/P10002165600" target="self"
-                                                    data-v-7385b91b="">《1VS11》</a>
-                                            </div>
-                                            <div class="time" data-v-7385b91b="">02:35</div>
-                                            <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                                    class="iconfont play" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                                    class="iconfont add" data-v-3a201fd6=""></span>
-                                                <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                            </div>
-                                        </li>
                                     </ul>
                                     <div class="share-box" data-v-8ca96088="" data-v-7385b91b="">
                                         <div class="el-dialog__wrapper" style="display:none;" data-v-8ca96088="">
@@ -552,6 +401,64 @@
             </div>
         </div>
     </div>
-</body>
+<script>
+    //搜索输入框回车事件
+    $("#seav").keyup(function(){
+        if(event.keyCode == 13){
+            srea();
+        }
+    });
 
+    //搜索
+    function srea(){
+        const serval = $("#seav").val();
+        if(serval==""){
+
+        }else{
+            location.href="/search/"+serval;
+        }
+    }
+
+
+    //大搜索输入框回车事件
+    $("#seavbig").keyup(function(){
+        if(event.keyCode == 13){
+            sreaf();
+        }
+    });
+
+    //大搜索
+    function sreaf(){
+        const serval = $("#seavbig").val();
+        if(serval==""){
+
+        }else{
+            location.href="/search/"+serval;
+        }
+    }
+
+    //分享
+    var clipboard = new ClipboardJS('#sharge');
+    clipboard.on('success', function (e) {
+        layer.msg("已复制，可粘贴！",{
+            offset: 't',
+            icon:1
+        });
+        e.clearSelection();
+    });
+
+
+    //点击爱心
+    var is = true;
+    function ax(id){
+        if(is){
+            $("#ax"+id).html('<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>');
+            is = false;
+        }else{
+            $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
+            is = true;
+        }
+    }
+</script>
+</body>
 </html>

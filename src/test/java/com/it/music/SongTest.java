@@ -52,4 +52,10 @@ public class SongTest {
         SingerAll lis=sodao.singerallsong(345);
         System.out.println(lis);
     }
+
+    @Test
+    public void searchdong(){
+        List lis=sodao.searchdong("年");
+        System.out.println(lis);
+    }
 }

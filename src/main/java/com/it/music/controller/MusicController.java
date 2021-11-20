@@ -133,4 +133,18 @@ public class MusicController {
         map.put("singde",lis);
         return "fontdesk/singerdeta";
     }
+
+    /**
+     * 搜索
+     * @param map
+     * @param srval
+     * @return
+     */
+    @RequestMapping(path = "/search/{srval}")
+    public String sreach(ModelMap map,@PathVariable("srval") String srval){
+       List lis=songse.searchdong(srval);
+       map.put("seval",srval);
+       map.put("sr",lis);
+        return "fontdesk/search";
+    }
 }

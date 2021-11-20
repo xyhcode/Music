@@ -66,4 +66,9 @@
         select * from singer as a inner join song as b on a.siid=b.siid where a.siid=#{siid};
     </select>
 
+
+    <select id="searchdong" resultType="Search">
+        select a.*,b.siname from song as a inner join singer as b on a.siid=b.siid where a.soname like'%${value}%' ORDER BY rand();
+    </select>
+
 </mapper>

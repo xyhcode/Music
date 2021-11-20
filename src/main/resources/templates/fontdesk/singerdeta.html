@@ -169,18 +169,15 @@
                                     <div aria-haspopup="listbox" role="combobox" aria-owns="el-autocomplete-3152"
                                          class="el-autocomplete">
                                         <div class="el-input el-input--suffix">
-                                            <!----><input type="text" autocomplete="off" valuekey="value"
-                                                          placeholder="请输入歌名、歌词、歌手或专辑"
+                                            <!----><input type="text" id="seav" autocomplete="off" valuekey="value"
+                                                          placeholder="请输入歌名"
                                                           fetchsuggestions="function () { [native code] }"
                                                           selectwhenunmatched="true" debounce="300" placement="bottom-start"
                                                           popperappendtobody="true" class="el-input__inner" value="">
                                             <!----><span class="el-input__suffix"><span
-                                                class="el-input__suffix-inner"><i
-                                                class="iconfont el-input__icon"></i>
-                                            <!---->
-                                            <!---->
-                                            <!---->
-                                            <!---->
+                                                class="el-input__suffix-inner"><i onclick="srea()"
+                                                                                  class="iconfont el-input__icon"></i>
+
                                                     </span>
                                             <!---->
                                                 </span>
@@ -336,7 +333,7 @@
                                         </div>
                                         <div class="album ellipsis" data-v-7385b91b=""><a
                                                  target="self"
-                                                data-v-7385b91b="" th:text="${cf.soname}"></a></div>
+                                                data-v-7385b91b="" th:text="${'《'+cf.soname}+'》'"></a></div>
                                         <div class="time" data-v-7385b91b="" th:text="${cf.sotime}"></div>
                                         <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                             <span class="iconfont play" data-v-3a201fd6=""></span>
@@ -419,6 +416,23 @@
         }else{
             $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
             is = true;
+        }
+    }
+
+    //搜索输入框回车事件
+    $("#seav").keyup(function(){
+        if(event.keyCode == 13){
+            srea();
+        }
+    });
+
+    //搜索
+    function srea(){
+        const serval = $("#seav").val();
+        if(serval==""){
+
+        }else{
+            location.href="/search/"+serval;
         }
     }
 </script>
