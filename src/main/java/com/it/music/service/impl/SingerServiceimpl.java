@@ -43,4 +43,9 @@ public class SingerServiceimpl implements SingerService {
         List ls=sing.seindx();
         return ls;
     }
+
+    @Override
+    public Singer getSinger(int siid) {
+        return sing.getSinger(siid);
+    }
 }

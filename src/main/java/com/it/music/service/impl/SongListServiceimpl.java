@@ -3,15 +3,16 @@ package com.it.music.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.it.music.dao.SongListDao;
+import com.it.music.entity.SongList;
 import com.it.music.service.SongListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
  * @author lingjing
  */
+
 @Service
 public class SongListServiceimpl implements SongListService {
 
@@ -28,6 +29,11 @@ public class SongListServiceimpl implements SongListService {
     public List seall() {
         List lis=solidao.seall();
         return lis;
+    }
+
+    @Override
+    public SongList getSongList(int solid) {
+        return solidao.getSongList(solid);
     }
 
     @Override

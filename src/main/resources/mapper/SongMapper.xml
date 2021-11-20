@@ -35,4 +35,11 @@
         select * from song as a inner join singer as b on a.siid=b.siid ORDER BY rand() limit 6;
     </select>
 
+    <select id="getSongAll" resultType="Song">
+        select * from song where soid in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

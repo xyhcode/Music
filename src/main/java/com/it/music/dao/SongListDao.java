@@ -1,5 +1,6 @@
 package com.it.music.dao;
 
+import com.it.music.entity.SongList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,6 +23,13 @@ public interface SongListDao {
      * @return
      */
     public List seall();
+
+    /**
+     * 根据id查询歌单
+     * @param solid
+     * @return
+     */
+    public SongList getSongList(int solid);
 
 
     /**

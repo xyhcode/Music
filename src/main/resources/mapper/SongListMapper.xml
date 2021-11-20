@@ -14,4 +14,8 @@
         select * from songlist where sotid=#{sotid}
     </select>
 
+    <select id="getSongList" resultType="SongList">
+        select * from songlist where solid=#{solid}
+    </select>
+
 </mapper>

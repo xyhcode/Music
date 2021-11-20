@@ -32,4 +32,11 @@ public interface SongService {
      * @return
      */
     public List songseing();
+
+    /**
+     * 根据多个ID查询多个歌曲
+     * @param soid
+     * @return
+     */
+    public List getSongAll(String[] soid);
 }

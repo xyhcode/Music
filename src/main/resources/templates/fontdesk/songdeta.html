@@ -8,6 +8,11 @@
     <link rel="stylesheet" th:href="@{/css/807f16584d6633e3b723.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
     <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script th:src="@{/layui/layui.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
 </head>
 <body>
 <div data-server-rendered="true" id="__nuxt">
@@ -239,17 +244,16 @@
                         <div class="bg" data-v-bd7c371e=""></div>
                         <div class="poster" data-v-bd7c371e="">
                             <div class="el-image" data-v-bd7c371e="">
-                                <div class="el-image__placeholder"></div>
+                                <img th:src="@{${sol.solimg}}" class="el-image__inner" style="object-fit: cover;">
                                 <!---->
                             </div>
                         </div>
                     </div>
                     <div class="info" data-v-bd7c371e="">
                         <div class="info-main" data-v-bd7c371e="">
-                            <h1 class="title" data-v-bd7c371e="">八月，你还在等一场大雨吗</h1>
-                            <div class="intro" data-v-bd7c371e="">无论你是否有冲那场大雨里奔跑的勇气，都希望你会记得八月里盛放的花。</div>
-                            <div class="tag" data-v-bd7c371e=""><a to="/songlist?subCateId=2376"
-                                                                   data-v-bd7c371e="">#流行</a></div>
+                            <h1 class="title" data-v-bd7c371e="" th:text="${sol.soltitle}">八月，你还在等一场大雨吗</h1>
+                            <div class="intro" data-v-bd7c371e="" th:text="${sol.solintro}">无论你是否有冲那场大雨里奔跑的勇气，都希望你会记得八月里盛放的花。</div>
+                            <div class="tag" data-v-bd7c371e="" style="color: red;">#<span th:text="${sot.sotname}">流行</span></div>
                         </div>
                         <div class="btns" data-v-bd7c371e=""><button type="button"
                                                                      class="el-button el-button--primary is-round" data-v-bd7c371e="">
@@ -261,8 +265,8 @@
                             <!---->
                             <!----><span><span class="iconfont" data-v-bd7c371e=""></span> 收藏
                                     </span>
-                        </button> <button type="button" class="el-button el-button--info is-round"
-                                          data-v-bd7c371e="">
+                        </button> <button id="fxx"  type="button" class="el-button el-button--info is-round"
+                                          data-v-bd7c371e="" th:data-clipboard-text="${'http://127.0.0.1:8090/songdeta/'+sol.solid}">
                             <!---->
                             <!----><span><span class="iconfont" data-v-bd7c371e=""></span> 分享
                                     </span>
@@ -296,279 +300,33 @@
                                 <div class="album" data-v-7385b91b="">专辑</div>
                                 <div class="time" data-v-7385b91b="">时长</div>
                             </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">1</div>
+                            <li class="pr t clearfix" data-v-7385b91b="" th:each="gq,state:${so}">
+                                <div class="num" data-v-7385b91b="" th:text="${state.count}">1</div>
                                 <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10061435731" target="self"
-                                            data-v-7385b91b="">变废为宝</a>
+                                    <div class="song-box" data-v-7385b91b="">
+                                        <a target="self"
+                                            data-v-7385b91b="" th:text="${gq.soname}">变废为宝</a>
+                                        <span data-v-7385b91b="" class="vip" th:if="${gq.sovip==1}">VIP</span>
                                         <!---->
                                     </div>
                                 </div>
                                 <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
+                                         target="self"
+                                        data-v-7385b91b="" th:each="gss:${gs}" th:if="${gss.siid==gq.siid}" th:text="${gss.siname}">薛之谦</a>
 
                                 </div>
                                 <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10003840845" target="self"
-                                        data-v-7385b91b="">《变废为宝》</a></div>
-                                <div class="time" data-v-7385b91b="">04:39</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
+                                         target="self"
+                                        data-v-7385b91b="" th:text="${'《'+gq.soname+'》'}">《变废为宝》</a></div>
+                                <div class="time" data-v-7385b91b="" th:text="${gq.sotime}">04:39</div>
+                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
+                                    <span class="iconfont play" data-v-3a201fd6="" ></span>
+                                    <span th:id="${'ax'+gq.soid}" th:onclick="ax([[${gq.soid}]])" >
+                                        <span class="iconfont favorite" data-v-3a201fd6="" ></span>
+                                    </span>
                                 </div>
                             </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">2</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10040589086" target="self"
-                                            data-v-7385b91b="">下雨了</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
 
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001774541" target="self"
-                                        data-v-7385b91b="">《初学者》</a></div>
-                                <div class="time" data-v-7385b91b="">05:05</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">3</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10038818739" target="self"
-                                            data-v-7385b91b="">那些花儿</a> <span class="vip"
-                                                                              data-v-7385b91b="">VIP</span></div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047859" target="self"
-                                        data-v-7385b91b="">朴树</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001629402" target="self"
-                                        data-v-7385b91b="">《我去2000年》</a></div>
-                                <div class="time" data-v-7385b91b="">04:55</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">4</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10059607241" target="self"
-                                            data-v-7385b91b="">半生出走</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047763" target="self"
-                                        data-v-7385b91b="">胡彦斌</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10003693334" target="self"
-                                        data-v-7385b91b="">《半生出走》</a></div>
-                                <div class="time" data-v-7385b91b="">04:59</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">5</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10049727031" target="self"
-                                            data-v-7385b91b="">凤凰花开的路口</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047922" target="self"
-                                        data-v-7385b91b="">林志炫</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10002734491" target="self"
-                                        data-v-7385b91b="">《熟情歌》</a></div>
-                                <div class="time" data-v-7385b91b="">04:02</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">6</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10040190946" target="self"
-                                            data-v-7385b91b="">大鱼（唱片版）</a> <span class="vip"
-                                                                                 data-v-7385b91b="">VIP</span></div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10273267" target="self"
-                                        data-v-7385b91b="">周深</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001674522" target="self"
-                                        data-v-7385b91b="">《深的深》</a></div>
-                                <div class="time" data-v-7385b91b="">05:17</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">7</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10040589081" target="self"
-                                            data-v-7385b91b="">绅士</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001774541" target="self"
-                                        data-v-7385b91b="">《初学者》</a></div>
-                                <div class="time" data-v-7385b91b="">04:50</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">8</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10040589079" target="self"
-                                            data-v-7385b91b="">刚刚好</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001774541" target="self"
-                                        data-v-7385b91b="">《初学者》</a></div>
-                                <div class="time" data-v-7385b91b="">04:10</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">9</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10038986648" target="self"
-                                            data-v-7385b91b="">你还要我怎样</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001640807" target="self"
-                                        data-v-7385b91b="">《意外》</a></div>
-                                <div class="time" data-v-7385b91b="">05:10</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">10</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10038986647" target="self"
-                                            data-v-7385b91b="">意外</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10001640807" target="self"
-                                        data-v-7385b91b="">《意外》</a></div>
-                                <div class="time" data-v-7385b91b="">04:51</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
-                            <li class="pr t clearfix" data-v-7385b91b="">
-                                <div class="num" data-v-7385b91b="">11</div>
-                                <div class="song ellipsis clearfix" data-v-7385b91b="">
-                                    <div class="song-box" data-v-7385b91b=""><a
-                                            href="https://music.taihe.com/song/T10050780401" target="self"
-                                            data-v-7385b91b="">认真的雪</a>
-                                        <!---->
-                                    </div>
-                                </div>
-                                <div class="artist ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/artist/A10047720" target="self"
-                                        data-v-7385b91b="">薛之谦</a>
-
-                                </div>
-                                <div class="album ellipsis" data-v-7385b91b=""><a
-                                        href="https://music.taihe.com/album/P10002944114" target="self"
-                                        data-v-7385b91b="">《薛之谦》</a></div>
-                                <div class="time" data-v-7385b91b="">04:19</div>
-                                <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b=""><span
-                                        class="iconfont play" data-v-3a201fd6=""></span> <span
-                                        class="iconfont favorite" data-v-3a201fd6=""></span> <span
-                                        class="iconfont add" data-v-3a201fd6=""></span>
-                                    <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
-                                </div>
-                            </li>
                         </ul>
                         <div class="share-box" data-v-8ca96088="" data-v-7385b91b="">
                             <div class="el-dialog__wrapper" style="display:none;" data-v-8ca96088="">
@@ -592,4 +350,28 @@
     </div>
 </div>
 </body>
+<script>
+    //分享
+    var clipboard = new ClipboardJS('#fxx');
+    clipboard.on('success', function (e) {
+        layer.msg("已复制，可粘贴！",{
+            offset: 't',
+            icon:1
+        });
+        e.clearSelection();
+    });
+
+    //点击爱心
+    var is = true;
+    function ax(id){
+        if(is){
+            $("#ax"+id).html('<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>');
+            is = false;
+        }else{
+            $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
+            is = true;
+        }
+    }
+
+</script>
 </html>

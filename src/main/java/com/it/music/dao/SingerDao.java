@@ -28,4 +28,11 @@ public interface SingerDao {
      * @return
      */
     public List seindx();
+
+    /**
+     * 根据歌手ID查询歌手
+     * @param siid
+     * @return
+     */
+    public Singer getSinger(int siid);
 }

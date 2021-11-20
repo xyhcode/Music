@@ -54,4 +54,9 @@ public class SongServiceimpl implements SongService {
         List lis=sodao.songseing();
         return lis;
     }
+
+    @Override
+    public List getSongAll(String[] soid) {
+        return sodao.getSongAll(soid);
+    }
 }

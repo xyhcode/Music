@@ -1,6 +1,7 @@
 package com.it.music.service;
 
 import com.github.pagehelper.PageInfo;
+import com.it.music.entity.SongList;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,13 @@ public interface SongListService {
      * @return
      */
     public List seall();
+
+    /**
+     * 根据id查询歌单
+     * @param solid
+     * @return
+     */
+    public SongList getSongList(int solid);
 
     /**
      * 分页显示歌单

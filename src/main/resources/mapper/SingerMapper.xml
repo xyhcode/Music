@@ -14,4 +14,9 @@
     <select id="seindx" resultType="Singer">
         select * from singer order by rand() limit 6
     </select>
+
+    <select id="getSinger" resultType="Singer">
+        select * from singer where siid=#{siid}
+    </select>
+
 </mapper>
