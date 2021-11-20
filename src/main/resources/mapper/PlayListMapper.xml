@@ -28,4 +28,8 @@
         select * from song as a inner join singer as b on a.siid=b.siid inner join playlist c on a.soid=c.soid  where c.usid=#{uid};
     </select>
 
+    <select id="getSong" resultMap="songse" parameterType="int">
+        select * from song as a inner join singer as b on a.siid=b.siid where a.soid=#{sid};
+    </select>
+
 </mapper>

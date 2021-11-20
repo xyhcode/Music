@@ -1,6 +1,7 @@
 package com.it.music.service.impl;
 
 import com.it.music.dao.PlayListDao;
+import com.it.music.entity.SongSing;
 import com.it.music.service.PlayListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class PlayListServiceimpl implements PlayListService {
     @Override
     public List getSongList(int uid) {
         return playListDao.getSongList(uid);
+    }
+
+    @Override
+    public SongSing getSong(int sid) {
+        return playListDao.getSong(sid);
     }
 }
