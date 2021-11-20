@@ -278,7 +278,7 @@
                     </div>
                     <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-5ea8f978="">
 
-                        <div class="tracklist-item fl" data-v-1e40aea8="" th:each="sol:${songlist.list}">
+                        <div class="tracklist-item fl" data-v-1e40aea8="" th:each="sol:${songlist.list}" th:onclick="gdxx([[${sol.solid}]])">
                             <div class="poster" data-v-1e40aea8="">
                                 <div class="el-image" data-v-1e40aea8="">
                                     <img th:src="@{${sol.solimg}}" class="el-image__inner" style="object-fit: cover;">
@@ -322,5 +322,10 @@
         </div>
     </div>
 </body>
-
+<script>
+    //热门歌单详情
+    function gdxx(gid){
+        location.href="/songdeta/"+gid;
+    }
+</script>
 </html>

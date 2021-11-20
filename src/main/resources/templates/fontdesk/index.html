@@ -304,7 +304,7 @@
                                         data-v-3b4aa7ea="">
                                         <!---->
                                         <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-3b4aa7ea="">
-                                            <div th:each="songl:${songli}" class="tracklist-item fl" data-v-1e40aea8="">
+                                            <div th:each="songl:${songli}" class="tracklist-item fl" data-v-1e40aea8="" th:onclick="gdxx([[${songl.solid}]])">
                                                 <div class="poster" data-v-1e40aea8="">
                                                     <div class="el-image" data-v-1e40aea8="">
                                                         <div class="el-image__placeholder">
@@ -457,6 +457,11 @@
     //点击歌手
     function singconf(siid){
         location.href="/singerdetails/"+siid;
+    }
+
+    //热门歌单详情
+    function gdxx(gid){
+        location.href="/songdeta/"+gid;
     }
 </script>
 </html>
