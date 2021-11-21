@@ -183,8 +183,50 @@
                         </form>
                     </div>
                 </div>
-                <div class="login-no fl"><a th:href="@{/login.html}" target="_blank">登录</a> <span>/</span> <a
+                <!--登录了-->
+                <div class="user-bar fl" th:if="${session.user!=null}" onmouseover="$('#dropdown-menu-3781').show()" onmouseout="$('#dropdown-menu-3781').hide()">
+                    <div data-v-446503a5="" class="header-user-bar">
+                        <div data-v-446503a5="" class="el-dropdown"><a data-v-446503a5="" href="/user"
+                                                                       class="user-avatar el-dropdown-selfdefine"
+                                                                       aria-haspopup="list"
+                                                                       aria-controls="dropdown-menu-3781"
+                                                                       role="button" tabindex="0">
+                            <div data-v-446503a5="" class="el-image avatar">
+                                <img th:src="${session.user.usimg}" class="el-image__inner" style="object-fit: cover;"><!----></div> <!----></a>
+
+                            <ul data-v-446503a5="" class="el-dropdown-menu el-popper" id="dropdown-menu-3781"
+                                style="display: none; position: absolute;left: -370px; top:60px;">
+                                <div data-v-446503a5="" class="header-userinfo">
+                                    <div data-v-446503a5="" class="base-info clearfix">
+                                        <div data-v-446503a5="" class="fl">
+                                            <a data-v-446503a5="" href="/user" class="fl">
+                                                <span data-v-446503a5="" class="user-avatar">
+                                                    <div data-v-446503a5="" class="el-image avatar">
+                                                        <img th:src="${session.user.usimg}" class="el-image__inner" style="object-fit: cover;" /><!----></div>
+                                                <!---->
+                                                </span>
+                                                <span th:text="${session.user.usname}">凌镜</span>
+                                            </a>
+                                        </div>
+                                        <button data-v-446503a5="" type="button"
+                                                class="el-button fr el-button--text"><!----><!----><span>退出</span>
+                                        </button>
+                                    </div>
+                                    <div data-v-446503a5="" class="vip-info clearfix">
+                                        <div data-v-446503a5="" class="fl">
+                                            VIP会员
+                                            <p data-v-446503a5="">懂你现在，听你所爱</p></div>
+                                        <a href="/vip.html" data-v-446503a5="" class="fr" th:if="${session.user.isvip==0}">立即开通</a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--没有登录-->
+                <div class="login-no fl" th:if="${session.user==null}"><a th:href="@{/login.html}" target="_blank">登录</a> <span>/</span> <a
                         th:href="@{/registered.html}" target="_blank">注册</a></div>
+
                 <div>
                     <div class="el-dialog__wrapper" style="display:none;">
                         <div role="dialog" aria-modal="true" aria-label="dialog"
