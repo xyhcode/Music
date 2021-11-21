@@ -34,7 +34,7 @@
                                         class="el-autocomplete">
                                         <div class="el-input el-input--suffix">
                                             <!----><input type="text" id="seavbig" autocomplete="off" valuekey="value"
-                                                placeholder="请输入歌名、歌词、歌手或专辑"
+                                                placeholder="请输入歌名"
                                                 fetchsuggestions="function () { [native code] }"
                                                 selectwhenunmatched="true" debounce="300" placement="bottom-start"
                                                 popperappendtobody="true" class="el-input__inner" th:value="${seval}">
@@ -205,12 +205,12 @@
     //大搜索输入框回车事件
     $("#seavbig").keyup(function(){
         if(event.keyCode == 13){
-            sreaf();
+            sreav();
         }
     });
 
     //大搜索
-    function sreaf(){
+    function sreav(){
         const serval = $("#seavbig").val();
         if(serval==""){
 

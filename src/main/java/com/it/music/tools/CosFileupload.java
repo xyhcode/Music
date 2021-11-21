@@ -7,6 +7,7 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
 import java.io.File;
 import java.io.InputStream;
@@ -65,6 +66,20 @@ public class CosFileupload {
         cosin.putObject(request);
         cosin.shutdown();
     }
+
+    /**
+     * 普通文件上传
+     * @param filepath
+     * @param filename
+     */
+    public static void ptfile(File filepath,String filename){
+        COSClient cosin=CosFileupload.Initialize();
+        PutObjectRequest request=new PutObjectRequest(BUCKETNAME, filename, filepath);
+        cosin.putObject(request);
+        cosin.shutdown();
+    }
+
+
     /***
      * 下载文件
      * @param file 下载的路径

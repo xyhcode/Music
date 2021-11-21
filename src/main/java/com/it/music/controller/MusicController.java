@@ -1,5 +1,6 @@
 package com.it.music.controller;
 
+import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.it.music.config.SysExecptionHandler;
@@ -7,6 +8,7 @@ import com.it.music.entity.Feature;
 import com.it.music.entity.SingerAll;
 import com.it.music.service.*;
 import com.it.music.tools.JsonResult;
+import com.it.music.tools.PayTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -146,5 +148,26 @@ public class MusicController {
        map.put("seval",srval);
        map.put("sr",lis);
         return "fontdesk/search";
+    }
+
+    /**
+     * 进入二维码界面
+     * @return
+     */
+    @RequestMapping("/ewm")
+    public String em(){
+        return "fontdesk/QrCode";
+    }
+
+    /**
+     * 生成二维码
+     * @return
+     */
+    @RequestMapping(path = "/test",method = RequestMethod.GET)
+    @ResponseBody
+    public JsonResult cf(){
+        AlipayTradePrecreateResponse response=PayTools.getqrcode();
+        JsonResult js=new JsonResult(200,"成功！");
+        return js;
     }
 }

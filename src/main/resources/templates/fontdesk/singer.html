@@ -29,8 +29,9 @@
                 var zm=String.fromCharCode((65+i));
                 if(szm===zm){
                     is+=" <li class=\"fl current\" id='li"+zm+"' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('"+zm+"')\" data-v-bb45b0b4=\"\">"+zm+"</span></li>"
+                }else{
+                    is+=" <li class=\"fl\" id='li"+zm+"' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('"+zm+"')\" data-v-bb45b0b4=\"\">"+zm+"</span></li>"
                 }
-                is+=" <li class=\"fl\" id='li"+zm+"' data-v-bb45b0b4=\"\"><span class=\"item\" onclick=\"xm('"+zm+"')\" data-v-bb45b0b4=\"\">"+zm+"</span></li>"
             }
             $("#allzm").append(is);
 

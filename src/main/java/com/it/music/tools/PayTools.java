@@ -1,14 +1,33 @@
-package com.it.music.config;
+package com.it.music.tools;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
+import cn.hutool.extra.qrcode.QrConfig;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePrecreateModel;
+import com.alipay.api.domain.AlipayTradeQueryModel;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.request.AlipayTradeQueryRequest;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 
-public class Payr {
-    public static void main(String[] args)  {
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @author 羡羡
+ */
+public class PayTools {
+
+    /**
+     * 支付验证
+     * @return
+     */
+    public static AlipayClient returnAlipayClient(){
         /** 支付宝网关 **/
         String URL = "https://openapi.alipaydev.com/gateway.do";
 
@@ -23,7 +42,16 @@ public class Payr {
 
         /** 初始化 **/
         AlipayClient alipayClient = new DefaultAlipayClient(URL,APP_ID,APP_PRIVATE_KEY,"json","UTF-8",ALIPAY_PUBLIC_KEY,"RSA2");
+        return alipayClient;
+    }
 
+
+    /**
+     * 生成二维码信息
+     * @return
+     */
+    public static AlipayTradePrecreateResponse getqrcode(){
+        AlipayClient alipayClient= PayTools.returnAlipayClient();
         /** 实例化具体API对应的request类，类名称和接口名称对应,当前调用接口名称：alipay.trade.precreate（统一收单线下交易预创建（扫码支付）） **/
         AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
 
@@ -31,36 +59,92 @@ public class Payr {
         AlipayTradePrecreateModel model = new AlipayTradePrecreateModel();
 
         /** 商户订单号，商户自定义，需保证在商户端不重复，如：20200612000001 **/
-        model.setOutTradeNo("20210612000001");
+        Date da=new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        String time=simpleDateFormat.format(da);
+        model.setOutTradeNo(time);
+        System.out.println("time:"+time);
 
         /** 销售产品码，固定值：FACE_TO_FACE_PAYMENT **/
         model.setProductCode("FACE_TO_FACE_PAYMENT");
 
         /**订单标题 **/
-        model.setSubject("测试");
+        model.setSubject("会员充值");
 
         /** 订单金额，精确到小数点后两位 **/
-        model.setTotalAmount("0.01");
+        model.setTotalAmount("25.00");
 
         /** 订单描述 **/
-        model.setBody("没有");
+        model.setBody("千千音乐会员充值");
 
         /** 将业务参数传至request中 **/
         request.setBizModel(model);
 
         /** 异步通知地址，以http或者https开头的，商户外网可以post访问的异步地址，用于接收支付宝返回的支付结果，如果未收到该通知可参考该文档进行确认：https://opensupport.alipay.com/support/helpcenter/193/201602475759 **/
-        request.setNotifyUrl("");
+        request.setNotifyUrl("http://api.test.alipay.net/atinterface/receive_notify.htm");
 
         AlipayTradePrecreateResponse response = null;
         try {
             /** 通过alipayClient调用API，获得对应的response类  **/
             response = alipayClient.execute(request);
-
+            String path=System.getProperty("user.dir");
+            File localFile = new File(path+"\\src\\main\\resources\\static\\pic\\qrcode.jpg");
+            String ico=path+"\\src\\main\\resources\\static\\pic\\pay.png";
+            QrCodeUtil.generate(response.getQrCode(), QrConfig.create().setImg(ico),localFile);
+            CosFileupload.ptfile(localFile,"music/img/qrcode.jpg");
+            System.out.println(response.getBody());
         } catch (AlipayApiException e) {
-
             e.printStackTrace();
         }
+        return response;
+    }
+
+    /**
+     * 查询交易
+     * @param orderid
+     * @return
+     */
+    public static JsonResult PaymentVerification(String orderid){
+        AlipayClient alipayClient=PayTools.returnAlipayClient();
+        JsonResult js;
+        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+        AlipayTradeQueryModel model = new AlipayTradeQueryModel();
+        model.setOutTradeNo(orderid);
+        //model.setTradeNo("2020061622001473951448314322");
+        request.setBizModel(model);
+        //request.putOtherTextParam("app_auth_token", "传入获取到的app_auth_token值");
+        AlipayTradeQueryResponse response = null;
+        try {
+
+            /** 通过alipayClient调用API，获得对应的response类  **/
+            response = alipayClient.execute(request);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+
+        /**
+         * 交易状态：
+         *
+         * WAIT_BUYER_PAY（交易创建，等待买家付款）
+         * TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）
+         * TRADE_SUCCESS（交易支付成功）
+         * TRADE_FINISHED（交易结束，不可退款）
+         *
+         */
+        /** 获取接口调用结果，如果调用失败，可根据返回错误信息到该文档寻找排查方案：https://opensupport.alipay.com/support/helpcenter/101 **/
         System.out.println(response.getBody());
-        //返回结果中有二维码链接 将二维码链接使用hutools生成二维码图片
+        System.out.println("交易状态："+response.getTradeStatus());
+        System.out.println("订单号："+response.getOutTradeNo());
+        System.out.println("交易号："+response.getTradeNo());
+        System.out.println("金额："+response.getTotalAmount());
+        System.out.println("code:"+response.getCode());
+        System.out.println("msg:"+response.getMsg());
+        if("10000".equals(response.getCode()) && "Success".equals(response.getMsg())){
+            js=new JsonResult(200,"支付成功！");
+        }else{
+            js=new JsonResult(500,"支付失败！");
+        }
+        System.out.println(js);
+        return js;
     }
 }
