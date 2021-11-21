@@ -19,4 +19,12 @@ public interface UserDao {
      * @return
      */
     public User seone(int id);
+
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
+    public User login(User user);
+
 }

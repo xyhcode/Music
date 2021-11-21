@@ -6,4 +6,9 @@
     <select id="seone" resultType="User">
         select * from user where usid=#{id}
     </select>
+
+    <select id="login" resultType="User">
+        select * from user where phone=#{phone} and password=#{password}
+    </select>
+
 </mapper>

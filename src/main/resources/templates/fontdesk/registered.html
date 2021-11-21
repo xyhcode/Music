@@ -2,106 +2,109 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link th:href="@{/login/css/bootstrap.min.css}" type="text/css" rel="stylesheet">
-	<link th:href="@{/login/css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
-	<link th:href="@{/login/css/bootsnav.css}" type="text/css" rel="stylesheet">
-	<link th:href="@{/login/css/normalize.css}" type="text/css" rel="stylesheet">
-	<link th:href="@{/login/css/css.css}" rel="stylesheet" type="text/css">
-	<script th:src="@{/login/js/jquery-1.11.0.min.js}" type="text/javascript"></script>
-	<script th:src="@{/login/js/jquery.step.js}" type="text/javascript"></script>
-	<script th:src="@{/login/js/bootstrap.min.js}" type="text/javascript"></script>
-	<script th:src="@{/login/js/bootsnav.js}" type="text/javascript"></script>
-	<script th:src="@{/login/js/jquery.js}" type="text/javascript"></script>
-	<!--[if IE]><script th:src="@{/login/js/html5.js}"></script><![endif]-->
-	<title>注册</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/login/css/bootstrap.min.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/login/css/font-awesome.min.css}" type="text/javascript" rel="stylesheet">
+    <link th:href="@{/login/css/bootsnav.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/login/css/normalize.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/login/css/css.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/login/js/jquery-1.11.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{/login/js/jquery.step.js}" type="text/javascript"></script>
+    <script th:src="@{/login/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script th:src="@{/login/js/bootsnav.js}" type="text/javascript"></script>
+    <script th:src="@{/login/js/jquery.js}" type="text/javascript"></script>
+    <!--[if IE]>
+    <script th:src="@{/login/js/html5.js}"></script><![endif]-->
+    <title>注册</title>
 </head>
 
 <body class="logobg_style">
-	<div id="large-header" class="large-header login-page">
-		<canvas id="demo-canvas" width="1590" height="711"></canvas>
-		<div class="Retrieve_style">
-			<div class="Retrieve-content step-body" id="myStep">
-				<h1 class="title_name">用户注册</h1>
-				<div class="step-header">
-					<ul>
-						<li>
-							<p>输入电话</p>
-						</li>
-						<li>
-							<p>确认密码</p>
-						</li>
-					</ul>
-				</div>
-				<div class="step-content">
-					<div class="step-list login_padding">
-						<form role="form" id="form_login" class="">
-							<div class="form-group clearfix">
-								<div class="input-group col-lg-8 col-md-8 col-xs-8">
-									<div class="input-group-addon"><i class="icon_phone"></i></div>
-									<input type="text" class="form-control text_phone" name="phone" id="phone"
-										placeholder="你的手机号" autocomplete="off">
-								</div>
-								<div class="col-lg-4 col-md-4 col-xs-4 fl"><input type="button" id="btn"
-										class="btn_mfyzm" value="获取验证码" onclick="Sendpwd(this)" /></div>
-							</div>
-							<div class="form-group clearfix">
-								<div class="input-group">
-									<div class="input-group-addon"><i class="icon_yanzhen"></i></div>
-									<input type="text" class="form-control" name="Verification" id="Verification"
-										placeholder="短信验证码" autocomplete="off">
-								</div>
-							</div>
-							<div class="tishi"></div>
-						</form>
-						<div class="form-group">
-							<button class="btn btn-danger btn-block btn-login" id="applyBtn">下一步</button>
-						</div>
+<div id="large-header" class="large-header login-page">
+    <canvas id="demo-canvas" width="1590" height="711"></canvas>
+    <div class="Retrieve_style">
+        <div class="Retrieve-content step-body" id="myStep">
+            <h1 class="title_name">用户注册</h1>
+            <div class="step-header">
+                <ul>
+                    <li>
+                        <p>输入电话</p>
+                    </li>
+                    <li>
+                        <p>确认密码</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="step-content">
+                <div class="step-list login_padding">
+                    <form role="form" id="form_login" class="">
+                        <div class="form-group clearfix">
+                            <div class="input-group col-lg-8 col-md-8 col-xs-8">
+                                <div class="input-group-addon"><i class="icon_phone"></i></div>
+                                <input type="text" class="form-control text_phone" name="phone" id="phone"
+                                       placeholder="你的手机号" autocomplete="off">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 fl"><input type="button" id="btn"
+                                                                              class="btn_mfyzm" value="获取验证码"
+                                                                              onclick="Sendpwd(this)"/></div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="icon_yanzhen"></i></div>
+                                <input type="text" class="form-control" name="Verification" id="Verification"
+                                       placeholder="短信验证码" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="tishi"></div>
+                    </form>
+                    <div class="form-group">
+                        <button class="btn btn-danger btn-block btn-login" id="applyBtn">下一步</button>
+                    </div>
 
-					</div>
-					<div class="step-list">
-						<form method="post" role="form" id="" class="login_padding">
-							<div class="form-group clearfix">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="icon_password"></i>
-									</div>
-									<input type="password" class="form-control" name="password" id="password"
-										placeholder="密码" autocomplete="off">
-								</div>
+                </div>
+                <div class="step-list">
+                    <form method="post" role="form" id="" class="login_padding">
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="icon_password"></i>
+                                </div>
+                                <input type="password" class="form-control" name="password" id="password"
+                                       placeholder="密码" autocomplete="off">
+                            </div>
 
-							</div>
-							<div class="form-group clearfix">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="icon_password"></i>
-									</div>
-									<input type="password" class="form-control" name="confirmpwd" id="confirmpwd"
-										placeholder="再次密码" autocomplete="off">
-								</div>
-							</div>
-							<div class="tishis"></div>
-							<div class="form-group">
-								<a href="javascript:void(0);" type="submit" class="btn btn-danger btn-block btn-login"
-									id="submitBtn">下一步</a>
-							</div>
-						</form>
-					</div>
-					
-					<div class="textright"><a href="/login.html" style="margin-right:40px;color:#333;position: relative;top:-30px;" class="forget">账户登录</a></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script th:src="@{/login/js/TweenLite/TweenLite.min.js}"></script>
-	<script th:src="@{/login/js/TweenLite/EasePack.min.js}"></script>
-	<script th:src="@{/login/js/TweenLite/rAF.js}"></script>
-	<script th:src="@{/login/js/TweenLite/demo-1.js}"></script>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="icon_password"></i>
+                                </div>
+                                <input type="password" class="form-control" name="confirmpwd" id="confirmpwd"
+                                       placeholder="再次密码" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="tishis"></div>
+                        <div class="form-group">
+                            <a href="javascript:void(0);" type="submit" class="btn btn-danger btn-block btn-login"
+                               id="submitBtn">下一步</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="textright"><a href="/login.html"
+                                          style="margin-right:40px;color:#333;position: relative;top:-30px;"
+                                          class="forget">账户登录</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/login/js/TweenLite/TweenLite.min.js}"></script>
+<script th:src="@{/login/js/TweenLite/EasePack.min.js}"></script>
+<script th:src="@{/login/js/TweenLite/rAF.js}"></script>
+<script th:src="@{/login/js/TweenLite/demo-1.js}"></script>
 </body>
-
-</html>
 <script type="text/javascript">
 
 </script>
+</html>

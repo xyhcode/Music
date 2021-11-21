@@ -9,4 +9,11 @@ import com.it.music.entity.User;
  */
 public interface UserService {
     public User seone(int id);
+
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
+    public User login(User user);
 }

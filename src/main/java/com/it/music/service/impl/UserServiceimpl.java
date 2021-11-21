@@ -22,4 +22,9 @@ public class UserServiceimpl implements UserService {
         User li=usdao.seone(id);
         return li;
     }
+
+    @Override
+    public User login(User user) {
+        return usdao.login(user);
+    }
 }

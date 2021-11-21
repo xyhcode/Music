@@ -1,16 +1,15 @@
 //登录操作
 $(document).ready(function(){
-if(screen.width < 780 && $(window).width() < 780)
-{
-	$(".content_list").hide();
-
-}else{
-	$(".content_list").show();
-}
-     $(window).resize(function(){	
-	 $(".content_list").show();
-	 });
+	if(screen.width < 780 && $(window).width() < 780) {
+		$(".content_list").hide();
+	}else{
+		$(".content_list").show();
+	}
+	$(window).resize(function(){
+		 $(".content_list").show();
+	});
 });
+
 //登录操作
 var phone =/[1][3-9][0-9]{9,9}/;
 var validCode=true;
@@ -19,29 +18,56 @@ function cliLogin() {
 	var txtPwd = $("#password").val();
 	
 	if ($.trim(txtUser) == "") {
-	
 		Tip('请输入你的手机号');
 		$("#txtUser").focus();
 		return;
-		
 	}
 	if(!phone.exec(txtUser)){
-			
-			Tip('手机输入格式不正确,请从新输入');
-			$("#txtUser").focus();
+		Tip('手机输入格式不正确,请从新输入');
+		$("#txtUser").focus();
 		return;
-		}
+	}
 	
 	if ($.trim(txtPwd) == "") {
 		Tip('请输入密码！');
 		$("#Userpwd").focus();
 		return;
 	}
-	
+
+	$.ajax({
+		url:'/login',
+		type:'post',
+		data:{
+			"phone":txtUser,
+			"password":txtPwd,
+		},
+		dataType : "json",
+		complete : function(xhr, status) {
+			//拦截器拦截没有权限跳转
+			// 通过xhr取得响应头
+			var REDIRECT = xhr.getResponseHeader("REDIRECT");
+			//如果响应头中包含 REDIRECT 则说明是拦截器返回的
+			if (REDIRECT == "REDIRECT") {
+				document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+			}
+		},
+		success:function(da){
+			// console.log(da);
+			if(da.code==500){
+				layer.msg(da.msg);
+				$("#username").val("");
+				$("#password").val("");
+			}else if(da.code==200){
+				// layer.msg(da.msg);
+				location.href="/index.html";
+			}
+		}
+	});
 	return false;
 }
-//注册操作
 
+
+//注册操作
 function Sendpwd(sender) {
 	var time=30;
 	var phones = $.trim($("#phone").val());
