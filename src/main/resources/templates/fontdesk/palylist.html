@@ -43,7 +43,7 @@
                             </div>
 
                             <div data-v-0869570c="" data-v-5ea8f978="">
-                                <ul class="filter-data-box clearfix" data-v-0869570c="">
+                                <ul class="filter-data-box clearfix" data-v-0869570c="" id="gtype">
 
                                     <a th:each="tt:${obj}" th:href="@{'/palylist.html?sotid='+${tt.sotid}}" >
                                         <li data-v-0869570c="" ><span th:title="${tt.sotname}" class="item ellipsis"
@@ -125,5 +125,17 @@
             location.href="/search/"+serval;
         }
     }
+
+    $(function() {
+        /*歌单类型选中*/
+        $(function() {
+            $("#gtype a").each(function(){
+                $this = $(this);
+                if($this[0].href==String(window.location)){
+                    $this.find("span").addClass("item ellipsis current");
+                }
+            });
+        })
+    })
 </script>
 </html>

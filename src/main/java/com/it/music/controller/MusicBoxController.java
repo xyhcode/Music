@@ -1,6 +1,5 @@
 package com.it.music.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.it.music.entity.SongSing;
 import com.it.music.service.PlayListService;
 import com.it.music.tools.JsonUtil;
@@ -21,7 +20,7 @@ public class MusicBoxController {
     @Autowired
     PlayListService playListService;
 
-    @GetMapping("musicbox")
+    @GetMapping("/musicbox")
     public String musicbox(ModelMap map){
         System.out.println("musicbox");
         List list=playListService.getSongList(uid);

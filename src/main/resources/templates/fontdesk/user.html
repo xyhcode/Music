@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千千音乐-听见世界</title>
+    <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
+    <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}" />
+    <link rel="stylesheet" th:href="@{/css/f0c121bf9729755d1933.css}"/>
+    <link rel="stylesheet" th:href="@{/css/4128696a8dd92d32da65.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/c1c20feae08654f3e00d.css}">
+</head>
+
+<body>
+<div data-server-rendered="true" id="__nuxt">
+    <!---->
+    <div id="__layout">
+        <div>
+            <!--头部-->
+            <footer th:replace="fontdesk/head::footer-fragment-head"></footer>
+
+            <div data-v-3859e69a="" data-v-72420e77="" class="container page-main">
+                <div data-v-3db4196a="" data-v-3859e69a="" class="head-box">
+                    <div data-v-3db4196a="" class="page-container head-content-box clearfix">
+                        <div data-v-3db4196a="" class="fl">
+                            <div data-v-3db4196a="" class="avatar"><span data-v-3db4196a=""
+                                                                         class="el-avatar el-avatar--circle"
+                                                                         style="height: 120px; width: 120px; line-height: 120px;"><img
+                                    src="https://thirdwx.qlogo.cn/mmopen/vi_32/sdF70WZpibcY5ClJib9hl657YfkSib78FAoaXXLfEqfPD3IYw6Rib4iaTmFKJCcqzwnFfJhhorynqbgNwiaBEJlfKwYA/132"
+                                    style="object-fit: cover;"></span> <!----></div>
+                            <a data-v-3db4196a="" href="/user/edit" class="">编辑资料</a></div>
+                        <div data-v-3db4196a="" class="info-box">
+                            <div data-v-3db4196a="" class="refre"></div>
+                            <div data-v-3db4196a="" class="info">
+                                <div data-v-3db4196a="" class="name">凌镜</div>
+                                <div data-v-3db4196a="" class="intro">自我介绍一下吧</div>
+                            </div>
+                            <div data-v-3db4196a="" class="bar"><a data-v-3db4196a="" href="/user"
+                                                                   class="nuxt-link-exact-active nuxt-link-active">我的收藏</a>
+                                |
+                                <a data-v-3db4196a="" href="/user/purchased" class="">已购歌曲</a>
+                                |
+                                <a data-v-3db4196a="" href="/user/mysong" class="">我的歌单</a>
+
+                            </div>
+                            <div data-v-3db4196a="" class="bg"><img data-v-3db4196a=""
+                                                                    src="https://static1-music.taihe.com/client/img/608ed91.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-v-3859e69a="" class="page-container content-box">
+                    <div data-v-3859e69a="" class="head clearfix">
+                        <div data-v-3859e69a="" class="title">我的收藏</div>
+                        <div data-v-3859e69a="" class="el-tabs el-tabs--top">
+                            <div class="el-tabs__header is-top">
+                                <div class="el-tabs__nav-wrap is-top">
+                                    <div class="el-tabs__nav-scroll">
+                                        <div role="tablist" class="el-tabs__nav is-top"
+                                             style="transform: translateX(0px);">
+                                            <div class="el-tabs__active-bar is-top"
+                                                 style="width: 41px; transform: translateX(0px);"></div>
+                                            <div id="tab-1" aria-controls="pane-1" role="tab" aria-selected="true"
+                                                 tabindex="0" class="el-tabs__item is-top is-active">单曲0
+                                            </div>
+                                            <div id="tab-2" aria-controls="pane-2" role="tab" tabindex="-1"
+                                                 class="el-tabs__item is-top">专辑0
+                                            </div>
+                                            <div id="tab-3" aria-controls="pane-3" role="tab" tabindex="-1"
+                                                 class="el-tabs__item is-top">歌单0
+                                            </div>
+                                            <div id="tab-4" aria-controls="pane-4" role="tab" tabindex="-1"
+                                                 class="el-tabs__item is-top">视频0
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="el-tabs__content">
+                                <div data-v-3859e69a="" role="tabpanel" id="pane-1" aria-labelledby="tab-1"
+                                     class="el-tab-pane"></div>
+                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-2"
+                                     aria-labelledby="tab-2" class="el-tab-pane" style="display: none;"></div>
+                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-3"
+                                     aria-labelledby="tab-3" class="el-tab-pane" style="display: none;"></div>
+                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-4"
+                                     aria-labelledby="tab-4" class="el-tab-pane" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-v-3859e69a="" class="content">
+                        <div data-v-3859e69a="" class="song-box"><!---->
+                            <div data-v-085e2f10="" data-v-3859e69a="" class="nodata-box"><img data-v-085e2f10=""
+                                                                                               src="https://static1-music.taihe.com/client/img/54bb599.png">
+                                <div data-v-085e2f10="" class="message">没有找到相关单曲</div>
+                            </div>
+                        </div>
+                        <div data-v-3859e69a="" class="albums-box" style="display: none;"><!----> <!----></div>
+                        <div data-v-3859e69a="" class="track-list-box" style="display: none;"><!----> <!----></div>
+                        <div data-v-3859e69a="" class="track-list-box" style="display: none;"><!----> <!----></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--尾部-->
+            <footer th:replace="fontdesk/foot::footer-fragment"></footer>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //热门歌单详情
+    function gdxx(gid) {
+        location.href = "/songdeta/" + gid;
+    }
+
+    //搜索输入框回车事件
+    $("#seav").keyup(function () {
+        if (event.keyCode == 13) {
+            srea();
+        }
+    });
+
+    //搜索
+    function srea() {
+        const serval = $("#seav").val();
+        if (serval == "") {
+
+        } else {
+            location.href = "/search/" + serval;
+        }
+    }
+</script>
+</html>

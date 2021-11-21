@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千千音乐-听见世界</title>
+    <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
+    <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}" />
+    <link rel="stylesheet" th:href="@{/css/f0c121bf9729755d1933.css}"/>
+    <link rel="stylesheet" th:href="@{/css/4128696a8dd92d32da65.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+
+</head>
+
+<body>
+<div data-server-rendered="true" id="__nuxt">
+    <!---->
+    <div id="__layout">
+        <div>
+            <!--头部-->
+            <footer th:replace="fontdesk/head::footer-fragment-head"></footer>
+
+            <div style="margin:20px 50px;">
+                <h2>个人资料</h2>
+
+
+            </div>
+
+            <!--尾部-->
+            <footer th:replace="fontdesk/foot::footer-fragment"></footer>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    //热门歌单详情
+    function gdxx(gid) {
+        location.href = "/songdeta/" + gid;
+    }
+
+    //搜索输入框回车事件
+    $("#seav").keyup(function () {
+        if (event.keyCode == 13) {
+            srea();
+        }
+    });
+
+    //搜索
+    function srea() {
+        const serval = $("#seav").val();
+        if (serval == "") {
+
+        } else {
+            location.href = "/search/" + serval;
+        }
+    }
+</script>
+</html>

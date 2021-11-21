@@ -124,18 +124,33 @@
                     </g>
                 </g>
             </svg>
+            <script>
+
+                $(function() {
+                    /*导航栏*/
+                    $(function() {
+                        $("#toto a").each(function(){
+                            $this = $(this);
+                            if($this[0].href==String(window.location)){
+                                $this.addClass("nuxt-link-exact-active nuxt-link-active");
+                            }
+                        });
+                    })
+                })
+
+            </script>
             <img th:src="@{/pic/99e28d0.png}" title="logo" alt="logo" style="display:none;"></a>
-            <ul class="header-nav fl" data-v-2a834836="">
-                <li class="fl" data-v-2a834836=""><a th:href="@{/}"
+            <ul class="header-nav fl" data-v-2a834836="" id="toto">
+                <li class="fl" data-v-2a834836=""><a th:href="@{/}" onclick="tjj(this)"
                                                      data-v-2a834836="">首页</a></li>
                 <li class="fl" data-v-2a834836=""><a href="/palylist.html"
-                                                     class="nuxt-link-exact-active nuxt-link-active"
                                                      data-v-2a834836="">歌单</a></li>
                 <li class="fl" data-v-2a834836=""><a th:href="@{'/morsinger/all/0/0'}"
                                                      data-v-2a834836="">歌手</a></li>
                 <li class="fl" data-v-2a834836=""><a href="/vip.html"
                                                      data-v-2a834836="">VIP</a></li>
-                <li class="fl" data-v-2a834836=""><span data-v-2a834836="">音乐盒</span></li>
+                <li class="fl" data-v-2a834836=""><a href="/musicbox" target="_blank"
+                                                     data-v-2a834836="">音乐盒</a></li>
             </ul>
             <div class="header-right fr">
                 <div class="search-box fl">
@@ -208,9 +223,9 @@
                                                 <span th:text="${session.user.usname}">凌镜</span>
                                             </a>
                                         </div>
-                                        <button data-v-446503a5="" type="button"
+                                        <a href="/exit" data-v-446503a5="" type="button"
                                                 class="el-button fr el-button--text"><!----><!----><span>退出</span>
-                                        </button>
+                                        </a>
                                     </div>
                                     <div data-v-446503a5="" class="vip-info clearfix">
                                         <div data-v-446503a5="" class="fl">
@@ -224,8 +239,8 @@
                     </div>
                 </div>
                 <!--没有登录-->
-                <div class="login-no fl" th:if="${session.user==null}"><a th:href="@{/login.html}" target="_blank">登录</a> <span>/</span> <a
-                        th:href="@{/registered.html}" target="_blank">注册</a></div>
+                <div class="login-no fl" th:if="${session.user==null}"><a th:href="@{/login.html}">登录</a> <span>/</span> <a
+                        th:href="@{/registered.html}">注册</a></div>
 
                 <div>
                     <div class="el-dialog__wrapper" style="display:none;">

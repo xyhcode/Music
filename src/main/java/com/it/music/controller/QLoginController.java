@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,6 +42,13 @@ public class QLoginController {
             jr = new JsonResult(500,"登录失败！");
         }
         return jr;
+    }
+
+    @RequestMapping("/exit")
+    public String exit(SessionStatus ss ,HttpServletRequest request){
+        ss.setComplete();
+        request.getSession().invalidate();
+        return "redirect:/index.html";
     }
 
 }
