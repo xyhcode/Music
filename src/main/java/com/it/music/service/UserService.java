@@ -2,6 +2,8 @@ package com.it.music.service;
 
 import com.it.music.entity.User;
 
+import java.util.List;
+
 /**
  * @author 羡羡
  *
@@ -17,6 +19,22 @@ public interface UserService {
      * @return
      */
     public User login(User user);
+
+    public int vercode(String iphone);
+
+    /**
+     * 用户注册
+     * @param us
+     * @return
+     */
+    public int Userreg(User us);
+
+    /**
+     * 电话查询
+     * @param iphone
+     * @return
+     */
+    public User seiphone(String iphone);
 
     /**
      * 用户修改

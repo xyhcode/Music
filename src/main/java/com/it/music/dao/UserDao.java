@@ -34,4 +34,18 @@ public interface UserDao {
      */
     public int alter(User user);
 
+
+    /**
+     * 用户注册
+     * @param us
+     * @return
+     */
+    public int Userreg(User us);
+
+    /**
+     * 电话查询
+     * @param iphone
+     * @return
+     */
+    public User seiphone(String iphone);
 }
