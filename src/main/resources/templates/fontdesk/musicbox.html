@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/33aea27d93c1414120ca.css}">
     <link rel="stylesheet" th:href="@{/css/0f2a9a5938b875c79ae6.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <!--    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>-->
     <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
     <script th:src="@{/layui/layui.js}"></script>
     <style>
@@ -83,9 +83,12 @@
             var currentTime;//当前播放的时间
             var audio = document.getElementById("audio");
             var ppxx;//保存ul的translateY值
+            var d_s;//mp3总时间
 
             audio.ontimeupdate = function () {//audio时间改变事件
                 currentTime = audio.currentTime;
+                d_s=audio.duration;
+
                 for (j = currentLine, len = lrcTime.length; j < len; j++) {
                     if (currentTime < lrcTime[j + 1] && currentTime > lrcTime[j]) {
                         currentLine = j;
@@ -97,6 +100,37 @@
                         break;
                     }
                 }
+
+                var dsum=parseInt(currentTime);//播放到多少秒
+                var zsum=parseInt(d_s);
+                var percent=dsum/zsum;//播放百分比
+                console.log(percent);
+
+                var dms=parseInt(dsum%60);
+                var dfs=parseInt(dsum/60);
+                var dm=dms;
+                var df=dfs;
+                if((dms)<10){
+                    dm="0"+dms;
+                }
+                if((dfs)<10){
+                    df="0"+dfs;
+                }
+                var dtime=df+":"+dm;
+                $('#d_time').text(dtime);
+
+
+
+                //进度条
+                // var barwid=document.querySelector(".el-slider__runway").offsetWidth;//滚动条总长度
+                // console.log(barwid);
+                // var wid=percent*parseInt(barwid);//滚动条长度
+                var bar=document.querySelector(".el-slider__bar");//得到滚动条
+                bar.style.width=(percent*100)+"%";//设置滚动条长度
+                var yuan=document.querySelector(".el-slider__button-wrapper");
+                yuan.style.left=(percent*100)+"%";
+
+
             };
 
             audio.onseeked = function () {//audio进度更改后事件
@@ -110,36 +144,35 @@
                     }
                 }
 
-                //总时间
-                var msize = audio.duration;//
-                var sumt = parseInt(msize);
-                //当前时间
-                var dcur = parseInt(currentTime);
-                var dtime = parseInt(dcur / 60) + ":" + (dcur % 60);
-
-                var z = dtime / sumt;
-                alert(z);
-
-                layui.use('slider', function () {
-                    var $ = layui.$
-                        , slider = layui.slider;
-
-                    //自定义颜色
-                    slider.render({
-                        elem: '#slideTest15'
-                        , theme: '#1ecc94' //主题色
-                        , tips: false
-                        , value: z
-                        , min: 0
-                        , max: 100
-                    });
-                });
 
             };
         })
 
-        function play(uid) {
+
+        function plays(uid) {
             location.href = "/play/" + uid;
+        }
+
+        var p=true;//播放状态
+
+        //播放
+        function mp3go() {
+            if(!p){
+                audio.play();
+            }else {
+                audio.pause();
+            }
+            p=!p;
+        }
+
+        //上一首
+        function prev(soid) {
+            location.href = "/prev/" + soid;
+        }
+
+        //下一首
+        function next(soid) {
+            location.href = "/next/" + soid;
         }
 
 
@@ -268,7 +301,7 @@
                                                                                              aria-activedescendant="el-autocomplete-208-item--1">
                                             <!----><span class="el-input__suffix"><span
                                                     class="el-input__suffix-inner"><i onclick="srea()"
-                                                    class="iconfont el-input__icon"></i><!----><!----><!---->
+                                                                                      class="iconfont el-input__icon"></i><!----><!----><!---->
                                                 <!----></span><!----></span><!----><!----></div>
                                         <div role="region" class="el-autocomplete-suggestion el-popper"
                                              style="display:none;">
@@ -446,7 +479,7 @@
                                     <!--                                        </div>-->
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
-                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="play([[${g.soid}]])"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.soid}]])"></span>
                                         <span class="iconfont favorite" data-v-3a201fd6=""></span>
                                         <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
                                     </div>
@@ -496,11 +529,11 @@
                                 <!---->
                             </div>
                             <div class="prev-play-next">
-                                <div class="prev iconfont"></div>
+                                <div class="prev iconfont" th:if="${playInfo!=null}" th:onclick="prev([[${playInfo.soid}]])"></div>
                                 <div class="play-pause-box">
-                                    <div class="play iconfont"></div>
+                                    <div class="play iconfont" onclick="mp3go()"></div>
                                 </div>
-                                <div class="next iconfont"></div>
+                                <div class="next iconfont" th:if="${playInfo!=null}" th:onclick="next([[${playInfo.soid}]])"></div>
                             </div>
                             <div class="playbar-right">
                                 <div class="voice-box clearfix"><span class="voice-icon iconfont"></span>
@@ -522,8 +555,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <span class="times"><span>00:00</span><span
-                                        class="duration">&nbsp;/&nbsp;00:00</span></span>
+                                <span class="times">
+                                    <span id="d_time">00:00</span>
+                                    <span class="duration">&nbsp;/&nbsp;</span>
+                                    <span th:if="${playInfo!=null}" th:text="${playInfo.sotime}"></span>
+                                    <span th:if="${playInfo==null}" >00:00</span>
+                                </span>
                                 <div class="type iconfont"></div>
                             </div>
                         </div>
