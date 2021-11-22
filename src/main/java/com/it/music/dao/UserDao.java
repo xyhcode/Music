@@ -27,4 +27,11 @@ public interface UserDao {
      */
     public User login(User user);
 
+    /**
+     * 用户修改
+     * @param user
+     * @return
+     */
+    public int alter(User user);
+
 }

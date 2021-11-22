@@ -8,7 +8,7 @@ public class User {
     public int usid;
     public String usname;
     public int sex;
-    public int agr;
+    public int age;
     public String phone;
     public String password;
     public String usintro;
@@ -40,12 +40,12 @@ public class User {
         this.sex = sex;
     }
 
-    public int getAgr() {
-        return agr;
+    public int getAge() {
+        return age;
     }
 
-    public void setAgr(int agr) {
-        this.agr = agr;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getPhone() {
@@ -99,10 +99,10 @@ public class User {
     public User() {
     }
 
-    public User(String usname, int sex, int agr, String phone, String password, String usintro, String usimg, int isvip, String viptime) {
+    public User(String usname, int sex, int age, String phone, String password, String usintro, String usimg, int isvip, String viptime) {
         this.usname = usname;
         this.sex = sex;
-        this.agr = agr;
+        this.age = age;
         this.phone = phone;
         this.password = password;
         this.usintro = usintro;
@@ -111,11 +111,11 @@ public class User {
         this.viptime = viptime;
     }
 
-    public User(int usid, String usname, int sex, int agr, String phone, String password, String usintro, String usimg, int isvip, String viptime) {
+    public User(int usid, String usname, int sex, int age, String phone, String password, String usintro, String usimg, int isvip, String viptime) {
         this.usid = usid;
         this.usname = usname;
         this.sex = sex;
-        this.agr = agr;
+        this.age = age;
         this.phone = phone;
         this.password = password;
         this.usintro = usintro;
@@ -130,7 +130,7 @@ public class User {
                 "usid=" + usid +
                 ", usname='" + usname + '\'' +
                 ", sex=" + sex +
-                ", agr=" + agr +
+                ", age=" + age +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", usintro='" + usintro + '\'' +

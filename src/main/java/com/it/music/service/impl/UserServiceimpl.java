@@ -27,4 +27,9 @@ public class UserServiceimpl implements UserService {
     public User login(User user) {
         return usdao.login(user);
     }
+
+    @Override
+    public int alter(User user) {
+        return usdao.alter(user);
+    }
 }
