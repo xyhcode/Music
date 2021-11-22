@@ -15,8 +15,8 @@
         update user
         <set>
             <if test="usname != null">usname=#{usname},</if>
-            <if test="sex != 0">sex=#{sex},</if>
-            <if test="age != 0">age=#{age},</if>
+            <if test="1 == 1">sex=#{sex},</if>
+            <if test="1 == 1">age=#{age},</if>
             <if test="phone != null">phone=#{phone},</if>
             <if test="usintro != null">usintro=#{usintro},</if>
             <if test="usimg != null">usimg=#{usimg},</if>
