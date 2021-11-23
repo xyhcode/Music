@@ -11,4 +11,27 @@
         select * from user where phone=#{phone} and password=#{password}
     </select>
 
+    <update id="alter">
+        update user
+        <set>
+            <if test="usname != null">usname=#{usname},</if>
+            <if test="sex != 0">sex=#{sex},</if>
+            <if test="age != 0">age=#{age},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="usintro != null">usintro=#{usintro},</if>
+            <if test="usimg != null">usimg=#{usimg},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="isvip != null">isvip=#{isvip},</if>
+            <if test="viptime != null">viptime=#{viptime},</if>
+        </set>
+        where usid=#{usid}
+    </update>
+
+    <insert id="Userreg" parameterType="User">
+        insert into user(usname,sex,age,phone,password,usintro,usimg,isvip,viptime)values(#{usname},#{sex},#{age},#{phone},#{password},#{usintro},#{usimg},#{isvip},#{viptime})
+    </insert>
+
+    <select id="seiphone" resultType="User">
+        select * from user where phone=#{iphone}
+    </select>
 </mapper>
