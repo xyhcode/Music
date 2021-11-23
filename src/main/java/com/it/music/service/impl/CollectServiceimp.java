@@ -91,6 +91,11 @@ public class CollectServiceimp implements CollectService {
     }
 
     @Override
+    public int add(Collect collect) {
+        return collectDao.add(collect);
+    }
+
+    @Override
     public Collect zao(int usid, int allid) {
         Collect collect = new Collect();
         collect.setUsid(usid);

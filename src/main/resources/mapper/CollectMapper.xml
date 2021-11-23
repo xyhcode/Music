@@ -14,4 +14,9 @@
         delete from collect where coid=#{coid}
     </delete>
 
+    <insert id="add" parameterType="Collect">
+        insert into collect(usid,allid,cotype,cotime)
+        value(#{usid},#{allid},#{cotype},#{cotime})
+    </insert>
+
 </mapper>

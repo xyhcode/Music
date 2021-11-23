@@ -34,6 +34,13 @@ public interface CollectService {
     public  int del(int coid);
 
     /**
+     * 收藏
+     * @param collect
+     * @return
+     */
+    public int add(Collect collect);
+
+    /**
      * 找
      * @param usid
      * @param allid

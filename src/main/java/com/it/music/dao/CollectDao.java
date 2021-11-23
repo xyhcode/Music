@@ -32,4 +32,11 @@ public interface CollectDao {
      */
     public Collect zao(Collect collect);
 
+    /**
+     * 收藏
+     * @param collect
+     * @return
+     */
+    public int add(Collect collect);
+
 }

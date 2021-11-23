@@ -212,4 +212,36 @@ public class UserController {
         return jr;
     }
 
+    /**是否收藏*/
+    @ResponseBody
+    @RequestMapping("/isadd/{allid}")
+    public JsonResult isadd(HttpServletRequest request,@PathVariable int allid){
+        User us = (User) request.getSession().getAttribute("user");
+        Collect col = collectService.zao(us.getUsid(),allid);
+        JsonResult jr = null;
+        if(col!=null){
+            jr = new JsonResult(202,"已添加！");
+        }else{
+            jr = new JsonResult(200,"添加！");
+        }
+        return jr;
+    }
+
+    /**收藏*/
+    @ResponseBody
+    @RequestMapping("/add")
+    public JsonResult add(HttpServletRequest request,Collect collect){
+        User us = (User) request.getSession().getAttribute("user");
+        collect.setUsid(us.getUsid());
+
+        JsonResult jr = null;
+        int s = collectService.add(collect);
+        if(s>0){
+            jr = new JsonResult(200,"添加成功！");
+        }else{
+            jr = new JsonResult(500,"添加失败！");
+        }
+        return jr;
+    }
+
 }
