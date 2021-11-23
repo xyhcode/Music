@@ -7,6 +7,10 @@
        select * from song
     </select>
 
+    <select id="getSong" resultType="Song">
+       select * from song where soid=#{soid}
+    </select>
+
     <insert id="songadd" parameterType="Song">
        insert into song(siid,soname,solink,lyrics,soimg,sotime,publish,sovip) values (#{siid},#{soname},#{solink},#{lyrics},#{soimg},#{sotime},#{publish},#{sovip});
     </insert>

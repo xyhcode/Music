@@ -28,6 +28,11 @@ public class SongServiceimpl implements SongService {
         return lis;
     }
 
+    @Override
+    public Song getSong(int soid) {
+        return sodao.getSong(soid);
+    }
+
 
     /**
      * 添加歌曲

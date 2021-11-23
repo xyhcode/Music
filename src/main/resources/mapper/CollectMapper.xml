@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.music.dao.CollectDao">
+
+    <select id="showxx" resultType="Collect">
+        select * from collect where usid=#{usid} and cotype=#{cotype}
+    </select>
+
+    <select id="zao" resultType="Collect">
+        select * from collect where usid=#{usid} and allid=#{allid}
+    </select>
+
+    <delete id="del">
+        delete from collect where coid=#{coid}
+    </delete>
+
+</mapper>

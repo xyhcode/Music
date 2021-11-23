@@ -89,18 +89,18 @@
                                 <div class="song ellipsis clearfix" data-v-7385b91b="">
                                     <div class="song-box" data-v-7385b91b="">
                                         <a target="self"
-                                            data-v-7385b91b="" th:text="${gq.soname}">变废为宝</a>
+                                           data-v-7385b91b="" th:text="${gq.soname}">变废为宝</a>
                                         <span data-v-7385b91b="" class="vip" th:if="${gq.sovip==1}">VIP</span>
                                         <!---->
                                     </div>
                                 </div>
                                 <div class="artist ellipsis" data-v-7385b91b=""><a
-                                         target="self"
+                                        target="self"
                                         data-v-7385b91b="" th:each="gss:${gs}" th:if="${gss.siid==gq.siid}" th:text="${gss.siname}">薛之谦</a>
 
                                 </div>
                                 <div class="album ellipsis" data-v-7385b91b=""><a
-                                         target="self"
+                                        target="self"
                                         data-v-7385b91b="" th:text="${'《'+gq.soname+'》'}">《变废为宝》</a></div>
                                 <div class="time" data-v-7385b91b="" th:text="${gq.sotime}">04:39</div>
                                 <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">

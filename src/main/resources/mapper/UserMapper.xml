@@ -21,7 +21,7 @@
             <if test="usintro != null">usintro=#{usintro},</if>
             <if test="usimg != null">usimg=#{usimg},</if>
             <if test="password != null">password=#{password},</if>
-            <if test="isvip != null">isvip=#{isvip},</if>
+            <if test="1 == 1">isvip=#{isvip},</if>
             <if test="viptime != null">viptime=#{viptime},</if>
         </set>
         where usid=#{usid}

@@ -17,6 +17,18 @@
     <script th:src="@{/layui/layui.js}"></script>
 
     <link rel="stylesheet" th:href="@{/css/c1c20feae08654f3e00d.css}">
+    <style>
+
+        .layui-tab-brief>.layui-tab-title .layui-this {
+            color: #333;
+        }
+        .layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after {
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid #333;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -52,202 +64,18 @@
                 <div data-v-3859e69a="" class="page-container content-box">
                     <div data-v-3859e69a="" class="head clearfix">
                         <div data-v-3859e69a="" class="title">我的收藏</div>
-                        <div data-v-3859e69a="" class="el-tabs el-tabs--top">
-                            <div class="el-tabs__header is-top">
-                                <div class="el-tabs__nav-wrap is-top">
-                                    <div class="el-tabs__nav-scroll">
-                                        <div role="tablist" class="el-tabs__nav is-top"
-                                             style="transform: translateX(0px);">
-                                            <div class="el-tabs__active-bar is-top"
-                                                 style="width: 41px; transform: translateX(0px);"></div>
-                                            <a href="javascript:;" id="tab-1" aria-controls="pane-1" role="tab"
-                                               aria-selected="true"
-                                               tabindex="0" class="el-tabs__item is-top is-active">单曲0
-                                            </a>
-                                            <a href="javascript:;" id="tab-3" aria-controls="pane-3" role="tab"
-                                               tabindex="-1"
-                                               class="el-tabs__item is-top">歌单0
-                                            </a>
-                                            <a href="javascript:;" id="tab-4" aria-controls="pane-4" role="tab"
-                                               tabindex="-1"
-                                               class="el-tabs__item is-top">视频0
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="el-tabs__content">
-                                <div data-v-3859e69a="" role="tabpanel" id="pane-1" aria-labelledby="tab-1"
-                                     class="el-tab-pane"></div>
-                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-2"
-                                     aria-labelledby="tab-2" class="el-tab-pane" style="display: none;"></div>
-                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-3"
-                                     aria-labelledby="tab-3" class="el-tab-pane" style="display: none;"></div>
-                                <div data-v-3859e69a="" role="tabpanel" aria-hidden="true" id="pane-4"
-                                     aria-labelledby="tab-4" class="el-tab-pane" style="display: none;"></div>
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li onclick="show(1)" id="title1" class="layui-this">单曲0</li></a>
+                                <li onclick="show(2)" id="title2">歌单0</li></a>
+                                <li onclick="show(3)" id="title3">视频0</li></a>
+                            </ul>
+                            <div class="layui-tab-content" style="height: 200px;">
+                                <div class="layui-tab-item layui-show" id="show1"></div>
+                                <div class="layui-tab-item" id="show2"></div>
+                                <div class="layui-tab-item" id="show3"></div>
                             </div>
                         </div>
-                    </div>
-                    <div data-v-3859e69a="" class="content">
-
-                        <!--没找到-->
-                        <div data-v-3859e69a="" class="song-box"><!---->
-                            <div data-v-085e2f10="" data-v-3859e69a="" class="nodata-box"><img data-v-085e2f10=""
-                                                                                               src="https://static1-music.taihe.com/client/img/54bb599.png">
-                                <div data-v-085e2f10="" class="message">没有找到相关单曲</div>
-                            </div>
-                        </div>
-
-                        <!--单曲-->
-                        <div data-v-3859e69a="" class="song-box">
-                            <button data-v-3859e69a="" type="button" class="el-button el-button--primary is-round">
-                                <!----><!----><span><span data-v-3859e69a="" class="iconfont"></span> 播放全部
-                    </span></button>
-                            <div data-v-7385b91b="" data-v-3859e69a="" class="">
-                                <ul data-v-7385b91b="">
-                                    <li data-v-7385b91b="" class="list-title">
-                                        <div data-v-7385b91b="" class="num">序号</div>
-                                        <div data-v-7385b91b="" class="song ellipsis">歌曲</div>
-                                        <div data-v-7385b91b="" class="artist">歌手</div>
-                                        <div data-v-7385b91b="" class="album">专辑</div>
-                                        <div data-v-7385b91b="" class="time">时长</div>
-                                    </li>
-                                    <li data-v-7385b91b="" class="pr t clearfix">
-                                        <div data-v-7385b91b="" class="num">1</div>
-                                        <div data-v-7385b91b="" class="song ellipsis clearfix">
-                                            <div data-v-7385b91b="" class="song-box"><a data-v-7385b91b=""
-                                                                                        href="/song/T10040396704"
-                                                                                        class="" target="self">火星人来过</a>
-                                                <!----></div>
-                                        </div>
-                                        <div data-v-7385b91b="" class="artist ellipsis"><a data-v-7385b91b=""
-                                                                                           href="/artist/A10047720"
-                                                                                           class=""
-                                                                                           target="self">薛之谦</a>
-
-                                        </div>
-                                        <div data-v-7385b91b="" class="album ellipsis"><a data-v-7385b91b=""
-                                                                                          href="/album/P10001686202"
-                                                                                          class="" target="self">《渡 The
-                                            Crossing》</a></div>
-                                        <div data-v-7385b91b="" class="time">03:36</div>
-                                        <div data-v-3a201fd6="" data-v-7385b91b="" class=" tools pa"><span
-                                                data-v-3a201fd6="" class="iconfont play"></span> <span
-                                                data-v-3a201fd6="" class="iconfont favorite isFavorite"></span> <span
-                                                data-v-3a201fd6="" class="iconfont add"></span> <!----> <span
-                                                data-v-3a201fd6="" class="iconfont share"></span></div>
-                                    </li>
-                                    <li data-v-7385b91b="" class="pr t clearfix">
-                                        <div data-v-7385b91b="" class="num">2</div>
-                                        <div data-v-7385b91b="" class="song ellipsis clearfix">
-                                            <div data-v-7385b91b="" class="song-box"><a data-v-7385b91b=""
-                                                                                        href="/song/T10053095781"
-                                                                                        class="" target="self">港湾</a>
-                                                <!----></div>
-                                        </div>
-                                        <div data-v-7385b91b="" class="artist ellipsis"><a data-v-7385b91b=""
-                                                                                           href="/artist/A10048650"
-                                                                                           class=""
-                                                                                           target="self">面孔乐队</a>
-
-                                        </div>
-                                        <div data-v-7385b91b="" class="album ellipsis"><a data-v-7385b91b=""
-                                                                                          href="/album/P10003142208"
-                                                                                          class=""
-                                                                                          target="self">《面孔》</a></div>
-                                        <div data-v-7385b91b="" class="time">05:22</div>
-                                        <div data-v-3a201fd6="" data-v-7385b91b="" class=" tools pa"><span
-                                                data-v-3a201fd6="" class="iconfont play"></span> <span
-                                                data-v-3a201fd6="" class="iconfont favorite isFavorite"></span> <span
-                                                data-v-3a201fd6="" class="iconfont add"></span> <!----> <span
-                                                data-v-3a201fd6="" class="iconfont share"></span></div>
-                                    </li>
-                                </ul>
-                                <div data-v-8ca96088="" data-v-7385b91b="" class="share-box">
-                                    <div data-v-8ca96088="" class="el-dialog__wrapper" style="display: none;">
-                                        <div role="dialog" aria-modal="true" aria-label="分享至"
-                                             class="el-dialog el-dialog--center share-content-pop"
-                                             style="margin-top: 15vh;">
-                                            <div class="el-dialog__header"><span class="el-dialog__title">分享至</span>
-                                                <button type="button" aria-label="Close" class="el-dialog__headerbtn"><i
-                                                        class="el-dialog__close el-icon el-icon-close"></i></button>
-                                            </div><!----><!----></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!--歌单-->
-                        <div data-v-3859e69a="" class="track-list-box" style="">
-                            <div data-v-1e40aea8="" data-v-3859e69a="" class=" tracklist-box clearfix">
-                                <div data-v-1e40aea8="" class="tracklist-item fl">
-                                    <div data-v-1e40aea8="" class="poster">
-                                        <div data-v-1e40aea8="" class="el-image"><img
-                                                src="https://img01.dmhmusic.com/0105/M00/7E/14/ChR45GFSwVuAYzWrAAErzfoZbDc255.jpg@w_300,h_300"
-                                                class="el-image__inner" style="object-fit: cover;"><!----></div>
-                                        <div data-v-1e40aea8="" class="play-bar"><span data-v-1e40aea8=""
-                                                                                       class="iconfont"></span></div>
-                                    </div>
-                                    <div data-v-1e40aea8="" class="name">【国庆节】假期听歌攻略</div>
-                                    <div data-v-1e40aea8="" class="more-info">
-                                        <div data-v-1e40aea8="" class="num ellipsis">20首单曲</div>
-                                    </div>
-                                </div>
-                                <div data-v-1e40aea8="" class="tracklist-item fl">
-                                    <div data-v-1e40aea8="" class="poster">
-                                        <div data-v-1e40aea8="" class="el-image"><img
-                                                src="https://img01.dmhmusic.com/0104/M00/6D/EE/ChR45GEWKpGACAlNAADKXs_SBeY310.jpg@w_300,h_300"
-                                                class="el-image__inner" style="object-fit: cover;"><!----></div>
-                                        <div data-v-1e40aea8="" class="play-bar"><span data-v-1e40aea8=""
-                                                                                       class="iconfont"></span></div>
-                                    </div>
-                                    <div data-v-1e40aea8="" class="name">顶级男声 | 治愈系精选</div>
-                                    <div data-v-1e40aea8="" class="more-info">
-                                        <div data-v-1e40aea8="" class="num ellipsis">19首单曲</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--视频-->
-                        <div data-v-3859e69a="" class="track-list-box" style="">
-                            <div data-v-540441ab="" data-v-3859e69a="" class="videolist-box clearfix">
-                                <div data-v-540441ab="" class="videolist-item fl">
-                                    <div data-v-540441ab="" class="poster">
-                                        <div data-v-540441ab="" class="el-image"><img
-                                                src="https://img01.dmhmusic.com/0103/M00/87/4C/ChR45GGCLdqACQ9DAAkGLmGrHfc411.jpg@w_300,h_300"
-                                                class="el-image__inner" style="object-fit: cover;"><!----></div>
-                                        <div data-v-540441ab="" class="play-bar"><span data-v-540441ab=""
-                                                                                       class="iconfont"></span></div>
-                                    </div>
-                                    <div data-v-540441ab="" class="name">字里行间（大型纪录片《紫禁城》主题歌）</div>
-                                    <div data-v-540441ab="" class="o-info"><p data-v-540441ab=""><span
-                                            data-v-540441ab="">张碧晨</span>
-
-                                    </p></div>
-                                </div>
-                                <div data-v-540441ab="" class="videolist-item fl">
-                                    <div data-v-540441ab="" class="poster">
-                                        <div data-v-540441ab="" class="el-image"><img
-                                                src="https://img01.dmhmusic.com/0104/M00/85/82/ChR45WGB_dGAGpxoAAHRC5YqzGE222.jpg@w_300,h_300"
-                                                class="el-image__inner" style="object-fit: cover;"><!----></div>
-                                        <div data-v-540441ab="" class="play-bar"><span data-v-540441ab=""
-                                                                                       class="iconfont"></span></div>
-                                    </div>
-                                    <div data-v-540441ab="" class="name">《我的错 My Fault》MV Teaser</div>
-                                    <div data-v-540441ab="" class="o-info"><p data-v-540441ab=""><span
-                                            data-v-540441ab="">Mike张怀颢</span>
-
-                                    </p></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div data-v-3859e69a="" class="albums-box" style="display: none;"><!----> <!----></div>
-                        <div data-v-3859e69a="" class="track-list-box" style="display: none;"><!----> <!----></div>
-                        <div data-v-3859e69a="" class="track-list-box" style="display: none;"><!----> <!----></div>
                     </div>
                 </div>
             </div>
@@ -260,9 +88,39 @@
 </div>
 </body>
 <script>
+
+    //点击爱心
+    function ax(id){
+        $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
+        $.ajax({
+            url: '/user/del/'+id,
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                show(1);
+            }
+        });
+    }
+
+
     //热门歌单详情
     function gdxx(gid) {
         location.href = "/songdeta/" + gid;
+    }
+
+    //点击视频
+    function indvodj(vid){
+        location.href="/videtail/"+vid;
     }
 
     //搜索输入框回车事件
@@ -281,5 +139,176 @@
             location.href = "/search/" + serval;
         }
     }
+
+    $(function(){
+        show(1);
+    })
+
+    function show(type) {
+        $.ajax({
+            url:'/user/'+type,
+            type:'post',
+            dataType : "json",
+            complete : function(xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success:function(da){
+                console.log(da);
+
+                if(da.code==200){
+
+                    $("#title1").text("单曲"+da.data.count1);
+                    $("#title2").text("歌单"+da.data.count2);
+                    $("#title3").text("视频"+da.data.count3);
+
+                    var collect = da.data.collect;
+                    switch (da.data.type) {
+                        /*单曲*/
+                        case 1:{
+                            if(collect.length==0){
+                                showNo(1,'单曲');
+                                return;
+                            }
+                            showdq(collect);
+                        }break;
+                        /*歌单*/
+                        case 2:{
+                            if(collect.length==0){
+                                showNo(2,'歌单');
+                                return;
+                            }
+                            showgd(collect);
+                        }break;
+                        /*视频*/
+                        case 3:{
+                            if(collect.length==0){
+                                showNo(3,'视频');
+                                return;
+                            }
+                            showsp(collect);
+                        }break;
+                        /*没有*/
+                        default:{
+                            console.log("type:"+da.data.type);
+                        };
+                    }
+
+
+                }
+            }
+        });
+    }
+
+
+    /*没找到*/
+    function showNo(type,name) {
+        var t = '<div data-v-3859e69a="" class="song-box"><!---->\n' +
+            '            <div data-v-085e2f10="" data-v-3859e69a="" class="nodata-box"><img data-v-085e2f10=""\n' +
+            '        src="https://static1-music.taihe.com/client/img/54bb599.png">\n' +
+            '            <div data-v-085e2f10="" class="message">没有找到相关'+name+'</div>\n' +
+            '            </div>\n' +
+            '            </div>';
+        $("#show"+type).html(t);
+    }
+
+    /*显示单曲*/
+    function showdq(data) {
+        var t1 = '<li data-v-7385b91b="" class="list-title">\n' +
+            '\t<div data-v-7385b91b="" class="num">序号</div>\n' +
+            '\t<div data-v-7385b91b="" class="song ellipsis">歌曲</div>\n' +
+            '\t<div data-v-7385b91b="" class="artist">歌手</div>\n' +
+            '\t<div data-v-7385b91b="" class="album">专辑</div>\n' +
+            '\t<div data-v-7385b91b="" class="time">时长</div>\n' +
+            '</li>';
+
+        for(var i=0;i<data.length;i++){
+            var vip = "";
+            if(data[i].sovip==1){
+                vip = '<span data-v-7385b91b="" class="vip" >VIP</span>';
+            }
+            t1+='<li class="pr t clearfix" data-v-7385b91b="">\n' +
+                '\t<div class="num" data-v-7385b91b="">'+(i+1)+'</div>\n' +
+                '\t<div class="song ellipsis clearfix" data-v-7385b91b="">\n' +
+                '\t\t<div class="song-box" data-v-7385b91b="">\n' +
+                '\t\t\t<a target="self"\n' +
+                '\t\t\t   data-v-7385b91b="">'+data[i].soname+'</a>\n' +vip+
+                '\t\t\t<!---->\n' +
+                '\t\t</div>\n' +
+                '\t</div>\n' +
+                '\t<div class="artist ellipsis" data-v-7385b91b=""><a\n' +
+                '\t\t\ttarget="self"\n' +
+                '\t\t\tdata-v-7385b91b="" >'+data[i].siname+'</a>\n' +
+                '\t</div>\n' +
+                '\t<div class="album ellipsis" data-v-7385b91b=""><a\n' +
+                '\t\t\ttarget="self"\n' +
+                '\t\t\tdata-v-7385b91b="" >《'+data[i].soname+'》</a></div>\n' +
+                '\t<div class="time" data-v-7385b91b="" >'+data[i].sotime+'</div>\n' +
+                '\t<div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">\n' +
+                '\t\t<span class="iconfont play" data-v-3a201fd6="" ></span>\n' +
+                '\t\t<span id="ax'+data[i].soid+'" onclick="ax('+data[i].soid+')" >\n' +
+                '\t\t\t<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>\n' +
+                '\t\t</span>\n' +
+                '\t</div>\n' +
+                '</li>';
+        }
+
+        var t = '<div data-v-3859e69a="" class="song-box" id="show1_ok">\n' +
+            '                                        <button data-v-3859e69a="" type="button" class="el-button el-button--primary is-round" style="margin-bottom: 20px;padding: 12px 31px;">\n' +
+            '                                            <span><span data-v-3859e69a="" class="iconfont"></span> 播放全部</span></button>\n' +
+            '                                        <div data-v-7385b91b="" data-v-3859e69a="" class="">\n' +
+            '                                            <ul data-v-7385b91b="">'+t1+'</ul>\n' +
+            '                                        </div>\n' +
+            '                                    </div>';
+
+        $("#show1").html(t);
+    }
+
+    /*显示歌单*/
+    function showgd(data) {
+        var t1 = '';
+        for(var i=0;i<data.length;i++){
+            t1 += '<div class="tracklist-item fl" data-v-1e40aea8="" onclick="gdxx('+data[i].solid+')">\n' +
+                '\t<div class="poster" data-v-1e40aea8="">\n' +
+                '\t\t<div class="el-image" data-v-1e40aea8="">\n' +
+                '\t\t\t<img src="'+data[i].solimg+'" class="el-image__inner" style="object-fit: cover;">\n' +
+                '\t\t</div>\n' +
+                '\t\t<div class="play-bar" data-v-1e40aea8=""><span class="iconfont" data-v-1e40aea8=""></span></div>\n' +
+                '\t</div>\n' +
+                '\t<div class="name" data-v-1e40aea8="">'+data[i].soltitle+'</div>\n' +
+                '</div>';
+        }
+        var t = '<div data-v-3859e69a="" class="track-list-box">\n' +
+            '\t<div data-v-1e40aea8="" data-v-3859e69a="" class=" tracklist-box clearfix">'+t1+'</div>\n' +
+            '</div>';
+        $("#show2").html(t);
+    }
+
+    /*显示视频*/
+    function showsp(data) {
+        var t1 = '';
+        for(var i=0;i<data.length;i++){
+            t1+= '<div data-v-540441ab="" class="videolist-item fl" onclick="indvodj('+data[i].feid+')">\n' +
+                '                                                <div data-v-540441ab="" class="poster">\n' +
+                '                                                    <div data-v-540441ab="" class="el-image"><img\n' +
+                '                                                            src="'+data[i].cover+'"\n' +
+                '                                                            class="el-image__inner" style="object-fit: cover;">\n' +
+                '                                                    </div>\n' +
+                '                                                    <div data-v-540441ab="" class="play-bar"><span data-v-540441ab="" class="iconfont"></span></div></div>\n' +
+                '                                                <div data-v-540441ab="" class="name">'+data[i].fetitle+'</div>\n' +
+                '                                            </div>';
+        }
+
+        var t = '<div data-v-3859e69a="" class="track-list-box" id="show3_ok">\n' +
+            '                                        <div data-v-540441ab="" data-v-3859e69a="" class="videolist-box clearfix">'+t1+'</div>\n' +
+            '                                    </div>';
+        $("#show3").html(t);
+    }
+
 </script>
 </html>
