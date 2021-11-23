@@ -26,7 +26,6 @@ public class MusicBoxController {
     public String musicbox(ModelMap map){
         System.out.println("musicbox");
         List list=playListService.getSongList(uid);
-        System.out.println(list);
         map.put("listInfo",list);
         return "fontdesk/musicbox";
     }
@@ -41,7 +40,6 @@ public class MusicBoxController {
         SongSing s=playListService.getSong(soid);
         map.put("playInfo",s);//播放歌曲信息
         String lyric= JsonUtil.getjson(s.getLyrics());
-        System.out.println(lyric);
         map.put("lyric",lyric);
         return "fontdesk/musicbox";
     }
@@ -61,7 +59,6 @@ public class MusicBoxController {
             pxb=idlist.length-1;
         }
         int sid=idlist[pxb];
-        System.out.println(sid);
         map.put("listInfo",list);
         SongSing s=playListService.getSong(sid);
         map.put("playInfo",s);//播放歌曲信息
@@ -86,7 +83,6 @@ public class MusicBoxController {
             pxb=0;
         }
         int sid=idlist[pxb];
-        System.out.println(sid);
         map.put("listInfo",list);
         SongSing s=playListService.getSong(sid);
         map.put("playInfo",s);//播放歌曲信息

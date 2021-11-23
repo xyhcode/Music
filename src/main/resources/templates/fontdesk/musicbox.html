@@ -158,8 +158,10 @@
         //播放
         function mp3go() {
             if(!p){
+                $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-pause2.png");
                 audio.play();
             }else {
+                $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-play.png");
                 audio.pause();
             }
             p=!p;
@@ -531,7 +533,9 @@
                             <div class="prev-play-next">
                                 <div class="prev iconfont" th:if="${playInfo!=null}" th:onclick="prev([[${playInfo.soid}]])"></div>
                                 <div class="play-pause-box">
-                                    <div class="play iconfont" onclick="mp3go()"></div>
+                                    <div class="play iconfont" onclick="mp3go()">
+                                        <img id="d_img" src="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-play.png" height="21px";width="21px";/>
+                                    </div>
                                 </div>
                                 <div class="next iconfont" th:if="${playInfo!=null}" th:onclick="next([[${playInfo.soid}]])"></div>
                             </div>
