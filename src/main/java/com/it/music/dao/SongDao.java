@@ -18,6 +18,13 @@ public interface SongDao {
     public List seall();
 
     /**
+     * 根据歌曲ID查询歌曲
+     * @param soid
+     * @return
+     */
+    public Song getSong(int soid);
+
+    /**
      * 添加
      * @param son
      * @return

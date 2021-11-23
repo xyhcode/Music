@@ -39,37 +39,15 @@
                             <div class="intro" data-v-bd7c371e="" th:text="${sol.solintro}">无论你是否有冲那场大雨里奔跑的勇气，都希望你会记得八月里盛放的花。</div>
                             <div class="tag" data-v-bd7c371e="" style="color: red;">#<span th:text="${sot.sotname}">流行</span></div>
                         </div>
-                        <div class="btns" data-v-bd7c371e=""><button type="button"
-                                                                     class="el-button el-button--primary is-round" data-v-bd7c371e="">
-                            <!---->
-                            <!----><span><span class="iconfont" data-v-bd7c371e=""></span> 播放全部
-                                    </span>
-                        </button> <button type="button" class="el-button el-button--info is-round"
-                                          data-v-bd7c371e="">
-                            <!---->
-                            <!----><span><span class="iconfont" data-v-bd7c371e=""></span> 收藏
-                                    </span>
-                        </button> <button id="fxx"  type="button" class="el-button el-button--info is-round"
+                        <div class="btns" data-v-bd7c371e="">
+                            <button type="button" class="el-button el-button--primary is-round" data-v-bd7c371e="">
+                                <span><span class="iconfont" data-v-bd7c371e=""></span> 播放全部</span>
+                            </button>
+                            <span id="ccc" th:onclick="sc([[${sol.solid}]])"></span>
+                            <button id="fxx"  type="button" class="el-button el-button--info is-round"
                                           data-v-bd7c371e="" th:data-clipboard-text="${'http://127.0.0.1:8090/songdeta/'+sol.solid}">
-                            <!---->
-                            <!----><span><span class="iconfont" data-v-bd7c371e=""></span> 分享
-                                    </span>
-                        </button>
-                            <div class="share-box" data-v-8ca96088="" data-v-bd7c371e="">
-                                <div class="el-dialog__wrapper" style="display:none;" data-v-8ca96088="">
-                                    <div role="dialog" aria-modal="true" aria-label="分享至"
-                                         class="el-dialog el-dialog--center share-content-pop"
-                                         style="margin-top:15vh;">
-                                        <div class="el-dialog__header"><span
-                                                class="el-dialog__title">分享至</span><button type="button"
-                                                                                           aria-label="Close" class="el-dialog__headerbtn"><i
-                                                class="el-dialog__close el-icon el-icon-close"></i></button>
-                                        </div>
-                                        <!---->
-                                        <!---->
-                                    </div>
-                                </div>
-                            </div>
+                                <span><span class="iconfont" data-v-bd7c371e=""></span> 分享</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -89,18 +67,18 @@
                                 <div class="song ellipsis clearfix" data-v-7385b91b="">
                                     <div class="song-box" data-v-7385b91b="">
                                         <a target="self"
-                                            data-v-7385b91b="" th:text="${gq.soname}">变废为宝</a>
+                                           data-v-7385b91b="" th:text="${gq.soname}">变废为宝</a>
                                         <span data-v-7385b91b="" class="vip" th:if="${gq.sovip==1}">VIP</span>
                                         <!---->
                                     </div>
                                 </div>
                                 <div class="artist ellipsis" data-v-7385b91b=""><a
-                                         target="self"
+                                        target="self"
                                         data-v-7385b91b="" th:each="gss:${gs}" th:if="${gss.siid==gq.siid}" th:text="${gss.siname}">薛之谦</a>
 
                                 </div>
                                 <div class="album ellipsis" data-v-7385b91b=""><a
-                                         target="self"
+                                        target="self"
                                         data-v-7385b91b="" th:text="${'《'+gq.soname+'》'}">《变废为宝》</a></div>
                                 <div class="time" data-v-7385b91b="" th:text="${gq.sotime}">04:39</div>
                                 <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
@@ -112,18 +90,6 @@
                             </li>
 
                         </ul>
-                        <div class="share-box" data-v-8ca96088="" data-v-7385b91b="">
-                            <div class="el-dialog__wrapper" style="display:none;" data-v-8ca96088="">
-                                <div role="dialog" aria-modal="true" aria-label="分享至"
-                                     class="el-dialog el-dialog--center share-content-pop" style="margin-top:15vh;">
-                                    <div class="el-dialog__header"><span class="el-dialog__title">分享至</span><button
-                                            type="button" aria-label="Close" class="el-dialog__headerbtn"><i
-                                            class="el-dialog__close el-icon el-icon-close"></i></button></div>
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!---->
                 </div>
@@ -144,6 +110,111 @@
         });
         e.clearSelection();
     });
+
+
+
+    issc([[${sol.solid}]]);
+
+    //显示是否收藏  true已收藏 false收藏
+    function showsc(n) {
+        var t = '';
+        if(n){
+            t = '<button type="button" class="el-button el-button--info is-round isFavorite" data-v-bd7c371e=""><!----><!----><span><span class="iconfont" data-v-bd7c371e=""></span> 已收藏\n' +
+                '        </span></button>';
+        }else{
+            t = '<button type="button" class="el-button el-button--info is-round" data-v-bd7c371e=""><!----><!----><span><span class="iconfont" data-v-bd7c371e=""></span> 收藏\n' +
+                '        </span></button>';
+        }
+        $("#ccc").html(t);
+    }
+
+    var ist = true;
+    //是否收藏
+    function  issc(id) {
+        $.ajax({
+            url: '/user/isadd/'+id,
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                if(da.code==200){
+                    ist = false;
+                }
+                showsc(ist);
+            }
+        });
+    }
+
+    //收藏
+    function sc(id) {
+        if(ist){
+            // alert(1)
+            $.ajax({
+                url: '/user/del/'+id,
+                type: 'post',
+                dataType: "json",
+                complete: function (xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success: function (da) {
+                    // console.log(da);
+                    issc(id);
+                    ist = false;
+                }
+            });
+        }else{
+            // alert(2)
+            var d = new Date();
+            var date = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+            $.ajax({
+                url: '/user/add',
+                type:"post",
+                // contentType:'application/json',  //发送数据类型
+                data:{
+                    "allid":id,
+                    "cotype":2,
+                    "cotime":date
+                },
+                dataType : "json",  //接受数据格式
+                complete : function(xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success:function(da){
+                    // console.log(da);
+                    // if(da.code==200){
+                    //     layer.msg(da.msg,{offset:['100px']});
+                    //
+                    // }else if(da.code=500){
+                    //     layer.msg(da.msg,{offset:['100px']});
+                    // }
+                    issc(id);
+                    ist = true;
+                }
+            });
+        }
+    }
+
 
     //点击爱心
     var is = true;

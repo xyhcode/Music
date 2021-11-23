@@ -1,19 +1,22 @@
 package com.it.music.controller;
 
+import com.it.music.entity.Collect;
 import com.it.music.entity.User;
-import com.it.music.service.UserService;
+import com.it.music.service.*;
 import com.it.music.tools.CosFileupload;
 import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author lingjing
@@ -25,8 +28,66 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CollectService collectService;
+
+    @Autowired
+    SongListService songListService;
+
+    @Autowired
+    SongService songService;
+
+    @Autowired
+    SingerService singerService;
+
+    @Autowired
+    FeatureService featureService;
+
     @RequestMapping("")
-    public String user(){
+    public String user(HttpServletRequest request,ModelMap mm,@RequestParam(defaultValue = "1") int type){
+        User us = (User) request.getSession().getAttribute("user");
+
+        int count1 = collectService.showxx(us.getUsid(),1).size();
+        int count2 = collectService.showxx(us.getUsid(),2).size();
+        int count3 = collectService.showxx(us.getUsid(),3).size();
+        mm.put("count1",count1);
+        mm.put("count2",count2);
+        mm.put("count3",count3);
+        mm.put("type",type);
+
+        List ls = collectService.showxx(us.getUsid(),type);
+        List list= new ArrayList();
+
+        List gs = singerService.seall();
+        mm.put("gs",gs);
+
+        switch(type){
+            //歌曲
+            case 1:{
+                for(int i=0;i<ls.size();i++){
+                    Collect col = (Collect) ls.get(i);
+                    list.add(songService.getSong(col.getAllid()));
+                }
+                mm.put("show1",list);
+            }break;
+            //歌单
+            case 2:{
+                for(int i=0;i<ls.size();i++){
+                    Collect col = (Collect) ls.get(i);
+                    list.add(songListService.getSongList(col.getAllid()));
+                }
+                mm.put("show2",list);
+            }break;
+            //视频
+            case 3:{
+                for(int i=0;i<ls.size();i++){
+                    Collect col = (Collect) ls.get(i);
+                    list.add(featureService.findidvoid(col.getAllid()));
+                }
+                mm.put("show3",list);
+            }break;
+            default: System.out.println("type:"+type);
+        }
 
         return "fontdesk/user";
     }
@@ -110,6 +171,76 @@ public class UserController {
         //更新一下session
         request.getSession().setAttribute("user",userService.seone(use.getUsid()));
 
+        return jr;
+    }
+
+
+    /*收藏显示*/
+    @ResponseBody
+    @RequestMapping("/{type}")
+    public JsonResult show(HttpServletRequest request ,@PathVariable int type){
+        User us = (User) request.getSession().getAttribute("user");
+
+        int count1 = collectService.showxx(us.getUsid(),1).size();
+        int count2 = collectService.showxx(us.getUsid(),2).size();
+        int count3 = collectService.showxx(us.getUsid(),3).size();
+        List list = collectService.showdata(us.getUsid(),type);
+        HashMap<String,Object> data = new HashMap<String,Object>();
+        data.put("count1",count1);
+        data.put("count2",count2);
+        data.put("count3",count3);
+        data.put("type",type);
+        data.put("collect",list);
+
+        JsonResult jr = new JsonResult(200,"查询成功！",data);
+        return jr;
+    }
+
+    /**取消收藏*/
+    @ResponseBody
+    @RequestMapping("/del/{id}")
+    public JsonResult del(HttpServletRequest request,@PathVariable int id){
+        User us = (User) request.getSession().getAttribute("user");
+        Collect col = collectService.zao(us.getUsid(),id);
+        int s = collectService.del(col.getCoid());
+        JsonResult jr = null;
+        if(s>0){
+            jr = new JsonResult(200,"取消成功！");
+        }else{
+            jr = new JsonResult(500,"取消失败！");
+        }
+        return jr;
+    }
+
+    /**是否收藏*/
+    @ResponseBody
+    @RequestMapping("/isadd/{allid}")
+    public JsonResult isadd(HttpServletRequest request,@PathVariable int allid){
+        User us = (User) request.getSession().getAttribute("user");
+        Collect col = collectService.zao(us.getUsid(),allid);
+        JsonResult jr = null;
+        if(col!=null){
+            jr = new JsonResult(202,"已添加！");
+        }else{
+            jr = new JsonResult(200,"添加！");
+        }
+        return jr;
+    }
+
+    /**收藏*/
+    @ResponseBody
+    @RequestMapping("/add")
+    public JsonResult add(HttpServletRequest request,Collect collect){
+        User us = (User) request.getSession().getAttribute("user");
+        collect.setUsid(us.getUsid());
+
+        JsonResult jr = null;
+        int s = collectService.add(collect);
+        if(s>0){
+            jr = new JsonResult(200,"添加成功！");
+        }else{
+            jr = new JsonResult(500,"添加失败！");
+        }
         return jr;
     }
 
