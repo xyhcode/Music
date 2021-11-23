@@ -32,4 +32,8 @@
         select * from song as a inner join singer as b on a.siid=b.siid where a.soid=#{sid};
     </select>
 
+    <select id="getSongs" resultMap="songse">
+        select * from song
+    </select>
+
 </mapper>

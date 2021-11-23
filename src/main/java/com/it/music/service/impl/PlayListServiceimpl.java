@@ -28,4 +28,9 @@ public class PlayListServiceimpl implements PlayListService {
     public SongSing getSong(int sid) {
         return playListDao.getSong(sid);
     }
+
+    @Override
+    public List getSongs() {
+        return playListDao.getSongs();
+    }
 }

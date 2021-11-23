@@ -150,8 +150,13 @@
         })
 
 
-        function plays(uid) {
-            location.href = "/play/" + uid;
+        function plays(sovip,uid) {
+            if (sovip==1){
+                window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+            }else{
+                location.href = "/play/" + uid;
+            }
+
         }
 
         var p=true;//播放状态
@@ -161,12 +166,20 @@
         function mp3go() {
             if(!p){
                 $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-pause2.png").css("margin-right","4px").css("margin-bottom","2px");
+                // $('#2').css("display","none");
+                // $('.playing-animate pr').css("display","block");
                 audio.play();
             }else {
                 $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-play.png");
+                // $('#2').css("display","block");
+                // $('.playing-animate').css("display","none");
                 audio.pause();
             }
             p=!p;
+        }
+
+        function vip() {
+            window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
         }
 
 
@@ -416,17 +429,6 @@
                         <div class="nav clearfix">
                             <div class="on btn"><span>播放列表</span></div>
                             <div class=" btn"><span>我的收藏</span></div>
-                            <div class=" btn"><span>自建歌单</span></div>
-                            <div class=" btn"><span>已购歌曲</span></div>
-                            <div class="title-piliang"><span class="iconfont play"></span>
-                                <span>批量操作</span>
-                            </div>
-                            <div class="title-piliang" style="display:none;"><span class="iconfont play"></span>
-                                <span>取消操作</span>
-                            </div>
-                            <div class="title-play" style="display:none;"><span class="iconfont play"></span>
-                                <span>播放全部</span>
-                            </div>
                         </div>
                         <div class="list-title" style="">
                             <div class="num">#</div>
@@ -436,20 +438,9 @@
                             <div class="time">时长</div>
                         </div>
                         <div class="songlist-box clearfix fl">
-                            <!---->
-                            <!---->
-                            <!---->
-                            <!--                                <ul class="songlist fl" style="height:-10px;">-->
-                            <!--                                    <li th:if="${listInfo}!=null" th:each="s:${listInfo}">-->
-                            <!--                                        <span th:text="${s.soName}" class="data_name"></span>-->
-                            <!--                                        <span th:text="${s.siName}" class="data_name"></span>-->
-                            <!--                                        <span th:text="${s.soName}" class="data_collection"></span>-->
-                            <!--                                        <span th:text="${s.soTime}" class="data_time"></span>-->
-                            <!--                                    </li>-->
-                            <!--                                </ul>-->
-                            <ul class="songlist fl" style="height: 462px;">
-                                <li th:if="${listInfo!=null}" th:each="g,userStat:${listInfo}" class="pr t clearfix ">
-                                    <div id="1" class="num"><p th:text="${userStat.count}"></p></div>
+                            <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" >
+                                <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class="pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''">
+                                    <div th:id="${userStat.count}" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
                                         <div class="line1"></div>
                                         <div class="line2"></div>
@@ -458,6 +449,7 @@
                                     <div class="song ellipsis">
                                         <div class="song-box">
                                             <a href="#" class target="_blank" tsid="T100" th:text="${g.soname}"></a>
+                                            <span class="vip" th:if="${g.sovip==1}" th:onclick="vip()">VIP</span>
                                         </div>
                                     </div>
                                     <div class="artist ellipsis">
@@ -469,23 +461,38 @@
                                         <a href="#" class th:text="${g.soname}"></a>
                                     </div>
                                     <div class="time"><p th:text="${g.sotime}"></p></div>
-                                    <!--                                        <div class="tools pa">-->
-                                    <!--                                            &lt;!&ndash;播放&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont play"><i class="layui-icon-play layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;" ></i></span>-->
-                                    <!--                                            &lt;!&ndash;暂停&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont pause"><i class="layui-icon-pause"></i></span>-->
-                                    <!--                                            &lt;!&ndash;收藏&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont collect"><i class="layui-icon-heart"></i></span>-->
-                                    <!--                                            &lt;!&ndash;分享&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont share"><i class="layui-icon-share"></i></span>-->
-                                    <!--                                            &lt;!&ndash;下载&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont download"><i class="layui-icon-download-circle"></i></span>-->
-                                    <!--                                            &lt;!&ndash;删除&ndash;&gt;-->
-                                    <!--                                            <span class="iconfont delete"><i class="layui-icon-delete"></i></span>-->
-                                    <!--                                        </div>-->
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
-                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.soid}]])"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.sovip}]],[[${g.soid}]]);"></span>
+                                        <span class="iconfont favorite" data-v-3a201fd6=""></span>
+                                        <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
+                                    </div>
+                                </li>
+                                <li  th:if="${playInfo==null}" th:each="g,userStat:${listInfo}" class="pr t clearfix ">
+                                    <div id="1" class="num"><p th:text="${userStat.count}"></p></div>
+                                    <div class="playing-animate pr">
+                                        <div class="line1"></div>
+                                        <div class="line2"></div>
+                                        <div class="line3"></div>
+                                    </div>
+                                    <div class="song ellipsis">
+                                        <div class="song-box">
+                                            <a href="#" class target="_blank" tsid="T100" th:text="${g.soname}"></a>
+                                            <span class="vip" th:if="${g.sovip==1}" th:onclick="vip()">VIP</span>
+                                        </div>
+                                    </div>
+                                    <div class="artist ellipsis">
+                                            <span>
+                                                <a href="#" class target="_blank" th:text="${g.sing.siname}"></a>
+                                            </span>
+                                    </div>
+                                    <div class="album ellipsis">
+                                        <a href="#" class th:text="${g.soname}"></a>
+                                    </div>
+                                    <div class="time"><p th:text="${g.sotime}"></p></div>
+                                    <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
+                                        <!--播放-->
+                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont favorite" data-v-3a201fd6=""></span>
                                         <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
                                     </div>

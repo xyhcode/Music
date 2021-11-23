@@ -2,6 +2,7 @@ package com.it.music.controller;
 
 import com.it.music.entity.Song;
 import com.it.music.entity.SongSing;
+import com.it.music.entity.User;
 import com.it.music.service.PlayListService;
 import com.it.music.tools.FindSubscript;
 import com.it.music.tools.JsonUtil;
@@ -10,23 +11,45 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletMapping;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class MusicBoxController {
+    int uid=0;
 
-    int uid=1001;
+    public int getUid(){
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attrs.getRequest();
+        User us=(User)request.getSession().getAttribute("user");
+        if (us==null){
+            return 0;
+        }
+        return us.usid;
+    }
 
     @Autowired
     PlayListService playListService;
 
     @GetMapping("/musicbox")
     public String musicbox(ModelMap map){
-        System.out.println("musicbox");
-        List list=playListService.getSongList(uid);
-        map.put("listInfo",list);
+        uid=getUid();
+        if (uid!=0){
+            List list=playListService.getSongList(uid);
+            map.put("listInfo",list);
+        }else{
+            List list=playListService.getSongs();
+            map.put("listInfo",list);
+        }
         return "fontdesk/musicbox";
     }
 
@@ -34,9 +57,15 @@ public class MusicBoxController {
     //播放
     @GetMapping("play/{soid}")
     public String play(@PathVariable("soid") int soid,ModelMap map) throws IOException {
-        List list=playListService.getSongList(uid);//播放列表歌曲
-        System.out.println(list);
-        map.put("listInfo",list);
+        uid=getUid();
+        List list;
+        if (uid!=0){
+            list=playListService.getSongList(uid);
+            map.put("listInfo",list);
+        }else{
+            list=playListService.getSongs();
+            map.put("listInfo",list);
+        }
         SongSing s=playListService.getSong(soid);
         map.put("playInfo",s);//播放歌曲信息
         String lyric= JsonUtil.getjson(s.getLyrics());
@@ -47,7 +76,15 @@ public class MusicBoxController {
     //上一首
     @GetMapping("prev/{soid}")
     public String prev(@PathVariable("soid") int soid,ModelMap map) throws IOException {
-        List list=playListService.getSongList(uid);//播放列表歌曲
+        uid=getUid();
+        List list;
+        if (uid!=0){
+            list=playListService.getSongList(uid);
+            map.put("listInfo",list);
+        }else{
+            list=playListService.getSongs();
+            map.put("listInfo",list);
+        }
         int[] idlist=new int[list.size()];
         for (int i=0;i<list.size();i++){
             SongSing z=(SongSing)list.get(i);
@@ -71,7 +108,15 @@ public class MusicBoxController {
     //下一首
     @GetMapping("next/{soid}")
     public String next(@PathVariable("soid") int soid,ModelMap map) throws IOException {
-        List list=playListService.getSongList(uid);//播放列表歌曲
+        uid=getUid();
+        List list;
+        if (uid!=0){
+            list=playListService.getSongList(uid);
+            map.put("listInfo",list);
+        }else{
+            list=playListService.getSongs();
+            map.put("listInfo",list);
+        }
         int[] idlist=new int[list.size()];
         for (int i=0;i<list.size();i++){
             SongSing z=(SongSing)list.get(i);

@@ -17,4 +17,7 @@ public interface PlayListDao {
     //根据歌曲id查歌曲信息
     public SongSing getSong(int soid);
 
+    //查所有歌曲
+    public List getSongs();
+
 }
