@@ -66,34 +66,177 @@ function cliLogin() {
 	return false;
 }
 
-
+var zt=0;
+var code;
 //注册操作
 function Sendpwd(sender) {
-	var time=30;
+	zt=0;
+	var time=60;
 	var phones = $.trim($("#phone").val());
 	if ($.trim(phones) == "") {
 		Tip('请填写手机号码！');
 		$("#phone").focus();
 		return;
 	}
-	var code=$(sender);
-		if (validCode) {
-			validCode=false;
-			code.addClass("msgs1").attr("disabled",true);;
-		var t=setInterval(function  () {
-			time--;
-			code.val(time+"秒");
-			if (time==0) {
-				clearInterval(t);
-			code.val("重新获取");
-				validCode=true;
-			code.removeClass("msgs1").attr("disabled",false);
-
+	$.ajax({
+		url:"veryphone/"+phones,
+		type:"POST",
+		success: function(da){
+			if(da.code==200){
+				layer.open({
+					type : 1,
+					title: false,
+					shadeClose : false, //点击遮罩关闭
+					content : $('#cf'),//添加层
+					closeBtn:1,
+					success: function(){
+						$("#captcha").html("");
+						$(".layui-layer-setwin a").attr("class", "layui-layer-ico layui-layer-close layui-layer-close1");
+						var captcha=sliderCaptcha({
+							id: 'captcha',
+							setSrc: function () {
+								//设置图片路径2
+								return 'https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/Captcha/Pic' + Math.round(Math.random() * 45) + '.jpg';
+								/*return 'https://imgs.blazor.zone/images/Pic' + Math.round(Math.random() * 136) + '.jpg';*/
+							},
+							onSuccess: function () {
+								$("#captcha").html("");
+								captcha.reset();
+								layer.closeAll();
+								$.ajax({
+									url:'sendcode/'+phones,
+									type:'post',
+									success: function (data){
+										if(data.code==200){
+											layer.msg("验证码发送成功！");
+											var code=$(sender);
+											if(validCode){
+												validCode=false;
+												code.add("msg1").attr("disabled",true);
+												var t=setInterval(function (){
+													time--;
+													code.val(time+"秒");
+													if(time==0){
+														zt=1;
+														clearInterval(t);
+														code.val("重新获取");
+														code.removeClass("msg1").attr("disabled",false);
+														validCode=true;
+													}
+												},1000);
+											}
+										}else{
+											layer.msg("验证码发送失败！");
+										}
+									}
+								})
+							}
+						});
+					}
+				});
+			}else{
+				layer.msg("该电话已注册！");
+				return;
 			}
-		},1000);
+		}
+	})
+}
+
+$(function() {
+	var step= $("#myStep").step({
+		animate:true,
+		initStep:1,
+		speed:1000
+	});
+	$("#preBtn").click(function(event) {
+		var yes=step.preStep();
+
+	});
+	$("#applyBtn").click(function(event) {
+
+		var code = $.trim($("#Verification").val());
+		var phone =/[1][3-9][0-9]{9,9}/;
+		var phones = $.trim($("#phone").val());
+		if ($.trim(phones) == "") {
+			Tip('请填写手机号码！');
+			$("#phone").focus();
+			return;
+		}
+		if(!phone.exec(phones)){
+
+			Tip('手机输入格式不正确,请从新输入');
+			$("#phones").focus();
+			return;
+		}
+		if ($.trim(code) == "") {
+			Tip('动态密码未填写！');
+			$("#Verification").focus();
+			return;
 		}
 
-}
+		if(zt==1){
+			layer.msg("验证码已过期！");
+			return;
+		}
+
+		if(code!="" && phones!="" && zt==0){
+			$.ajax({
+				url:'verycode/'+phones+"/"+code,
+				type:'POST',
+				success:function(data){
+					if(data.code==200){
+						return true;
+					}else{
+						layer.msg("验证码错误！");
+						return;
+					}
+				}
+			})
+		}
+		var yes=step.nextStep();
+		return;
+	});
+	$("#submitBtn").click(function(event) {
+		var txtconfirm = $.trim($("#confirmpwd").val());
+		var txtPwd = $("#password").val();
+
+		if ($.trim(txtPwd) == "") {
+
+			Tips('请输入你要设置的密码！');
+			$("#txtPwd").focus();
+			return;
+
+		}
+		if($.trim(txtconfirm) == "") {
+
+			Tips('请再次输入密码！');
+			$("#txtconfirm").focus();
+			return;
+
+		}
+		if( $.trim(txtconfirm) != $.trim(txtPwd) ) {
+
+			Tips('你输入的密码不匹配，请从新输入！');
+			$("#txtconfirm").focus();
+			return;
+
+		}else{
+			$.ajax({
+				url:'regis/'+txtconfirm,
+				type:'POST',
+				success: function (data){
+					if(data.code==200){
+						layer.msg("登入成功！");
+						location.href ="/login.html";
+					}else{
+						layer.msg("注册失败！");
+					}
+				}
+			})
+		}
+		var yes=step.nextStep();
+	});
+});
 
 function Tip(msg) {
 	$(".tishi").show().html("<div class='prompt'><i class='tishi_icon'></i>"+msg+"</div>");

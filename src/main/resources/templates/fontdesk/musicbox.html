@@ -64,6 +64,7 @@
     <script>
 
         $(function () {
+
             var lrcJSON = JSON.parse($("#ly").text());
 
             var lrcTime = [];//歌词对应的时间数组
@@ -155,15 +156,20 @@
 
         var p=true;//播放状态
 
+
         //播放
         function mp3go() {
             if(!p){
+                $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-pause2.png").css("margin-right","4px").css("margin-bottom","2px");
                 audio.play();
             }else {
+                $('#d_img').attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-play.png");
                 audio.pause();
             }
             p=!p;
         }
+
+
 
         //上一首
         function prev(soid) {
@@ -531,7 +537,10 @@
                             <div class="prev-play-next">
                                 <div class="prev iconfont" th:if="${playInfo!=null}" th:onclick="prev([[${playInfo.soid}]])"></div>
                                 <div class="play-pause-box">
-                                    <div class="play iconfont" onclick="mp3go()"></div>
+                                    <div class="play iconfont" onclick="mp3go()">
+                                        <img th:if="${playInfo!=null}" id="d_img" src="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-pause2.png" height="21px";width="21px"; style="margin-right: 4px;margin-bottom: 2px;"/>
+                                        <img th:if="${playInfo==null}" id="d_img" src="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/24gf-play.png" height="21px";width="21px";/>
+                                    </div>
                                 </div>
                                 <div class="next iconfont" th:if="${playInfo!=null}" th:onclick="next([[${playInfo.soid}]])"></div>
                             </div>
