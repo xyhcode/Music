@@ -62,7 +62,7 @@
                                 <div class="album" data-v-7385b91b="">专辑</div>
                                 <div class="time" data-v-7385b91b="">时长</div>
                             </li>
-                            <li class="pr t clearfix" data-v-7385b91b="" th:each="gq,state:${so}">
+                            <li class="pr t clearfix" data-v-7385b91b="" th:each="gq,state:${so}" th:ondblclick="tyy2([[${gq.soid}]])">
                                 <div class="num" data-v-7385b91b="" th:text="${state.count}">1</div>
                                 <div class="song ellipsis clearfix" data-v-7385b91b="">
                                     <div class="song-box" data-v-7385b91b="">
