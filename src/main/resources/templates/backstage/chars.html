@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/morris.css}" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <!-- Swift Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link th:href="@{/css/all-themes.css}" rel="stylesheet" />
+    <link th:href="@{/css/leftindex.css}" rel="stylesheet" />
+    <script th:src="@{/js/echarts.min.js}"></script>
+</head>
+<body style="background-color: #f0f2f5">
+<div class="container-fluid">
+    <div class="block-header">
+        <h2></h2>
+        <small class="text-muted"></small>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-account col-blue"></i> </div>
+                <div class="content">
+                    <div class="text">歌曲总数</div>
+                    <div class="number">27</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-account col-green"></i> </div>
+                <div class="content">
+                    <div class="text">歌单总数</div>
+                    <div class="number">12</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-bug col-blush"></i> </div>
+                <div class="content">
+                    <div class="text">视频总数</div>
+                    <div class="number">05</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="info-box-4 hover-zoom-effect">
+                <div class="icon"> <i class="zmdi zmdi-balance col-cyan"></i> </div>
+                <div class="content">
+                    <div class="text">用户总数</div>
+                    <div class="number">$3,540</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tubiao" style="margin-top:40px;padding-right: 0px;width: 1260px;padding-left: 0px;">
+        <div id="main" style="margin: 0px 0px 0px 0px;width: 1260px"></div>
+    </div>
+
+    <div id="tubiao2" style="width:1260px;padding-left: 0px;margin-right: 0px">
+        <div id="main2" style="margin: 0px 0px 0px 0px;padding-right: 0px;width: 1260px"></div>
+    </div>
+</div>
+<script th:src="@{/js/macarons.js}"></script>
+<script th:src="@{/js/leftindexjs.js}"></script>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+</body>
+</html>

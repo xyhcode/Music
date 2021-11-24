@@ -1,0 +1,181 @@
+#maxdiv{
+    padding: 32px;
+    width: 1240px;
+    height: 1060px;
+    background-color: #f0f2f5;
+}
+#topdiv{
+    width: 100%;
+    height: 133px;
+    float: left;
+    margin-bottom: 38px;
+}
+#topd1,#topd2,#topd3,#topd4{
+    float: left;
+    width: 284px;
+    height: 130px;
+    background: #fff;
+    cursor: pointer;
+
+}
+#topd1,#topd2,#topd3{
+    margin-right: 32px;
+}
+
+.card-panel-text{
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    cursor: pointer;
+    font-weight: 700;
+    box-sizing: inherit;
+    line-height: 18px;
+    color: rgba(0,0,0,.45);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.card-panel-num{
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    cursor: pointer;
+    color: #666;
+    font-weight: 700;
+    box-sizing: inherit;
+    font-size: 20px;
+}
+.divico{
+    width: 48px;
+    height: 48px;
+    float: left;
+    padding: 16px 16px;
+    margin: 26px 83px 26px 26px;
+}
+.icon{
+    padding: 0px auto;
+}
+.divfont{
+    margin-top: 40px;
+    margin-right: 26px;
+    margin-bottom: 16px;
+    width: 65px;
+    height: 52px;
+    float: left;
+}
+#tubiao{
+    padding-top:16px ;
+    padding-left:16px;
+    padding-right: 16px;
+    margin-top: 170px;
+    width: 1200px;
+    height: 400px;
+    background: #fff;
+}
+#each{
+    height: 400px;
+    width: 1000px;
+    position: relative;
+}
+
+#main{
+    margin-top: 16px;
+    width: 1170px;
+    height: 384px;
+    margin-left: 16px;
+    margin-right: 16px;
+    background: #fff;
+}
+#tubiao2{
+    padding-top:16px ;
+    padding-left:16px;
+    padding-right: 16px;
+    margin-top: 38px;
+    width: 1200px;
+    height: 400px;
+    background: #fff;
+}
+#main2{
+    margin-top: 16px;
+    width: 1170px;
+    height: 384px;
+    margin-left: 16px;
+    margin-right: 16px;
+    background: #fff;
+}
+#top{
+    position: absolute;
+    right: 10px;
+    button:200px;
+    border-radius: 100%;
+    background-color: #fff;
+    cursor: pointer;
+}
+.back-to-ceiling{
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    box-sizing: inherit;
+    right: 20px;
+    bottom: 20px;
+    line-height: 35px;
+    background: #fff;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #409eff;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 0 6px rgba(0,0,0,.12);
+    cursor: pointer;
+    visibility:hidden;
+}
+.Icon Icon-backToTopArrow{
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    line-height: 35px;
+    color: #409eff;
+    font-size: 20px;
+    cursor: pointer;
+    box-sizing: inherit;
+    fill: #409eff;
+    background: none;
+    height: 16px;
+    width: 16px;
+}
+
+.back-to-ceiling:hover{
+    background-color: #D5DBE7;
+}
+
+#t1{
+    fill:currentColor;
+    color: #40C9C6;
+}
+
+.t2{
+    fill:currentColor;
+    color: #36a3f7;
+}
+.t3{
+    fill:currentColor;
+    color: #34bfa3;
+}
+.t4{
+    fill:currentColor;
+    color: #f4516c;
+}
+
+
+
+
