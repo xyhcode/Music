@@ -34,8 +34,7 @@
                         <div class="play-num" th:text="${features.feplays+'次播放'}"></div>
                         <div class="num-wrap">
                             <span class="iconfont icon-new fr" id="sharbtn" th:data-clipboard-text="${'http://localhost:8090/videtail/'+features.feid}"></span>
-                            <span class="iconfont icon-new fr" style="display:block" id="ax"></span>
-                            <span class="iconfont icon-new collected fr" id="reai" style="display:none;"></span>
+                            <span id="ccc" th:onclick="sc([[${features.feid}]])"></span>
                         </div>
                     </div>
                 </div>
@@ -57,21 +56,107 @@
         e.clearSelection();
     });
 
-    //点击爱心
-    $("#ax").click(function (){
-        if($(this).css("display") == "block"){
-            $(this).css("display", "none");
-            $("#reai").css("display", "block");
-        }
-    });
 
-    //取消爱心
-    $("#reai").click(function (){
-        if($(this).css("display") == "block"){
-            $("#ax").css("display",'block');
-            $("#reai").css("display", "none");
+    issc([[${features.feid}]]);
+
+    //显示是否收藏  true爱心 false取消爱心
+    function showsc(n) {
+        var t = '';
+        if(n){
+            t = '<span class="iconfont icon-new collected fr"></span>';
+        }else{
+            t = '<span class="iconfont icon-new fr" ></span>';
         }
-    });
+        $("#ccc").html(t);
+    }
+
+    var ist = true;
+    //是否收藏
+    function  issc(id) {
+        $.ajax({
+            url: '/user/isadd/'+id,
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                if(da.code==200){
+                    ist = false;
+                }
+                showsc(ist);
+            }
+        });
+    }
+
+    //收藏
+    function sc(id) {
+        if(ist){
+            // alert(1)
+            $.ajax({
+                url: '/user/del/'+id,
+                type: 'post',
+                dataType: "json",
+                complete: function (xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success: function (da) {
+                    // console.log(da);
+                    issc(id);
+                    ist = false;
+                }
+            });
+        }else{
+            // alert(2)
+            var d = new Date();
+            var date = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+            $.ajax({
+                url: '/user/add',
+                type:"post",
+                // contentType:'application/json',  //发送数据类型
+                data:{
+                    "allid":id,
+                    "cotype":3,
+                    "cotime":date
+                },
+                dataType : "json",  //接受数据格式
+                complete : function(xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success:function(da){
+                    // console.log(da);
+                    // if(da.code==200){
+                    //     layer.msg(da.msg,{offset:['100px']});
+                    //
+                    // }else if(da.code=500){
+                    //     layer.msg(da.msg,{offset:['100px']});
+                    // }
+                    issc(id);
+                    ist = true;
+                }
+            });
+        }
+    }
+
 
     //搜索输入框回车事件
     $("#seav").keyup(function(){
