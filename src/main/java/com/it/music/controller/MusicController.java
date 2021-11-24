@@ -1,20 +1,24 @@
 package com.it.music.controller;
 
-import com.alipay.api.response.AlipayTradePrecreateResponse;
+import cn.hutool.core.date.DateUtil;
+import com.alipay.api.response.AlipayTradeCancelResponse;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.it.music.config.SysExecptionHandler;
 import com.it.music.entity.Feature;
+import com.it.music.entity.PayLog;
 import com.it.music.entity.SingerAll;
+import com.it.music.entity.User;
 import com.it.music.service.*;
+import com.it.music.tools.CosFileupload;
 import com.it.music.tools.JsonResult;
 import com.it.music.tools.PayTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,6 +40,12 @@ public class MusicController {
 
     @Autowired
     FeatureService fese;
+
+    @Autowired
+    PayLogService pase;
+
+    @Autowired
+    UserService user;
 
     @GetMapping({"/", "/index", "index.html"})
     public String index(ModelMap mp){
@@ -159,15 +169,134 @@ public class MusicController {
         return "fontdesk/QrCode";
     }
 
+    String je="";
+
     /**
      * 生成二维码
      * @return
      */
-    @RequestMapping(path = "/test",method = RequestMethod.GET)
+    @RequestMapping(path = "/creatqr/{pric}",method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult cf(){
-        AlipayTradePrecreateResponse response=PayTools.getqrcode();
-        JsonResult js=new JsonResult(200,"成功！");
+    public JsonResult cf(@PathVariable String pric){
+        System.out.println("je:"+je+" "+pric);
+        JsonResult js;
+        if(je.equals(pric)){
+            js=new JsonResult(500,"失败！");
+        }else{
+            je=pric;
+            String dir=PayTools.getqrcode(pric);
+            js=new JsonResult(200,"成功！",dir);
+        }
         return js;
+    }
+
+    /**
+     * 轮询
+     * @param order
+     * @param request
+     * @return
+     */
+    @RequestMapping(path = "/lunxuan/{order}",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult pollingpay(@PathVariable String order,HttpServletRequest request){
+        JsonResult js = null;
+        //轮询查询是否支付
+        AlipayTradeQueryResponse res=PayTools.PaymentVerification(order);
+        //状态码判断是否支付
+        if ("10000".equals(res.getCode()) && "Success".equals(res.getMsg()) && "TRADE_SUCCESS".equals(res.getTradeStatus())){
+            //获取用户session
+            User us= (User) request.getSession().getAttribute("user");
+            //得到用户ID
+            User usen=user.seone(us.getUsid());
+            //得到当前时间
+            String now = DateUtil.now();
+            //判断它原来是否vip
+            if(usen.getIsvip()==0){
+                //不是 计算充值会员后的到期时间
+               String vetime=PayTools.addtime(now,res.getTotalAmount());
+               //修改数据库
+                User usno=new User();
+                usno.setUsid(us.getUsid());
+                usno.setViptime(vetime);
+                usno.setIsvip(1);
+                int cf=user.alter(usno);
+                if(cf>0){
+                    //添加支付log到数据库
+                    PayLog pa=new PayLog(us.usid,res.getTotalAmount(),res.getOutTradeNo(),res.getTradeNo(),now);
+                    int panum=pase.paylogadd(pa);
+                    if(panum>0){
+                        User reus=user.seone(us.getUsid());
+                        //更新session
+                        request.getSession().setAttribute("user",reus);
+                        js=new JsonResult(200,"支付成功！");
+                    }else{
+                        System.out.println("支付成功！数据载入错误！");
+                    }
+                }
+                je="";
+                //删除cos的二维码图片
+                CosFileupload.delfile("music/payimg/"+order+".jpg");
+                System.out.println("order:231"+" "+order);
+            }else{
+                String vnoetime=PayTools.addtime(us.getViptime(),res.getTotalAmount());
+                User usno=new User();
+                usno.setUsid(us.getUsid());
+                usno.setViptime(vnoetime);
+                usno.setIsvip(1);
+                int cf=user.alter(usno);
+                if(cf>0){
+                    PayLog pa=new PayLog(us.usid,res.getTotalAmount(),res.getOutTradeNo(),res.getTradeNo(),now);
+                    int panum=pase.paylogadd(pa);
+                    if(panum>0){
+                        js=new JsonResult(200,"支付成功！");
+                    }else{
+                        System.out.println("支付成功！数据载入错误！");
+                    }
+                }
+                je="";
+                CosFileupload.delfile("music/payimg/"+order+".jpg");
+                System.out.println("order:250"+" "+order);
+            }
+        }else {
+            js=new JsonResult(500,"支付失败！");
+        }
+        return js;
+    }
+
+    /**
+     * 撤销订单
+     * @param order 订单号
+     * @return
+     */
+    @RequestMapping(path = "/reorder/{order}",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult ReturnOrder(@PathVariable String order){
+        System.out.println("264:"+order);
+        je="";
+        JsonResult js;
+        //撤销超时的订单 闭环
+        AlipayTradeCancelResponse res=PayTools.revokepay(order);
+        //撤销成功
+        if ("10000".equals(res.getCode()) && "Success".equals(res.getMsg())){
+            //删除cos图片
+            CosFileupload.delfile("music/payimg/"+order+".jpg");
+            js=new JsonResult(200,"撤销成功！");
+        }else{
+            js=new JsonResult(500,"撤销失败！");
+        }
+        return js;
+    }
+
+    /**
+     * 进入vip充值界面
+     * @param request
+     * @param map
+     * @return
+     */
+    @RequestMapping(path="/Reinface",method = RequestMethod.GET)
+    public String govip(HttpServletRequest request,ModelMap map){
+        User reuse= (User) request.getSession().getAttribute("user");
+        map.put("us",reuse);
+        return "fontdesk/vip";
     }
 }

@@ -6,215 +6,440 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>千千音乐-听见世界</title>
-    <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
-    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="icon" type="image/x-icon"
+          href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" th:href="@{/css/b34ba44cfddedd3fcb45.css}">
     <link rel="stylesheet" th:href="@{/css/8dd5b223e783ea899db7.css}">
     <link rel="stylesheet" th:href="@{/css/e0f2c22d19247a4f91ca.css}">
     <link rel="stylesheet" th:href="@{/css/a9b44b8f02e561b5d926.css}">
     <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}"/>
+    <script th:src="@{/layui/layui.js}"></script>
 </head>
 
 <body>
-    <div data-server-rendered="true" id="__nuxt">
-        <div id="__layout">
-            <div data-v-72420e77="">
-                <!--头部-->
-                <footer th:replace="fontdesk/head::footer-fragment-head"></footer>
+<div data-server-rendered="true" id="__nuxt">
+    <div id="__layout">
+        <div data-v-72420e77="">
+            <!--头部-->
+            <footer th:replace="fontdesk/head::footer-fragment-head"></footer>
 
-                <div class="container page-main" data-v-a5fd420e="" data-v-72420e77="">
-                    <div class="head-box" data-v-a5fd420e="">
-                        <div class="page-container head-content-box clearfix" data-v-a5fd420e="">
-                            <div class="fl" data-v-a5fd420e="">
-                                <div class="avatar" data-v-a5fd420e=""><span class="el-avatar el-avatar--circle"
-                                        style="height:120px;width:120px;line-height:120px;" data-v-a5fd420e=""><img
-                                            th:src="@{/pic/3713308.png}" style="object-fit:cover;"></span>
-                                    <!---->
-                                </div>
-                                <div class="info" data-v-a5fd420e=""><a href="javascript:" data-v-a5fd420e="">立即登录</a>
-                                </div>
+            <div class="container page-main" data-v-a5fd420e="" data-v-72420e77="">
+                <div class="head-box" data-v-a5fd420e="">
+                    <div class="page-container head-content-box clearfix" data-v-a5fd420e="">
+                        <div class="fl" data-v-a5fd420e="">
+                            <div class="avatar" data-v-a5fd420e=""><span class="el-avatar el-avatar--circle"
+                                                                         style="height:120px;width:120px;line-height:120px;"
+                                                                         data-v-a5fd420e="">
+                                    <img th:src="@{${us==null ? '/pic/3713308.png' : us.usimg}}"
+                                         style="object-fit:cover;"></span>
+                                <!---->
                             </div>
-                            <div class="fr" data-v-a5fd420e="">
-                                <div class="info" data-v-a5fd420e="">
-                                    <div class="title" data-v-a5fd420e="">开通会员，立享特权</div> <button type="button"
+                            <div class="info" data-v-a5fd420e=""><a th:href="@{${us==null ? '/login.html':''}}"
+                                                                    th:text="${us==null ? '立即登入':us.usname}"
+                                                                    data-v-a5fd420e=""></a></div>
+                        </div>
+                        <div class="fr" data-v-a5fd420e="" th:if="${us==null}">
+                            <div class="info" data-v-a5fd420e="">
+                                <div class="title" data-v-a5fd420e="">开通会员，立享特权</div>
+                                <button th:onclick="nolog(0)" type="button"
                                         class="el-button el-button--info is-round" data-v-a5fd420e="">
-                                        <!---->
-                                        <!----><span>立即开通</span>
-                                    </button>
+                                    <!---->
+                                    <!----><span>立即开通</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="fr" data-v-a5fd420e="" th:if="${us!=null}">
+                            <div class="info" data-v-a5fd420e="">
+                                <div class="title" data-v-a5fd420e=""
+                                     th:text="${us!=null && us.isvip==1 ? '你已是尊贵的VIP会员':'开通会员，立享特权'}"></div>
+                                <button type="button" th:onclick="nolog(1)" id="xf"
+                                        class="el-button el-button--info is-round" data-v-a5fd420e=""
+                                <!----><span th:id="${us.isvip}" th:text="${us.isvip==1 && us!=null ? '立即续费':'立即开通'}">立即开通</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="page-container content-box" data-v-a5fd420e="">
+                    <div class="group" data-v-a5fd420e="">
+                        <div class="group-title" data-v-a5fd420e="">-会员特权-</div>
+                        <div class="vip-privilege-box vip-privilege" data-v-69b7b2aa="" data-v-a5fd420e="">
+                            <div class="el-row" style="margin-left:-15px;margin-right:-15px;" data-v-69b7b2aa="">
+                                <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
+                                     data-v-69b7b2aa="">
+                                    <div class="item" data-v-69b7b2aa=""><span class="iconfont"
+                                                                               data-v-69b7b2aa=""></span>
+                                        <div class="name" data-v-69b7b2aa="">VIP曲库</div>
+                                        <div class="intro" data-v-69b7b2aa="">独享更多VIP专属曲库内容（不含数字专辑）</div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
+                                     data-v-69b7b2aa="">
+                                    <div class="item" data-v-69b7b2aa=""><span class="iconfont"
+                                                                               data-v-69b7b2aa=""></span>
+                                        <div class="name" data-v-69b7b2aa="">无损音质</div>
+                                        <div class="intro" data-v-69b7b2aa="">为VIP会员提供SQ无损音质服务，听到细节</div>
+                                    </div>
+                                </div>
+                                <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
+                                     data-v-69b7b2aa="">
+                                    <div class="item" data-v-69b7b2aa=""><span class="iconfont"
+                                                                               data-v-69b7b2aa=""></span>
+                                        <div class="name" data-v-69b7b2aa="">身份特权</div>
+                                        <div class="intro" data-v-69b7b2aa="">VIP尊贵标识，优先享有新功能特权</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="page-container content-box" data-v-a5fd420e="">
-                        <div class="group" data-v-a5fd420e="">
-                            <div class="group-title" data-v-a5fd420e="">-会员特权-</div>
-                            <div class="vip-privilege-box vip-privilege" data-v-69b7b2aa="" data-v-a5fd420e="">
-                                <div class="el-row" style="margin-left:-15px;margin-right:-15px;" data-v-69b7b2aa="">
-                                    <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
-                                        data-v-69b7b2aa="">
-                                        <div class="item" data-v-69b7b2aa=""><span class="iconfont"
-                                                data-v-69b7b2aa=""></span>
-                                            <div class="name" data-v-69b7b2aa="">VIP曲库</div>
-                                            <div class="intro" data-v-69b7b2aa="">独享更多VIP专属曲库内容（不含数字专辑）</div>
-                                        </div>
+                    <div class="group" data-v-a5fd420e="">
+                        <div class="group-title" data-v-a5fd420e="">-会员歌单-</div>
+                        <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-a5fd420e="">
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
-                                        data-v-69b7b2aa="">
-                                        <div class="item" data-v-69b7b2aa=""><span class="iconfont"
-                                                data-v-69b7b2aa=""></span>
-                                            <div class="name" data-v-69b7b2aa="">无损音质</div>
-                                            <div class="intro" data-v-69b7b2aa="">为VIP会员提供SQ无损音质服务，听到细节</div>
-                                        </div>
-                                    </div>
-                                    <div class="el-col el-col-8" style="padding-left:15px;padding-right:15px;"
-                                        data-v-69b7b2aa="">
-                                        <div class="item" data-v-69b7b2aa=""><span class="iconfont"
-                                                data-v-69b7b2aa=""></span>
-                                            <div class="name" data-v-69b7b2aa="">身份特权</div>
-                                            <div class="intro" data-v-69b7b2aa="">VIP尊贵标识，优先享有新功能特权</div>
-                                        </div>
-                                    </div>
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
+                                <div class="name" data-v-1e40aea8="">日语 | 炎炎夏日，来一颗清新薄荷糖</div>
+                                <!---->
                             </div>
-                        </div>
-                        <div class="group" data-v-a5fd420e="">
-                            <div class="group-title" data-v-a5fd420e="">-会员歌单-</div>
-                            <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-a5fd420e="">
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">日语 | 炎炎夏日，来一颗清新薄荷糖</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">古风 | 你是我的一缕执念</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">古风 | 你是我的一缕执念</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">华语乐坛不能没有这些唱将！</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">华语乐坛不能没有这些唱将！</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">怀旧 | 陪伴90后长大的那些歌</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">怀旧 | 陪伴90后长大的那些歌</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">影视原声 | 感动你的银幕时光</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">影视原声 | 感动你的银幕时光</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">电音梦游记</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">电音梦游记</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">流行 | 每天一首，你最流行</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">流行 | 每天一首，你最流行</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
+                                <div class="name" data-v-1e40aea8="">摇滚不止，生生不息</div>
+                                <!---->
+                            </div>
+                            <div class="tracklist-item fl" data-v-1e40aea8="">
+                                <div class="poster" data-v-1e40aea8="">
+                                    <div class="el-image" data-v-1e40aea8="">
+                                        <div class="el-image__placeholder"></div>
+                                        <!---->
                                     </div>
-                                    <div class="name" data-v-1e40aea8="">摇滚不止，生生不息</div>
-                                    <!---->
+                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
+                                                                                   data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="tracklist-item fl" data-v-1e40aea8="">
-                                    <div class="poster" data-v-1e40aea8="">
-                                        <div class="el-image" data-v-1e40aea8="">
-                                            <div class="el-image__placeholder"></div>
-                                            <!---->
-                                        </div>
-                                        <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                data-v-1e40aea8=""></span></div>
-                                    </div>
-                                    <div class="name" data-v-1e40aea8="">热爱嘻哈的你一定要了解下日语说唱</div>
-                                    <!---->
-                                </div>
+                                <div class="name" data-v-1e40aea8="">热爱嘻哈的你一定要了解下日语说唱</div>
+                                <!---->
                             </div>
                         </div>
                     </div>
                 </div>
-                <footer th:replace="fontdesk/foot::footer-fragment"></footer>
             </div>
+            <footer th:replace="fontdesk/foot::footer-fragment"></footer>
         </div>
     </div>
+</div>
 
 <script>
     //搜索输入框回车事件
-    $("#seav").keyup(function(){
-        if(event.keyCode == 13){
+    $("#seav").keyup(function () {
+        if (event.keyCode == 13) {
             srea();
         }
     });
 
     //搜索
-    function srea(){
+    function srea() {
         const serval = $("#seav").val();
-        if(serval==""){
+        if (serval == "") {
 
-        }else{
-            location.href="/search/"+serval;
+        } else {
+            location.href = "/search/" + serval;
         }
+    }
+
+    //点击充值或者续费
+    var timer;
+    function nolog(zt) {
+        if (zt == 0) {
+            location.href = "/login.html";
+        } else {
+            payval(0);
+            layer.open({
+                type:1,
+                title: false,
+                shadeClose:false,
+                closeBtn:0,
+                content : $('#payopen')
+            })
+        }
+    }
+
+    //关闭支付窗口
+    var timerf;
+    function closepay(){
+        clearInterval(timer);
+        clearInterval(timerf);
+        layer.closeAll();
+    }
+    //判断点击哪个价格的
+    var pr;
+    function payval(amt){
+        if(amt==0){
+            clearInterval(timer);
+            clearInterval(timerf);
+            pr=9;
+            $("#gou li").eq(0).attr("class", "item active");
+            $("#gou li").eq(1).attr("class", "item ");
+            $("#gou li").eq(2).attr("class", "item ");
+            hj(9);
+        }else if(amt==1){
+            clearInterval(timer);
+            clearInterval(timerf);
+            pr=30;
+            $("#gou li").eq(1).attr("class", "item active");
+            $("#gou li").eq(0).attr("class", "item ");
+            $("#gou li").eq(2).attr("class", "item ");
+            hj(30);
+        }else{
+            clearInterval(timer);
+            clearInterval(timerf);
+            pr=96;
+            $("#gou li").eq(0).attr("class", "item ");
+            $("#gou li").eq(1).attr("class", "item ");
+            $("#gou li").eq(2).attr("class", "item active");
+            hj(96);
+        }
+    }
+
+
+    //刷新二维码
+    function maflush(){
+        hj(pr);
+    }
+
+    var img;
+    var order;
+    function hj(amt) {
+        $.ajax({
+            url:'creatqr/'+amt,
+            type:'POST',
+            success: function(j){
+                if(j.code==200){
+                    $(".code img").css("display","block");
+                    $(".code i").css("display","none");
+                    order=j.data;
+                    console.log(j.data);
+                    img="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/payimg/"+j.data+".jpg"
+                    $(".code img").attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/payimg/"+j.data+".jpg");
+                    $(".price-box").html("<span class=\"price pr\">"+amt+"<i class=\"el pa\">元</i></span>");
+                    var endtime=0;
+                    timer=setInterval(function (){
+                        endtime++;
+                        $.ajax({
+                            url:"lunxuan/"+j.data,
+                            type:'post',
+                            success: function(da){
+                                if (da.code==200){
+                                    clearInterval(timer);
+                                    layer.open({
+                                        title: false,
+                                        closeBtn:0
+                                        ,content: '支付成功！',
+                                        yes:function(index,layero){
+                                            layer.closeAll();
+                                            location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        if(endtime===59){
+                            clearInterval(timer);
+                            $.ajax({
+                                url:'reorder/'+j.data,
+                                type:'post',
+                                success: function(da){
+                                    if (da.code==200){
+                                        layer.msg("支付超时，请点击二维码刷新！")
+                                    };
+                                }
+                            })
+                        }
+                        console.log(endtime);
+                    },1000);
+                }else{
+                    clearInterval(timer);
+                    $(".code img").attr("src",img);
+                    var endtime=0;
+                    timerf=setInterval(function (){
+                        endtime++;
+                        $.ajax({
+                            url:"lunxuan/"+j.data,
+                            type:'post',
+                            success: function(da){
+                                if (da.code==200){
+                                    clearInterval(timer);
+                                    layer.open({
+                                        title: false,
+                                        closeBtn:0
+                                        ,content: '支付成功！',
+                                        yes:function(index,layero){
+                                            layer.closeAll();
+                                            location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        if(endtime===59){
+                            clearInterval(timerf);
+                            console.log(order);
+                            $.ajax({
+                                url:'reorder/'+order,
+                                type:'post',
+                                success: function(da){
+                                    if (da.code==200){
+                                        layer.msg("支付超时，请点击二维码刷新！");
+                                    };
+                                }
+                            })
+                        }
+                        console.log(endtime);
+                    },1000);
+                }
+            }
+        })
     }
 </script>
 </body>
-
+<div class="el-dialog__body" id="payopen" style="padding: 0px 0px 0px 0px;display: none">
+    <div class="header"><h2 class="title">开通会员</h2>
+        <div class="iconfont" onclick="closepay()"></div>
+    </div>
+    <div class="goods">
+        <div class="mod-tit" th:text="${us!=null ? '开通账号:'+us.usname : ''}">开通账号：贩卖晚霞</div>
+        <ul class="items" id="gou">
+            <li class="item active" onclick="payval(0)">
+                <h4>
+            <span class="price pr">9
+                <i class="el pa">元</i>
+            </span>
+                </h4>
+                <div class="every-month-price">9元/月</div>
+                <div class="line"></div>
+                <h5 class="product-name">一个月</h5>
+            </li>
+            <li class="item " onclick="payval(1)"><h4>
+                <span class="price pr">30<i class="el pa">元</i></span>
+            </h4>
+                <div class="every-month-price">10元/月</div>
+                <div class="line"></div>
+                <h5 class="product-name">3个月</h5></li>
+            <li class="item " onclick="payval(2)">
+                <h4><span class="price pr">
+                            96
+                            <i class="el pa">元</i></span></h4>
+                <div class="every-month-price">8元/月</div>
+                <div class="line"></div>
+                <h5 class="product-name">1年</h5></li>
+        </ul>
+    </div>
+    <div class="pay-type">
+        <div class="mod-tit">支付方式：</div>
+        <div class="pay-type-content">
+            <div class="code-box pr" style="background-color: white">
+                <div id="qrcode-pay" class="code"
+                     title="https://music.taihe.com/order/pay?ticket=ticket_eef18e6cece9d0f4fb464dceed9c1d8c">
+                    <i class="layui-icon layui-icon-loading-1 layui-anim layui-anim-rotate layui-anim-loop" style="font-size: 30px;color: black;"></i>
+                    <img style="display: none;"></div>
+                <span class="refesh pa"><span onclick="maflush()"><i class="iconfont"></i> <br>点击刷新
+                        </span></span></div>
+            <div class="code-desc"><p>
+                请使用
+                <span class="red">支付宝 </span> 扫描二维码进行支付
+            </p>
+                <div class="price-box"></div>
+                <div class="gou"><i class="iconfont"></i> <a href="#" target="_blank" class="link">《VIP会员服务协议》</a>
+                    <a href="#" target="_blank" class="link">《自动续费服务协议》</a></div>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
