@@ -55,6 +55,8 @@
                             <div class="info" data-v-a5fd420e="">
                                 <div class="title" data-v-a5fd420e=""
                                      th:text="${us!=null && us.isvip==1 ? '你已是尊贵的VIP会员':'开通会员，立享特权'}"></div>
+                                <span></span>
+                                <span th:text="${us.viptime!=null ? '到期时间：'+#strings.abbreviate(us.viptime,14) : ''}"></span><br/>
                                 <button type="button" th:onclick="nolog(1)" id="xf"
                                         class="el-button el-button--info is-round" data-v-a5fd420e=""
                                 <!----><span th:id="${us.isvip}" th:text="${us.isvip==1 && us!=null ? '立即续费':'立即开通'}">立即开通</span>

@@ -192,9 +192,9 @@ public class PayTools {
     public static  String addtime(String time,String amt){
         Date date = DateUtil.parse(time);
         int betime;
-        if(amt.equals("9")){
+        if(amt.equals("9.00")){
             betime=30;
-        }else if(amt.equals("30")){
+        }else if(amt.equals("30.00")){
             betime=90;
         }else{
             betime=365;
