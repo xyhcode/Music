@@ -65,6 +65,13 @@
 
         $(function () {
 
+            var z=sessionStorage.getItem("i");
+            console.log(z);
+            location.href="#"+z;
+
+            // box.css("scrollTop",h);
+            // box.scrollTop = targetLi.offsetTop;
+
             var lrcJSON = JSON.parse($("#ly").text());
 
             var lrcTime = [];//歌词对应的时间数组
@@ -121,7 +128,6 @@
                 $('#d_time').text(dtime);
 
 
-
                 //进度条
                 // var barwid=document.querySelector(".el-slider__runway").offsetWidth;//滚动条总长度
                 // console.log(barwid);
@@ -147,10 +153,72 @@
 
 
             };
+
+
+            var vol=1;
+            var time=10;
+
+            console.log(audio.paused);
+
+            document.onkeyup = function (event) {//键盘事件
+
+                console.log("keyCode:" + event.keyCode);
+                var e = event || window.event || arguments.callee.caller.arguments[0];
+                // var ylts=document.querySelector(".music_voice_line");//音量条
+                // var ylt=ylts.offsetWidth;//音量条长度
+                // var zyl=document.querySelector(".music_voice_bar").offsetWidth;//音量条总长度
+                // var yd=document.querySelector(".music_voice_dot");//圆点
+                //鼠标上下键控制视频音量
+                if (e && e.keyCode === 38) {
+                    // 按 向上键
+                    if(vol<1){
+                        vol+=0.1;
+                    }else{
+                        vol=1;
+                    }
+                    audio.volume=vol;//设置音量大小
+                    // ylts.style.width=zyl*(vol/1);//设置音量条长度
+                    // yd.style.left=vol*zyl;
+                    return false;
+                } else if (e && e.keyCode === 40) {
+                    // 按 向下键
+                    if(vol>0){
+                        vol-=0.1;
+                    }else{
+                        vol=0;
+                        ylts.style.width=0;
+                    }
+                    audio.volume=vol;//设置音量大小
+                    // ylts.style.width=zyl*(vol/1);//设置音量条长度
+                    // yd.style.left=vol*zyl;
+                    return false;
+                } else if (e && e.keyCode === 37) {
+                    // 按 向左键
+                    audio.currentTime !== 0 ? audio.currentTime -= time : 1;
+                    return false;
+                } else if (e && e.keyCode === 39) {
+                    // 按 向右键
+                    audio.volume !== audio.duration ? audio.currentTime += time : 1;
+                    return false;
+                }
+                // } else if (e && e.keyCode === 32) {
+                //     if (audio.paused === true) {
+                //         audio.play();
+                //         tp.classList.add("music_play2");
+                //         state = true;
+                //     } else {
+                //         audio.pause();
+                //         tp.classList.remove("music_play2");
+                //     }
+                //     return false;
+                // }
+            };
         })
 
 
         function plays(isvip,sovip,uid) {
+            var i="l"+uid
+            sessionStorage.setItem("i",i);
             if (sovip==1 && isvip==0){//这首歌要vip才能听
                 window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
             }else{
@@ -436,10 +504,10 @@
                             <div class="album">专辑</div>
                             <div class="time">时长</div>
                         </div>
-                        <div class="songlist-box clearfix fl">
+                        <div class=" songlist-box clearfix fl">
                             <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" >
 
-                                <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class="pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''">
+                                <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class=" pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''" th:id="l+${g.soid}">
                                     <div th:id="${userStat.count}" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
                                         <div class="line1"></div>
@@ -470,7 +538,7 @@
                                     </div>
                                 </li>
 
-                                <li  th:if="${playInfo==null}" th:each="g,userStat:${listInfo}" class="pr t clearfix ">
+                                <li  th:if="${playInfo==null}" th:each="g,userStat:${listInfo}" class="pr t clearfix " th:id="${'l'+g.soid}">
                                     <div id="1" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
                                         <div class="line1"></div>

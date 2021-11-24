@@ -1,6 +1,7 @@
 package com.it.music.service;
 
 import com.it.music.entity.SongSing;
+import com.it.music.entity.UserSong;
 
 import java.util.List;
 
@@ -11,4 +12,10 @@ public interface PlayListService {
     public SongSing getSong(int sid);
 
     public List getSongs();
+
+    public int addSong(UserSong us);
+
+    public UserSong selectSong(UserSong us);
+
+    public int insertSongs(int uid,String[] str);
 }
