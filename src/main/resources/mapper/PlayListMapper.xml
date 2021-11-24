@@ -36,4 +36,12 @@
         select * from song as a inner join singer as b on a.siid=b.siid
     </select>
 
+    <select id="selectSong" parameterType="UserSong"  resultType="UserSong">
+        select * from playlist where usid=#{usid} and soid=#{soid}
+    </select>
+
+    <insert id="addSong" parameterType="UserSong">
+        insert into playlist value (#{usid},#{soid})
+    </insert>
+
 </mapper>

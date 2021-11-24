@@ -2,6 +2,7 @@ package com.it.music;
 
 import com.it.music.dao.PlayListDao;
 import com.it.music.entity.SongSing;
+import com.it.music.entity.UserSong;
 import com.it.music.tools.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,18 @@ public class PlayListTest {
     public void gc() throws IOException {
         String s= JsonUtil.getjson("https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/lrc/1637048331778.txt");
         System.out.println(s);
+    }
+
+    @Test
+    public void g() throws IOException {
+        UserSong s=playListDao.selectSong(new UserSong(1004,285));
+        if (s==null){
+            int n=playListDao.addSong(new UserSong(1004,285));
+            System.out.println(n);
+        }else{
+            System.out.println("已存在");
+        }
+
+
     }
 }

@@ -356,6 +356,7 @@
   height: 1500px;
   overflow: scroll;
   padding-bottom: 80px;
+  overflow-x:hidden;
 }
 .container-player .songlist li {
   height: 50px;

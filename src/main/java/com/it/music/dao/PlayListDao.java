@@ -1,6 +1,7 @@
 package com.it.music.dao;
 
 import com.it.music.entity.SongSing;
+import com.it.music.entity.UserSong;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,5 +20,11 @@ public interface PlayListDao {
 
     //查所有歌曲
     public List getSongs();
+
+    //添加单首歌到播放列表
+    public int addSong(UserSong us);
+
+    //查这首歌是否存在
+    public UserSong selectSong(UserSong us);
 
 }
