@@ -89,6 +89,11 @@
 </body>
 <script>
 
+    /*单个播放*/
+    function tyy2(id) {
+        window.open("/addplaylist/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    }
+
     //点击爱心
     function ax(id){
         $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
@@ -250,7 +255,7 @@
                 '\t\t\tdata-v-7385b91b="" >《'+data[i].soname+'》</a></div>\n' +
                 '\t<div class="time" data-v-7385b91b="" >'+data[i].sotime+'</div>\n' +
                 '\t<div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">\n' +
-                '\t\t<span class="iconfont play" data-v-3a201fd6="" ></span>\n' +
+                '\t\t<span class="iconfont play" data-v-3a201fd6="" onclick="tyy2('+data[i].soid+')"></span>\n' +
                 '\t\t<span id="ax'+data[i].soid+'" onclick="ax('+data[i].soid+')" >\n' +
                 '\t\t\t<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>\n' +
                 '\t\t</span>\n' +

@@ -40,7 +40,7 @@
                             <div class="tag" data-v-bd7c371e="" style="color: red;">#<span th:text="${sot.sotname}">流行</span></div>
                         </div>
                         <div class="btns" data-v-bd7c371e="">
-                            <button type="button" class="el-button el-button--primary is-round" data-v-bd7c371e="">
+                            <button type="button" class="el-button el-button--primary is-round" data-v-bd7c371e="" th:onclick="tyy([[${sol.solid}]])">
                                 <span><span class="iconfont" data-v-bd7c371e=""></span> 播放全部</span>
                             </button>
                             <span id="ccc" th:onclick="sc([[${sol.solid}]])"></span>
@@ -82,7 +82,7 @@
                                         data-v-7385b91b="" th:text="${'《'+gq.soname+'》'}">《变废为宝》</a></div>
                                 <div class="time" data-v-7385b91b="" th:text="${gq.sotime}">04:39</div>
                                 <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
-                                    <span class="iconfont play" data-v-3a201fd6="" ></span>
+                                    <span class="iconfont play" data-v-3a201fd6="" th:onclick="tyy2([[${gq.soid}]])" ></span>
                                     <span th:id="${'ax'+gq.soid}" th:onclick="ax([[${gq.soid}]])" ></span>
                                 </div>
                             </li>
@@ -99,6 +99,17 @@
 </div>
 </body>
 <script>
+
+    /*全部播放*/
+    function tyy(id) {
+        window.open("/songlists/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    }
+
+    /*单个播放*/
+    function tyy2(id) {
+        window.open("/addplaylist/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    }
+
     //分享
     var clipboard = new ClipboardJS('#fxx');
     clipboard.on('success', function (e) {

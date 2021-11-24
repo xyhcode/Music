@@ -146,6 +146,14 @@ public class MusicController {
         return "fontdesk/singerdeta";
     }
 
+    @ResponseBody
+    @RequestMapping(path = "/singersc/{siid}",method = RequestMethod.POST)
+    public JsonResult singdta2(@PathVariable("siid") int siid){
+        SingerAll lis=songse.singerallsong(siid);
+        JsonResult jr = new JsonResult(200,"查询成功！",lis.song);
+        return jr;
+    }
+
     /**
      * 搜索
      * @param map
