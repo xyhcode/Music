@@ -27,4 +27,7 @@ public interface PlayListDao {
     //查这首歌是否存在
     public UserSong selectSong(UserSong us);
 
+    //查歌手的所有歌曲
+    public List findSingerSong(int siid);
+
 }

@@ -81,7 +81,7 @@
                     </div>
                     <div class="content" data-v-014d094a="">
                         <div class="song-box" data-v-014d094a="">
-                            <button type="button" class="el-button el-button--primary is-round" data-v-014d094a="" >
+                            <button type="button" class="el-button el-button--primary is-round" data-v-014d094a="" th:onclick="tyy([[${singde.siid}]])">
                                 <span><span class="iconfont" data-v-014d094a=""></span> 播放全部</span>
                             </button>
                             <div data-v-7385b91b="" data-v-014d094a="">
@@ -130,6 +130,11 @@
 </div>
 </body>
 <script>
+
+    /*全部播放*/
+    function tyy(id) {
+        window.open("/singerlists/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    }
 
     /*单个播放*/
     function tyy2(id) {

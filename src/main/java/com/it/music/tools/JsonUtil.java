@@ -24,7 +24,6 @@ public class JsonUtil {
             jsons+="\""+t+"\":"+"\""+c+"\",";
         }
         String json1=jsons.substring(0,jsons.length()-1)+"}";
-        System.out.println(json1);
         return json1;
     }
 }

@@ -40,6 +40,10 @@
         select * from playlist where usid=#{usid} and soid=#{soid}
     </select>
 
+    <select id="findSingerSong" resultType="Song" parameterType="int" >
+        select * from song where siid=#{siid}
+    </select>
+
     <insert id="addSong" parameterType="UserSong">
         insert into playlist value (#{usid},#{soid})
     </insert>

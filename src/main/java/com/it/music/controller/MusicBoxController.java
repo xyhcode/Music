@@ -3,6 +3,7 @@ package com.it.music.controller;
 import com.it.music.entity.SongSing;
 import com.it.music.entity.User;
 import com.it.music.service.PlayListService;
+import com.it.music.service.SongNumService;
 import com.it.music.tools.FindSubscript;
 import com.it.music.tools.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -50,11 +54,22 @@ public class MusicBoxController {
         return us.isvip;
     }
 
+    public int addSongNum(int uid,int soid){
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String dtime=sdf.format(date);
+        int n=songNumService.add(new SongNum(uid,soid,dtime));
+        return n;
+    }
+
     @Autowired
     PlayListService playListService;
 
     @Autowired
     SongListService songListService;
+
+    @Autowired
+    SongNumService songNumService;
 
     @GetMapping("/musicbox")
     public String musicbox(ModelMap map){
@@ -84,6 +99,7 @@ public class MusicBoxController {
         }
         SongSing s=playListService.getSong(soid);
         map.put("playInfo",s);//播放歌曲信息
+        addSongNum(uid,soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
         return "fontdesk/musicbox";
@@ -124,6 +140,7 @@ public class MusicBoxController {
             s=playListService.getSong(sid);
         }
         map.put("playInfo",s);//播放歌曲信息
+        addSongNum(uid,s.soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
         return "fontdesk/musicbox";
@@ -165,6 +182,7 @@ public class MusicBoxController {
             s=playListService.getSong(sid);
         }
         map.put("playInfo",s);//播放歌曲信息
+        addSongNum(uid,s.soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
         return "fontdesk/musicbox";
@@ -188,6 +206,7 @@ public class MusicBoxController {
                 map.put("playInfo",null);
             }else{
                 map.put("playInfo",s);
+                addSongNum(uid,s.soid);
                 String lyric=JsonUtil.getjson(s.getLyrics());
                 map.put("lyric",lyric);
             }
@@ -204,6 +223,22 @@ public class MusicBoxController {
         uid=getUid();
         SongList sol = songListService.getSongList(solid);
         String[] strAry = sol.getSoid().split(",");
+        if (uid!=0){
+            int n=playListService.insertSongs(uid,strAry);
+            List list=playListService.getSongList(uid);
+            map.put("listInfo",list);
+        }else{
+            List list=playListService.getSongs();
+            map.put("listInfo",list);
+        }
+        return "fontdesk/musicbox";
+    }
+
+    @GetMapping("/singerlists/{siid}")
+    public String singerlist(@PathVariable("siid") int siid,ModelMap map){
+        uid=getUid();
+        String[] strAry = playListService.getSingerSoid(siid);
+        System.out.println(Arrays.toString(strAry));
         if (uid!=0){
             int n=playListService.insertSongs(uid,strAry);
             List list=playListService.getSongList(uid);

@@ -1,6 +1,7 @@
 package com.it.music.service.impl;
 
 import com.it.music.dao.PlayListDao;
+import com.it.music.entity.Song;
 import com.it.music.entity.SongSing;
 import com.it.music.entity.UserSong;
 import com.it.music.service.PlayListService;
@@ -58,5 +59,16 @@ public class PlayListServiceimpl implements PlayListService {
             }
         }
         return n;
+    }
+
+    @Override
+    public String[] getSingerSoid(int siid) {
+        List list=playListDao.findSingerSong(siid);
+        String[] str=new String[list.size()];
+        for (int i=0;i< list.size();i++){
+            Song z=(Song) list.get(i);
+            str[i]=""+z.soid;
+        }
+        return str;
     }
 }

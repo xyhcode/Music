@@ -1,14 +1,18 @@
 package com.it.music;
 
 import com.it.music.dao.PlayListDao;
+import com.it.music.entity.Song;
 import com.it.music.entity.SongSing;
 import com.it.music.entity.UserSong;
+import com.it.music.service.PlayListService;
+import com.it.music.service.impl.PlayListServiceimpl;
 import com.it.music.tools.JsonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -43,14 +47,13 @@ public class PlayListTest {
 
     @Test
     public void g() throws IOException {
-        UserSong s=playListDao.selectSong(new UserSong(1004,285));
-        if (s==null){
-            int n=playListDao.addSong(new UserSong(1004,285));
-            System.out.println(n);
-        }else{
-            System.out.println("已存在");
+        List list=playListDao.findSingerSong(345);
+        System.out.println(list);
+        String[] str=new String[list.size()];
+        for (int i=0;i< list.size();i++){
+            Song z=(Song) list.get(i);
+            str[i]=""+z.soid;
         }
-
-
+        System.out.println(Arrays.toString(str));
     }
 }

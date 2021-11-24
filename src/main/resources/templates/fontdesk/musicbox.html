@@ -154,6 +154,15 @@
 
             };
 
+            audio.loop = false;
+            audio.addEventListener('ended', function () {
+                var soid=sessionStorage.getItem("i");
+                if (soid!=null){
+                    var l=soid.slice(1,4);
+                    next(l);
+                }
+            }, false);
+
 
             var vol=1;
             var time=10;
@@ -217,10 +226,10 @@
 
 
         function plays(isvip,sovip,uid) {
-            var i="l"+uid
+            var i="l"+uid;
             sessionStorage.setItem("i",i);
             if (sovip==1 && isvip==0){//这首歌要vip才能听
-                window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                window.open("/Reinface", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
             }else{
                 location.href = "/play/" + uid;
             }
@@ -246,7 +255,7 @@
         }
 
         function vip() {
-            window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+            window.open("/Reinface", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
         }
 
 
@@ -258,9 +267,10 @@
 
         //下一首
         function next(soid) {
-            location.href = "/next/" + soid;
+            if (soid!=null){
+                location.href = "/next/" + soid;
+            }
         }
-
 
     </script>
 </head>
@@ -507,7 +517,7 @@
                         <div class=" songlist-box clearfix fl">
                             <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" >
 
-                                <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class=" pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''" th:id="l+${g.soid}">
+                                <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class=" pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''" th:id="l+${g.soid}" >
                                     <div th:id="${userStat.count}" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
                                         <div class="line1"></div>

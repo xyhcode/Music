@@ -18,4 +18,6 @@ public interface PlayListService {
     public UserSong selectSong(UserSong us);
 
     public int insertSongs(int uid,String[] str);
+
+    public String[] getSingerSoid(int siid);
 }
