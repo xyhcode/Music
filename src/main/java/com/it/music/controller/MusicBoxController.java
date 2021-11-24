@@ -26,6 +26,7 @@ import java.util.List;
 @Controller
 public class MusicBoxController {
     int uid=0;
+    int vip=0;
 
     public int getUid(){
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -35,6 +36,16 @@ public class MusicBoxController {
             return 0;
         }
         return us.usid;
+    }
+
+    public int getVip(){
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attrs.getRequest();
+        User us=(User)request.getSession().getAttribute("user");
+        if (us==null){
+            return 0;
+        }
+        return us.isvip;
     }
 
     @Autowired
@@ -76,6 +87,7 @@ public class MusicBoxController {
     //上一首
     @GetMapping("prev/{soid}")
     public String prev(@PathVariable("soid") int soid,ModelMap map) throws IOException {
+        vip=getVip();
         uid=getUid();
         List list;
         if (uid!=0){
@@ -96,9 +108,16 @@ public class MusicBoxController {
             pxb=idlist.length-1;
         }
         int sid=idlist[pxb];
-
         map.put("listInfo",list);
         SongSing s=playListService.getSong(sid);
+        while (s.sovip==1 && vip==0){
+            pxb-=1;
+            if (pxb<0){
+                pxb=idlist.length-1;
+            }
+            sid=idlist[pxb];
+            s=playListService.getSong(sid);
+        }
         map.put("playInfo",s);//播放歌曲信息
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
@@ -109,6 +128,7 @@ public class MusicBoxController {
     //下一首
     @GetMapping("next/{soid}")
     public String next(@PathVariable("soid") int soid,ModelMap map) throws IOException {
+        vip=getVip();
         uid=getUid();
         List list;
         if (uid!=0){
@@ -131,6 +151,14 @@ public class MusicBoxController {
         int sid=idlist[pxb];
         map.put("listInfo",list);
         SongSing s=playListService.getSong(sid);
+        while (s.sovip==1 && vip==0){
+            pxb+=1;
+            if (pxb>=idlist.length){
+                pxb=0;
+            }
+            sid=idlist[pxb];
+            s=playListService.getSong(sid);
+        }
         map.put("playInfo",s);//播放歌曲信息
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
