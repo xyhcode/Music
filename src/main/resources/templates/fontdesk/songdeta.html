@@ -83,9 +83,7 @@
                                 <div class="time" data-v-7385b91b="" th:text="${gq.sotime}">04:39</div>
                                 <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                     <span class="iconfont play" data-v-3a201fd6="" ></span>
-                                    <span th:id="${'ax'+gq.soid}" th:onclick="ax([[${gq.soid}]])" >
-                                        <span class="iconfont favorite" data-v-3a201fd6="" ></span>
-                                    </span>
+                                    <span th:id="${'ax'+gq.soid}" th:onclick="ax([[${gq.soid}]])" ></span>
                                 </div>
                             </li>
 
@@ -290,7 +288,7 @@
     //收藏
     function scsong(id,i,is) {
         if(is){
-            alert(1)
+            // alert(1)
             $.ajax({
                 url: '/user/del/'+id,
                 type: 'post',
@@ -310,7 +308,7 @@
                 }
             });
         }else{
-            alert(2)
+            // alert(2)
             var d = new Date();
             var date = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
             $.ajax({
