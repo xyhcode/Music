@@ -96,6 +96,7 @@ public class MusicBoxController {
             pxb=idlist.length-1;
         }
         int sid=idlist[pxb];
+
         map.put("listInfo",list);
         SongSing s=playListService.getSong(sid);
         map.put("playInfo",s);//播放歌曲信息

@@ -33,7 +33,7 @@
     </select>
 
     <select id="getSongs" resultMap="songse">
-        select * from song
+        select * from song as a inner join singer as b on a.siid=b.siid
     </select>
 
 </mapper>

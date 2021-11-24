@@ -150,13 +150,12 @@
         })
 
 
-        function plays(sovip,uid) {
-            if (sovip==1){
+        function plays(isvip,sovip,uid) {
+            if (sovip==1 && isvip==0){//这首歌要vip才能听
                 window.open("/vip", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
             }else{
                 location.href = "/play/" + uid;
             }
-
         }
 
         var p=true;//播放状态
@@ -439,6 +438,7 @@
                         </div>
                         <div class="songlist-box clearfix fl">
                             <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" >
+
                                 <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class="pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''">
                                     <div th:id="${userStat.count}" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
@@ -454,7 +454,7 @@
                                     </div>
                                     <div class="artist ellipsis">
                                             <span>
-                                                <a href="#" class target="_blank" th:text="${g.sing.siname}"></a>
+                                                <a href="#" class target="_blank" th:text="${g.sing.siname}">1</a>
                                             </span>
                                     </div>
                                     <div class="album ellipsis">
@@ -463,11 +463,13 @@
                                     <div class="time"><p th:text="${g.sotime}"></p></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
-                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.sovip}]],[[${g.soid}]]);"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont favorite" data-v-3a201fd6=""></span>
                                         <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
                                     </div>
                                 </li>
+
                                 <li  th:if="${playInfo==null}" th:each="g,userStat:${listInfo}" class="pr t clearfix ">
                                     <div id="1" class="num"><p th:text="${userStat.count}"></p></div>
                                     <div class="playing-animate pr">
@@ -492,7 +494,8 @@
                                     <div class="time"><p th:text="${g.sotime}"></p></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
-                                        <span class="iconfont play" data-v-3a201fd6="" th:onclick="plays([[${g.sovip}]],[[${g.soid}]]);"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
+                                        <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont favorite" data-v-3a201fd6=""></span>
                                         <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
                                     </div>
