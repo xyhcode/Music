@@ -40,4 +40,14 @@ public interface FeatureDao {
      * @return
      */
     public int fecount();
+
+    /**
+     * 浏览+1
+     * @param feid
+     * @return
+     */
+    public int browse(int feid);
+
+
+
 }

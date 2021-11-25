@@ -46,4 +46,11 @@ public class FeatureTest {
         int fcou=fe.fecount();
         System.out.println(fcou);
     }
+
+    @Test
+    public void tt(){
+        int is =fe.browse(1002);
+        System.out.println(is);
+    }
+
 }

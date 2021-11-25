@@ -38,6 +38,11 @@ public class FeatureServiceimpl implements FeatureService {
     }
 
     @Override
+    public int browse(int feid) {
+        return fdao.browse(feid);
+    }
+
+    @Override
     public int fecount() {
         int fcount=fdao.fecount();
         return fcount;

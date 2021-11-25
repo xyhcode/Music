@@ -34,6 +34,13 @@ public interface FeatureService {
     public Feature findidvoid(int feid);
 
     /**
+     * 浏览+1
+     * @param feid
+     * @return
+     */
+    public int browse(int feid);
+
+    /**
      * 视频的总数
      * @return
      */

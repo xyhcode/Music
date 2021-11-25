@@ -111,6 +111,7 @@ public class MusicController {
      */
     @RequestMapping(path = "/videtail/{vid}",method = RequestMethod.GET)
     public String viconf(ModelMap map,@PathVariable("vid") int vid){
+        fese.browse(vid);
         Feature fea=fese.findidvoid(vid);
         map.put("features",fea);
         return "fontdesk/grvidetails";

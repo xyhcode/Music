@@ -22,4 +22,9 @@
     <select id="fecount" resultType="int">
         select count(*) from feature;
     </select>
+
+    <update id="browse" >
+        update feature set feplays=feplays+1 where feid=#{feid}
+    </update>
+
 </mapper>
