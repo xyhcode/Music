@@ -2,15 +2,14 @@ package com.it.music.controller;
 
 import com.it.music.entity.SongSing;
 import com.it.music.entity.User;
-import com.it.music.service.PlayListService;
-import com.it.music.service.SongNumService;
+import com.it.music.service.*;
 import com.it.music.tools.FindSubscript;
+import com.it.music.tools.JsonResult;
 import com.it.music.tools.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -18,13 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import com.it.music.entity.*;
 import com.it.music.entity.SongSing;
 import com.it.music.entity.User;
-import com.it.music.service.SongListService;
-import com.it.music.service.SongService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -71,6 +68,9 @@ public class MusicBoxController {
     @Autowired
     SongNumService songNumService;
 
+    @Autowired
+    CollectService collectService;
+
     @GetMapping("/musicbox")
     public String musicbox(ModelMap map){
         uid=getUid();
@@ -102,6 +102,7 @@ public class MusicBoxController {
         addSongNum(uid,soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
+        map.put("soid",soid);
         return "fontdesk/musicbox";
     }
 
@@ -123,16 +124,19 @@ public class MusicBoxController {
             SongSing z=(SongSing)list.get(i);
             idlist[i]=z.soid;
         }
-        int xb= FindSubscript.binarySearch(idlist,soid);
+        System.out.println(Arrays.toString(idlist));
+//        int xb= FindSubscript.binarySearch(idlist,soid);
+        int xb=FindSubscript.findxb(idlist,soid);
         int pxb=xb-1;
+        System.out.println("上一首："+pxb);
         if (pxb<0){
             pxb=idlist.length-1;
         }
-        int sid=idlist[pxb];
+        int sid=idlist[pxb];//上一首歌的id  255
         map.put("listInfo",list);
-        SongSing s=playListService.getSong(sid);
-        while (s.sovip==1 && vip==0){
-            pxb-=1;
+        SongSing s=playListService.getSong(sid);//上一首歌的信息
+        while (s.sovip==1 && vip==0){//上一首歌是否vip and 普通用户
+            pxb-=1;//再上一首
             if (pxb<0){
                 pxb=idlist.length-1;
             }
@@ -143,6 +147,7 @@ public class MusicBoxController {
         addSongNum(uid,s.soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
+        map.put("soid",s.soid);
         return "fontdesk/musicbox";
     }
 
@@ -165,7 +170,8 @@ public class MusicBoxController {
             SongSing z=(SongSing)list.get(i);
             idlist[i]=z.soid;
         }
-        int xb= FindSubscript.binarySearch(idlist,soid);
+//        int xb= FindSubscript.binarySearch(idlist,soid);
+        int xb=FindSubscript.findxb(idlist,soid);
         int pxb=xb+1;
         if (pxb>=idlist.length){
             pxb=0;
@@ -185,6 +191,7 @@ public class MusicBoxController {
         addSongNum(uid,s.soid);
         String lyric= JsonUtil.getjson(s.getLyrics());
         map.put("lyric",lyric);
+        map.put("soid",s.soid);
         return "fontdesk/musicbox";
     }
 
@@ -222,15 +229,39 @@ public class MusicBoxController {
     }
 
 
+    //歌单播放全部
     @GetMapping("/songlists/{solid}")
     public String songlist(@PathVariable("solid") int solid,ModelMap map){
+        int i=0;
         uid=getUid();
+        vip=getVip();
+        SongSing ss=null;
         SongList sol = songListService.getSongList(solid);
-        String[] strAry = sol.getSoid().split(",");
-        if (uid!=0){
-            int n=playListService.insertSongs(uid,strAry);
-            List list=playListService.getSongList(uid);
+        String[] strAry = sol.getSoid().split(",");//得到歌单数组
+        if (uid!=0){//登录了
+            int n=playListService.insertSongs(uid,strAry);//将歌单歌曲添加到播放列表
+            List list=playListService.getSongList(uid);//查询用户的播放列表
             map.put("listInfo",list);
+            int soid=Integer.parseInt(strAry[i]);
+            SongSing s=playListService.getSong(soid);//得到歌单的第一首歌的信息
+            if (s.sovip==1 && vip==0){//第一首歌是vip歌曲，而且用户不是vip
+                while (true){
+                    if (i>=strAry.length){//歌单所有歌都是vip歌曲
+                        map.put("playInfo",null);
+                        break;
+                    }
+                    s=playListService.getSong(soid);//得到下一首的歌曲
+                    if (s!=null && s.sovip==0){//判断下一首歌是不是vip歌曲
+                        s=playListService.getSong(soid);
+                        map.put("playInfo",s);
+                    }
+                    i+=1;
+                }
+            }else{//允许播放
+                ss=playListService.getSong(soid);
+                map.put("playInfo",ss);
+            }
+
         }else{
             List list=playListService.getSongs();
             map.put("listInfo",list);
@@ -238,6 +269,7 @@ public class MusicBoxController {
         return "fontdesk/musicbox";
     }
 
+    //歌手歌单播放全部
     @GetMapping("/singerlists/{siid}")
     public String singerlist(@PathVariable("siid") int siid,ModelMap map){
         uid=getUid();
@@ -253,6 +285,60 @@ public class MusicBoxController {
         }
         return "fontdesk/musicbox";
     }
+
+
+    @GetMapping("/collectList/{usid}")
+    public String collectList(@PathVariable("usid") int usid,ModelMap map){
+        if (usid!=0){
+            String[] str=collectService.findColl(uid);
+            List list=new ArrayList();
+            for (int i=0;i<str.length;i++){
+                SongSing s=playListService.getSong(Integer.parseInt(str[i]));
+                System.out.println(s);
+                list.add(s);
+            }
+            System.out.println(list);
+            map.put("listInfo",list);
+        }else{
+            map.put("listInfo",null);
+        }
+        return "fontdesk/musicbox";
+    }
+
+    @ResponseBody
+    @GetMapping("/addsong/{soid}/{isvip}")
+    public JsonResult addsong(@PathVariable("soid") int soid,@PathVariable("isvip") int isvip){
+        JsonResult jr=null;
+        vip=getVip();
+        uid=getUid();
+        if (uid!=0){//登录了
+            System.out.println(vip+":"+isvip);
+            if (vip==0 && isvip==1){//不允许播放
+                jr=new JsonResult(510,"该歌曲是VIP专享，你不是VIP！");
+            }else{//允许播放
+                UserSong s=playListService.selectSong(new UserSong(uid,soid));//查这首歌在收藏表是否存在
+                if (s==null){//不存在就添加
+                    int n=playListService.addSong(new UserSong(uid,soid));
+                    if (n!=0){
+                        jr=new JsonResult(200,"添加成功！");
+                    }else{
+                        jr=new JsonResult(500,"添加失败！");
+                    }
+                }else{//已存在
+                    jr=new JsonResult(511,"该歌曲已存在播放表！");
+                }
+            }
+        }else{//没登录
+            if (isvip==1){//不允许播放
+                jr=new JsonResult(512,"该歌曲是VIP专享，你不是VIP！(未登录)");
+            }else{//允许播放
+                jr=new JsonResult(200,"播放成功！(未登录)");
+            }
+        }
+        return jr;
+    }
+
+
 
 
 

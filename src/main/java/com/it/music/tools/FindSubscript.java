@@ -21,4 +21,16 @@ public class FindSubscript {
         }
         return -1;
     }
+
+    public static int findxb(int[] arr,int soid){
+        int wz=0;
+        for (int i=0;i<arr.length;i++){
+            if (arr[i]==soid){
+                wz=i;
+                break;
+            }
+        }
+        return wz;
+    }
+
 }

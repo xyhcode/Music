@@ -23,6 +23,11 @@ public class Collect {
         this.cotime = cotime;
     }
 
+    public Collect(int usid, int cotype) {
+        this.usid = usid;
+        this.cotype = cotype;
+    }
+
     public Collect() {
     }
 

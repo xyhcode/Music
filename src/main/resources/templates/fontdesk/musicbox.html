@@ -226,8 +226,6 @@
 
 
         function plays(isvip,sovip,uid) {
-            var i="l"+uid;
-            sessionStorage.setItem("i",i);
             if (sovip==1 && isvip==0){//这首歌要vip才能听
                 window.open("/Reinface", "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
             }else{
@@ -730,6 +728,8 @@
             location.href = "/search/" + serval;
         }
     }
+
+    location.href = "/play/" +[[${soid}]]+"#l"+[[${soid}]];
 </script>
 </body>
 </html>

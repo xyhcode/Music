@@ -103,4 +103,15 @@ public class CollectServiceimp implements CollectService {
         return collectDao.zao(collect);
     }
 
+    @Override
+    public String[] findColl(int uid) {
+        List list=collectDao.showxx(new Collect(uid,1));
+        String[] str=new String[list.size()];
+        for (int i=0;i<str.length;i++){
+            Collect z=(Collect) list.get(i);
+            str[i]=""+z.getAllid();
+        }
+        return str;
+    }
+
 }

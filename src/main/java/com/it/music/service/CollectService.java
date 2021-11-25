@@ -1,6 +1,7 @@
 package com.it.music.service;
 
 import com.it.music.entity.Collect;
+import com.it.music.entity.SongSing;
 
 import java.util.List;
 
@@ -47,5 +48,12 @@ public interface CollectService {
      * @return
      */
     public Collect zao(int usid ,int allid);
+
+    /**
+     * 用户id找所有收藏歌曲的id
+     * @param uid
+     * @return
+     */
+    public String[] findColl(int uid);
 
 }
