@@ -18,73 +18,90 @@ for(var i=0;i<day;i++){
 // 基于准备好的dom，初始化echarts实例 上面的div
 var tubiao=echarts.init(document.getElementById('main'), 'macarons');
 
-// 指定图表的配置项和数据
-var option = {
-    title: {
-        x:'center',
-        text: '当日播放流量'//标题
-    },
-    tooltip: {},
-    xAxis: {
-        data: motharr
-    },
-    yAxis: {
+$(function (){
+    $.ajax({
+        url:'charsnumber',
+        type:'post',
+        success: function(da){
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    x:'center',
+                    text: '当日播放流量'//标题
+                },
+                tooltip: {},
+                xAxis: {
+                    data: motharr
+                },
+                yAxis: {
 
-    },
-    series: [{
-        type: 'line',
-        data: [800, 20, 300, 10, 190, 20,80,500,900,13,67,34,78,321,34,78,267,356,224,784,245,23,23,90,4,26,89,45,30,39,500]
-    }],
-    tooltip: {
-        trigger: 'item',
-        formatter: function(params)
-        {
-            return moth +'月'+params.name+ '日'+' : '+params.data+'人'; //将小数转化为百分数显示
+                },
+                series: [{
+                    type: 'line',
+                    data: da.data
+                }],
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params)
+                    {
+                        return moth +'月'+params.name+ '日'+' : '+params.data+'人'; //将小数转化为百分数显示
+                    }
+                },
+                grid:{
+                    x:50,
+                    y:50,
+                    x2:0,
+                    y2:30
+                }
+            };
+            tubiao.setOption(option);
         }
-    },
-    grid:{
-        x:50,
-        y:50,
-        x2:0,
-        y2:30
-    }
-};
-tubiao.setOption(option);
+    })
+})
+
 
 
 /*第二个图表*/
 var tubiao2=echarts.init(document.getElementById('main2'), 'macarons');
-var option2 = {
-    title: {
-        x:'center',
-        text: '当日会员收益'//标题
-    },
-    tooltip: {},
-    xAxis: {
-        data: motharr
-    },
-    yAxis: {
+$(function(){
+    $.ajax({
+        url:'charpaynum',
+        type:'POST',
+        success: function (pay){
+            var option2 = {
+                title: {
+                    x:'center',
+                    text: '当日会员收益'//标题
+                },
+                tooltip: {},
+                xAxis: {
+                    data: motharr
+                },
+                yAxis: {
 
-    },
-    series: [{
-        type: 'line',
-        data: [80, 20, 30, 10, 198, 20,800,500,900,13,67,34,78,321,50,78,267,356,220,784,245,23,23,90,4,26,89,45,30,50,600]
-    }],
-    tooltip: {
-        trigger: 'item',
-        formatter: function(params)
-        {
-            return moth +'月'+params.name+ '日'+' : '+params.data+'元'; //将小数转化为百分数显示
+                },
+                series: [{
+                    type: 'line',
+                    data: pay.data
+                }],
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params)
+                    {
+                        return moth +'月'+params.name+ '日'+' : '+params.data+'元'; //将小数转化为百分数显示
+                    }
+                },
+                grid:{
+                    x:50,
+                    y:50,
+                    x2:0,
+                    y2:30
+                }
+            };
+            tubiao2.setOption(option2);
         }
-    },
-    grid:{
-        x:50,
-        y:50,
-        x2:0,
-        y2:30
-    }
-};
-tubiao2.setOption(option2);
+    })
+})
 
 
 /*返回顶部*/

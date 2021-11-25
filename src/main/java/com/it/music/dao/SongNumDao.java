@@ -8,4 +8,5 @@ public interface SongNumDao {
 
     public int adds(SongNum sn);
 
+    public int sedat(String time);
 }

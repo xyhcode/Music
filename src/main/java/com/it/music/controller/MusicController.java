@@ -230,17 +230,18 @@ public class MusicController {
                 usno.setIsvip(1);
                 int cf=user.alter(usno);
                 if(cf>0){
+                    User reus=user.seone(us.getUsid());
                     //添加支付log到数据库
                     PayLog pa=new PayLog(us.usid,res.getTotalAmount(),res.getOutTradeNo(),res.getTradeNo(),now);
                     int panum=pase.paylogadd(pa);
                     if(panum>0){
-                        User reus=user.seone(us.getUsid());
                         //更新session
                         request.getSession().setAttribute("user",reus);
                         js=new JsonResult(200,"支付成功！");
                     }else{
                         System.out.println("支付成功！数据载入错误！");
                     }
+                    request.getSession().setAttribute("user",reus);
                 }
                 je="";
                 //删除cos的二维码图片
@@ -254,6 +255,7 @@ public class MusicController {
                 usno.setIsvip(1);
                 int cf=user.alter(usno);
                 if(cf>0){
+                    User reus=user.seone(us.getUsid());
                     PayLog pa=new PayLog(us.usid,res.getTotalAmount(),res.getOutTradeNo(),res.getTradeNo(),now);
                     int panum=pase.paylogadd(pa);
                     if(panum>0){
@@ -261,6 +263,7 @@ public class MusicController {
                     }else{
                         System.out.println("支付成功！数据载入错误！");
                     }
+                    request.getSession().setAttribute("user",reus);
                 }
                 je="";
                 CosFileupload.delfile("music/payimg/"+order+".jpg");

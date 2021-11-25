@@ -15,4 +15,12 @@ public interface PayLogDao {
      * @return
      */
     public int paylogadd(PayLog paylog);
+
+
+    /**
+     * 得到每天的收益
+     * @param time
+     * @return
+     */
+    public int pacount(String time);
 }

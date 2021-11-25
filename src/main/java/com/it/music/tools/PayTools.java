@@ -200,7 +200,7 @@ public class PayTools {
             betime=365;
         }
         DateTime newDate2 = DateUtil.offsetDay(date, betime);
-        String formatDateTime = DateUtil.formatDateTime(newDate2);
-        return formatDateTime;
+        String formatDate = DateUtil.formatDate(newDate2);
+        return formatDate;
     }
 }

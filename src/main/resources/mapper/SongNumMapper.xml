@@ -8,4 +8,7 @@
         insert into songnum(usid,soid,sontime)  values(#{usid},#{soid},#{sontime})
     </insert>
 
+    <select id="sedat" resultType="int">
+        select count(*) from songnum where sontime like '${value}'
+    </select>
 </mapper>
