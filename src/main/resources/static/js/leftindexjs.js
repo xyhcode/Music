@@ -44,7 +44,7 @@ $(function (){
                     trigger: 'item',
                     formatter: function(params)
                     {
-                        return moth +'月'+params.name+ '日'+' : '+params.data+'人'; //将小数转化为百分数显示
+                        return moth +'月'+params.name+ '日'+' : '+params.data+'次'; //将小数转化为百分数显示
                     }
                 },
                 grid:{
