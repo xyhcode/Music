@@ -543,8 +543,7 @@
                                         <!--播放-->
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
-                                        <span class="iconfont favorite" data-v-3a201fd6=""></span>
-                                        <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
+                                        <span th:id="${'ax'+g.soid}" th:onclick="ax([[${g.soid}]])" ></span>
                                     </div>
                                 </li>
 
@@ -574,8 +573,7 @@
                                         <!--播放-->
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
-                                        <span class="iconfont favorite" data-v-3a201fd6=""></span>
-                                        <!----> <span class="iconfont share" data-v-3a201fd6=""></span>
+                                        <span th:id="${'ax'+g.soid}" th:onclick="ax([[${g.soid}]])" ></span>
                                     </div>
                                 </li>
                             </ul>
@@ -730,6 +728,147 @@
             location.href = "/search/" + serval;
         }
     }
+
+
+    //歌曲收藏------------------------------------------------------------------------------
+
+    var issong = [];
+    $(function(){
+        $.ajax({
+            url: '/songyyh',
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                for (var i=0;i<da.data.length;i++){
+                    var soid = da.data[i].soid;
+
+                    var obj = new Object();
+                    obj.sid = soid;
+                    obj.sis = true;
+                    issong.push(obj);
+
+                    //是否收藏歌曲
+                    issc2(soid,i);
+                }
+            }
+        });
+    });
+
+
+    //是否收藏歌曲
+    function  issc2(id,i) {
+        $.ajax({
+            url: '/user/isadd/'+id,
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                var isong = true;
+                if(da.code==200){
+                    isong = false;
+                }
+                issong[i].sis = isong;
+                showax(isong,id);
+            }
+        });
+    }
+
+    //显示爱心
+    function showax(n,id){
+        if(n){
+            $("#ax"+id).html('<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>');
+        }else{
+            $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
+        }
+    }
+
+    //收藏
+    function scsong(id,i,is) {
+        if(is){
+            // alert(1)
+            $.ajax({
+                url: '/user/del/'+id,
+                type: 'post',
+                dataType: "json",
+                complete: function (xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success: function (da) {
+                    // console.log(da);
+                    issc2(id,i);
+                }
+            });
+        }else{
+            // alert(2)
+            var d = new Date();
+            var date = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+            $.ajax({
+                url: '/user/add',
+                type:"post",
+                // contentType:'application/json',  //发送数据类型
+                data:{
+                    "allid":id,
+                    "cotype":1,
+                    "cotime":date
+                },
+                dataType : "json",  //接受数据格式
+                complete : function(xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success:function(da){
+                    // console.log(da);
+                    issc2(id,i);
+                }
+            });
+        }
+    }
+
+    //点击爱心
+    function ax(id){
+        var dd = JSON.parse(JSON.stringify(issong));
+        for(var i=0;i<dd.length;i++){
+            var sid = dd[i].sid;
+            var sis = dd[i].sis;
+            // console.log(sid);
+            // console.log(sis);
+            if(id==sid){
+                scsong(id,i,sis);
+            }
+        }
+    }
+
+
 </script>
 </body>
 </html>

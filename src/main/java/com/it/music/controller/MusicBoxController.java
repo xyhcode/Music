@@ -5,12 +5,12 @@ import com.it.music.entity.User;
 import com.it.music.service.PlayListService;
 import com.it.music.service.SongNumService;
 import com.it.music.tools.FindSubscript;
+import com.it.music.tools.JsonResult;
 import com.it.music.tools.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -20,8 +20,6 @@ import com.it.music.entity.SongSing;
 import com.it.music.entity.User;
 import com.it.music.service.SongListService;
 import com.it.music.service.SongService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -254,6 +252,14 @@ public class MusicBoxController {
         return "fontdesk/musicbox";
     }
 
+    @ResponseBody
+    @RequestMapping(path = "/songyyh",method = RequestMethod.POST)
+    public JsonResult song(HttpServletRequest request){
 
+        List list = playListService.getSongList(getUid());
+        JsonResult jr = new JsonResult(200,"查询成功！",list);
+
+        return jr;
+    }
 
 }
