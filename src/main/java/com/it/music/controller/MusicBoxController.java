@@ -213,6 +213,10 @@ public class MusicBoxController {
         }else{
             list=playListService.getSongs();
             map.put("listInfo",list);
+            SongSing s=playListService.getSong(soid);
+            map.put("playInfo",s);
+            String lyric= JsonUtil.getjson(s.getLyrics());
+            map.put("lyric",lyric);
         }
         return "fontdesk/musicbox";
     }
