@@ -18,4 +18,7 @@
         select * from songlist where solid=#{solid}
     </select>
 
+    <select id="solicount" resultType="int">
+        select count(*) from songlist;
+    </select>
 </mapper>

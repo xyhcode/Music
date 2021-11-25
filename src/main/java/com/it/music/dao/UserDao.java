@@ -3,8 +3,6 @@ package com.it.music.dao;
 import com.it.music.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 /**
  * @author 羡羡
  *
@@ -48,4 +46,10 @@ public interface UserDao {
      * @return
      */
     public User seiphone(String iphone);
+
+    /**
+     * 统计用户的总数
+     * @return
+     */
+    public int uscount();
 }

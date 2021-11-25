@@ -60,4 +60,11 @@ public interface SongService {
      * @return
      */
     public List searchdong(String soname);
+
+
+    /**
+     * 统计所有的歌曲的数量
+     * @return
+     */
+    public int secount();
 }

@@ -2,8 +2,6 @@ package com.it.music.service;
 
 import com.github.pagehelper.PageInfo;
 import com.it.music.entity.SongList;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -45,4 +43,10 @@ public interface SongListService {
      * @return
      */
     public PageInfo solall(int sotid,int p);
+
+    /***
+     * 查询所有的歌单的总数
+     * @return
+     */
+    public int solicount();
 }

@@ -53,4 +53,14 @@ public class SongListServiceimpl implements SongListService {
         PageInfo page = new PageInfo(list,7);
         return page;
     }
+
+    /**
+     * 查询总数
+     * @return
+     */
+    @Override
+    public int solicount() {
+        int coun=solidao.solicount();
+        return coun;
+    }
 }

@@ -77,4 +77,16 @@ public class SongServiceimpl implements SongService {
         List lis=sodao.searchdong(soname);
         return lis;
     }
+
+    /**
+     * 统计所有歌曲的总数
+     * @return
+     */
+    @Override
+    public int secount() {
+        int coun=sodao.secount();
+        return coun;
+    }
+
+
 }

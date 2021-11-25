@@ -39,4 +39,10 @@ public interface SongListDao {
      */
     public List solall(int sotid);
 
+    /**
+     * 查询歌单的总数
+     * @return
+     */
+    public int solicount();
+
 }

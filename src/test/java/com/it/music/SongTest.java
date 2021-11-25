@@ -58,4 +58,10 @@ public class SongTest {
         List lis=sodao.searchdong("年");
         System.out.println(lis);
     }
+
+    @Test
+    public void secoun(){
+       int zs= sodao.secount();
+       System.out.println(zs);
+    }
 }

@@ -2,8 +2,6 @@ package com.it.music.service;
 
 import com.it.music.entity.User;
 
-import java.util.List;
-
 /**
  * @author 羡羡
  *
@@ -42,5 +40,11 @@ public interface UserService {
      * @return
      */
     public int alter(User user);
+
+    /**
+     * 用户统计
+     * @return
+     */
+    public int uscou();
 
 }

@@ -36,4 +36,10 @@ public class FeatureServiceimpl implements FeatureService {
         Feature fe=fdao.findidvoid(feid);
         return fe;
     }
+
+    @Override
+    public int fecount() {
+        int fcount=fdao.fecount();
+        return fcount;
+    }
 }

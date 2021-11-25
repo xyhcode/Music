@@ -7,7 +7,6 @@ import com.it.music.tools.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -33,6 +32,12 @@ public class UserServiceimpl implements UserService {
     @Override
     public int alter(User user) {
         return usdao.alter(user);
+    }
+
+    @Override
+    public int uscou() {
+        int yh=usdao.uscount();
+        return yh;
     }
 
     /**

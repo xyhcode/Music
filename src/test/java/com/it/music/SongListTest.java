@@ -41,4 +41,10 @@ public class SongListTest {
     }
 
 
+    @Test
+    public void sol(){
+        int solont=songListDao.solicount();
+        System.out.println(solont);
+    }
+
 }

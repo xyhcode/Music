@@ -18,4 +18,8 @@
     <select id="findidvoid" resultType="Feature">
         select * from feature where feid=#{feid}
     </select>
+
+    <select id="fecount" resultType="int">
+        select count(*) from feature;
+    </select>
 </mapper>

@@ -1,9 +1,7 @@
 package com.it.music;
 
-import cn.hutool.core.util.RandomUtil;
 import com.it.music.dao.UserDao;
 import com.it.music.entity.User;
-import com.it.music.tools.CosFileupload;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +49,11 @@ public class UserTest {
     public void rand(){
         String vg= RandomStringUtils.randomAlphanumeric(8);
         System.out.println(vg);
+    }
+
+    @Test
+    public void rea(){
+        int usco=us.uscount();
+        System.out.println(usco);
     }
 }

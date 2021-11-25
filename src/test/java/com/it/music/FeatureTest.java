@@ -40,4 +40,10 @@ public class FeatureTest {
        Feature fea=fe.findidvoid(1002);
        System.out.println(fea);
     }
+
+    @Test
+    public void fecoun(){
+        int fcou=fe.fecount();
+        System.out.println(fcou);
+    }
 }

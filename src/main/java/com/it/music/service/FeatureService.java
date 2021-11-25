@@ -32,4 +32,10 @@ public interface FeatureService {
      * @return
      */
     public Feature findidvoid(int feid);
+
+    /**
+     * 视频的总数
+     * @return
+     */
+    public int fecount();
 }
