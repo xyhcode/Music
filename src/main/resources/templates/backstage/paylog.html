@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>交易日志</title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+</head>
+<body class="layui-view-body">
+<div class="layui-content">
+    <!--面包屑导航-->
+    <div class="mianb">
+        <div class="mblf layui-col-xs6 layui-col-md6">
+            <i class="layui-icon">&#xe656;</i>
+            <p>首页管理 > <span>交易日志</span></p>
+        </div>
+    </div>
+    <!--面包屑导航-->
+    <div class="layui-row">
+        <div class="layui-card">
+            <div class="table-responsive">
+                <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户电话</th>
+                        <th>交易金额</th>
+                        <th>订单号</th>
+                        <th>交易号</th>
+                        <th>交易时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pay:${payli.list}">
+                        <td th:text="${pay.paylogid}">01</td>
+                        <td th:text="${pay.phone}">国庆节放假七天！</td>
+                        <td th:text="${pay.amt}"></td>
+                        <td th:text="${pay.ordernumber}"></td>
+                        <td th:text="${pay.transactionnumber}"></td>
+                        <td th:text="${pay.tradingtime}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--分页-->
+            <div id="page"></div>
+            <!--分页-->
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+<script th:src="@{/assets/layui.all.js}"></script>
+<script th:inline="javascript">
+    var element = layui.element;
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        //页码完整功能
+        laypage.render({
+            elem: 'page'
+            , count: [[${payli.getTotal()}]]
+            ,hash:true
+            ,hash: 'fenye' //自定义hash值
+            ,curr:[[${payli.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next']
+            , jump: function (obj,first) {
+                if(!first){
+                    location.href="/paylog/"+obj.curr;
+                }
+            }
+        });
+    });
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+    });
+</script>
+
+</body>
+</html>

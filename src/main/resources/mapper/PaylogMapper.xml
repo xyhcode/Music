@@ -8,4 +8,8 @@
     <select id="pacount" resultType="int">
         select COALESCE(sum(amt),0) from paylog where tradingtime like '${value}%';
     </select>
+
+    <select id="sepaylog" resultType="PayLogAll">
+        select * from paylog as a inner join user as b on a.usid=b.usid
+    </select>
 </mapper>

@@ -53,4 +53,10 @@ public class PayLogServiceimpl implements PayLogService {
         }
         return lis;
     }
+
+    @Override
+    public List sepaylog() {
+        List lis= paydao.sepaylog();
+        return lis;
+    }
 }

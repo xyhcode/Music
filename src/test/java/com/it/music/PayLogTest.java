@@ -56,4 +56,11 @@ public class PayLogTest {
            System.out.println(i+"号："+cf);
         }
     }
+
+
+    @Test
+    public void seall(){
+        List is=paydao.sepaylog();
+        System.out.println(is);
+    }
 }

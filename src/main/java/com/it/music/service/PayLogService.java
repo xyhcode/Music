@@ -17,4 +17,10 @@ public interface PayLogService {
     public int paylogadd(PayLog paylog);
 
     public List pacount();
+
+    /**
+     * 查询所有的支付信息
+     * @return
+     */
+    public List sepaylog();
 }

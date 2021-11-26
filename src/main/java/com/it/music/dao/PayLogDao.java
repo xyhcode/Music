@@ -3,6 +3,8 @@ package com.it.music.dao;
 import com.it.music.entity.PayLog;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author: 羡羡
  * @Date: 2021/11/24/08:39
@@ -23,4 +25,10 @@ public interface PayLogDao {
      * @return
      */
     public int pacount(String time);
+
+    /**
+     * 查询所有的支付信息
+     * @return
+     */
+    public List sepaylog();
 }
