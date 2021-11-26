@@ -31,4 +31,19 @@ public interface SongTypeDao {
      */
     public SongType getSongType(int sotid);
 
+
+    /**
+     * 增加分类
+     */
+    public int addclass(SongType stype);
+
+    /**
+     * 删除分类
+     */
+    public int delclass(int sotid);
+    /**
+     * 修改分类
+     */
+    public int updateclass(SongType stype);
+
 }

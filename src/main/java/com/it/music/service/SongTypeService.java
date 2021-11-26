@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface SongTypeService {
     /**
-     * 查询首页的歌单类型11
+     * 查询所有类型
      * @return
      */
     public List sein();
@@ -36,4 +36,17 @@ public interface SongTypeService {
      */
     public Object[] setype();
 
+    /**
+     * 分类增加
+     */
+        public int addclass(SongType stype);
+
+    /**
+     * 删除分类
+     */
+    public int delclass(int sotid);
+    /**
+     * 修改分类
+     */
+    public int updateclass(SongType stype);
 }

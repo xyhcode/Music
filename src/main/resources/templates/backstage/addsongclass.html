@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+</head>
+<body class="layui-tank">
+<div class="layui-card">
+    <form class="layui-form" action="/admin/add/addclass" method="post" enctype="multipart/form-data">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类名</label>
+            <div class="layui-input-block">
+                <input type="text" name="sotname"  lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <input type="text" name="sottype" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" ><span style="color: red">1语种2流派3主题4情感5场景</span>
+            </div>
+        </div>
+<!--        <div class=" tkbtnfxd">-->
+            <input type="submit" class="layui-btn  layui-btn-normal float-right" />
+            <a href="/admin/class/1" class="layui-btn layui-btn-primary float-right"  id="quxiao" >取消</a>
+<!--        </div>-->
+
+
+    </form>
+</div>
+<audio id="audio" controls="" style="display: none;"></audio>
+
+
+
+<script th:src="@{/assets/layui.all.js}"></script>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+
+
+</body>
+</html>
