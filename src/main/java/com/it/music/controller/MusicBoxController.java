@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.it.music.entity.*;
 import com.it.music.entity.SongSing;
 import com.it.music.entity.User;
+import com.it.music.service.SongListService;
+import com.it.music.service.SongService;
 import org.springframework.web.bind.support.SessionStatus;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -305,6 +307,7 @@ public class MusicBoxController {
         return "fontdesk/musicbox";
     }
 
+
     @ResponseBody
     @GetMapping("/addsong/{soid}/{isvip}")
     public JsonResult addsong(@PathVariable("soid") int soid,@PathVariable("isvip") int isvip){
@@ -340,6 +343,14 @@ public class MusicBoxController {
 
 
 
+    @ResponseBody
+    @RequestMapping(path = "/songyyh",method = RequestMethod.POST)
+    public JsonResult song(HttpServletRequest request){
 
+        List list = playListService.getSongList(getUid());
+        JsonResult jr = new JsonResult(200,"查询成功！",list);
+
+        return jr;
+    }
 
 }

@@ -4,4 +4,8 @@
     <insert id="paylogadd" parameterType="PayLog">
         insert into paylog(usid,amt,ordernumber,transactionnumber,tradingtime) values(#{usid},#{amt},#{ordernumber},#{transactionnumber},#{tradingtime});
     </insert>
+
+    <select id="pacount" resultType="int">
+        select COALESCE(sum(amt),0) from paylog where tradingtime like '${value}%';
+    </select>
 </mapper>
