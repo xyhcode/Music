@@ -10,12 +10,14 @@ import com.it.music.service.SingerService;
 import com.it.music.service.SongService;
 import com.it.music.service.SongTypeService;
 import com.it.music.tools.CosFileupload;
+import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,13 +33,15 @@ import java.util.List;
 public class HIndexController {
     @Autowired
     SingerService singerService;
+
     @Autowired
     PayLogService pase;
 
-@Autowired
-SongService songService;
-@Autowired
-SongTypeService songTypeService;
+    @Autowired
+    SongService songService;
+
+    @Autowired
+    SongTypeService songTypeService;
     /**首页页面*/
     @RequestMapping({"/admin","/admin/index"})
     public String index(){
@@ -59,31 +63,80 @@ SongTypeService songTypeService;
         return "/backstage/adduser";
     }
 
+    /**
+     * 交易日志
+     * @param map
+     * @return
+     */
+    @RequestMapping("/admin/paylog")
+    public String pay(ModelMap map){
+        PageHelper.startPage(1,11);
+        List lis=pase.sepaylog();
+        PageInfo pa=new PageInfo(lis,10);
+        map.put("payli",pa);
+        return "backstage/paylog";
+    }
 
-
-
-
-
-    /**歌曲管理页面*/
-    @RequestMapping("/admin/song/{page}")
-    public String song(ModelMap map, @PathVariable("page") int page){
-        System.out.println("admin song");
-        // 页码，每页多少条
-        PageHelper.startPage(page,10);
-        PageInfo info;
-        List list=songService.seall();
-        info = new PageInfo(list);
-        System.out.println("总条数"+info.getTotal());
-        System.out.println("总页数"+info.getPages());
-        System.out.println("当前页"+info.getPageNum());
-        int sz[]=info.getNavigatepageNums(); //得到导航页页码
-        System.out.println("导航"+ Arrays.toString(sz));
-        map.put("song",info);
-        return "/backstage/song";
+    /**
+     * 交易日志分页
+     * @param map
+     * @param curr
+     * @return
+     */
+    @RequestMapping(path = "/paylog/{curr}",method = RequestMethod.GET)
+    public String paypage(ModelMap map, @PathVariable("curr") int curr){
+        PageHelper.startPage(curr,11);
+        List lis=pase.sepaylog();
+        PageInfo pa=new PageInfo(lis,10);
+        map.put("payli",pa);
+        return "backstage/paylog";
     }
 
 
+    /**歌曲管理页面*/
+    @RequestMapping("/admin/song")
+    public String song(ModelMap map){
+        PageHelper.startPage(1,5);
+        List list=songService.seall();
+        System.out.println(list);
+        PageInfo pa=new PageInfo(list,10);
+        map.put("song",pa);
+        return "/backstage/song";
+    }
 
+    /**
+     * 歌曲分页
+     * @param map
+     * @param curr
+     * @return
+     */
+    @RequestMapping(path = "/songma/{curr}",method = RequestMethod.GET)
+    public String sonpa(ModelMap map, @PathVariable int curr){
+        PageHelper.startPage(curr,5);
+        List list=songService.seall();
+        PageInfo pa=new PageInfo(list,10);
+        map.put("song",pa);
+        return "/backstage/song";
+    }
+
+    /**
+     * 歌曲删除
+     * @param soid
+     * @return
+     */
+    @RequestMapping(path = "/songma/songdel/{soid}")
+    @ResponseBody
+    public JsonResult songdel(@PathVariable int soid){
+        System.out.println(soid);
+        JsonResult js=new JsonResult();
+        int cf=songService.del(soid);
+        if(cf>0){
+            js=new JsonResult(200,"删除成功！");
+        }else{
+            js=new JsonResult(500,"删除失败！");
+        }
+       return js;
+    }
 
 
     /**歌手管理页面*/
@@ -206,34 +259,7 @@ SongTypeService songTypeService;
         return mv;
     }
 
-    /**
-     * 交易日志
-     * @param map
-     * @return
-     */
-    @RequestMapping("/admin/paylog")
-    public String pay(ModelMap map){
-        PageHelper.startPage(1,11);
-        List lis=pase.sepaylog();
-        PageInfo pa=new PageInfo(lis,10);
-        map.put("payli",pa);
-        return "backstage/paylog";
-    }
 
-    /**
-     * 交易日志分页
-     * @param map
-     * @param curr
-     * @return
-     */
-    @RequestMapping(path = "/paylog/{curr}",method = RequestMethod.GET)
-    public String paypage(ModelMap map, @PathVariable("curr") int curr){
-        PageHelper.startPage(curr,11);
-        List lis=pase.sepaylog();
-        PageInfo pa=new PageInfo(lis,10);
-        map.put("payli",pa);
-        return "backstage/paylog";
-    }
 
 
 
@@ -305,23 +331,6 @@ SongTypeService songTypeService;
         }
         return "redirect:/admin/song/1";
 
-    }
-
-
-    /**歌曲管理删除歌曲
-     * @return*/
-    @RequestMapping("/admin/song/del/{soid}")
-    public String songdel(@PathVariable("soid") int id) {
-        System.out.println(id);
-        int i=songService.del(id);
-        ModelAndView mv=new ModelAndView();
-        if(i>0){
-            System.out.println("删除成功");
-        }else{
-            System.out.println("删除失败");
-        }
-
-        return "redirect:/admin/song/1";
     }
 
     /**
