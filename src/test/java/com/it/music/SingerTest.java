@@ -73,4 +73,14 @@ public class SingerTest {
         List lis=sind.seallsing();
         System.out.println(lis);
     }
+
+    @Test
+    public void testupd()
+    {
+        Singer singer = new Singer();
+        singer.setSiid(404);
+        singer.setSitype(2);
+        sind.singerupdate(singer);
+        System.out.println();
+    }
 }

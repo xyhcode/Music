@@ -187,4 +187,22 @@ public class SingerServiceimpl implements SingerService {
         List lis=sing.seallsing();
         return lis;
     }
+
+    @Override
+    public int singerupdate(Singer s) {
+        int n = sing.singerupdate(s);
+        return n;
+    }
+
+    public int singerdel(int siid)
+    {
+        int n = sing.singerdel(siid);
+        return n;
+    }
+
+    @Override
+    public int update(Singer s) {
+        int n = sing.update(s);
+        return n;
+    }
 }

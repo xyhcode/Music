@@ -1,7 +1,7 @@
 package com.it.music.entity;
 
 /**
- * @author 羡羡
+ *
  * 歌手
  */
 public class Singer {

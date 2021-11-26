@@ -2,7 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.it.music.dao.SingerDao">
+
     <select id="seall" resultType="Singer">
         select * from singer
     </select>
@@ -10,6 +12,26 @@
     <insert id="singadd" parameterType="Singer">
         insert into singer(siname,siintro,siimg,siarea,sitype) values (#{siname},#{siintro},#{siimg},#{siarea},#{sitype});
     </insert>
+
+    <update id="singerupdate">
+        update singer
+        <set>
+            <if test="siname != null">siname=#{siname},</if>
+            <if test="siintro != null">siintro=#{siintro},</if>
+            <if test="siimg != null">siimg=#{siimg},</if>
+            <if test="siarea != null">siarea=#{siarea},</if>
+            <if test="sitype != null">sitype=#{sitype},</if>
+        </set>
+        <where>
+             siid=#{siid}
+        </where>
+
+
+    </update>
+
+    <delete id="singerdel" parameterType="int">
+        delete from singer where siid=#{siid}
+    </delete>
 
     <select id="seindx" resultType="Singer">
         select * from singer order by rand() limit 6

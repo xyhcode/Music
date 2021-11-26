@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>歌手管理</title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+    <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.pagination li {display: inline;}
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+        }
+
+        ul.pagination li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
+</head>
+<body class="layui-view-body">
+<div class="layui-content">
+    <!--面包屑导航-->
+    <div class="mianb">
+        <div class="mblf layui-col-xs6 layui-col-md6">
+            <i class="layui-icon">&#xe656;</i>
+            <p>首页管理 > <span>添加歌手</span></p>
+        </div>
+        <div class="mbrt layui-col-xs6 layui-col-md6">
+            <a href="/admin/findaddsinger" class="layui-btn layui-btn-normal" id="fabu">添加歌手</a>
+        </div>
+    </div>
+    <!--面包屑导航-->
+    <div class="layui-row">
+        <div class="layui-card">
+            <div class="table-responsive">
+                <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
+                    <thead>
+                    <tr>
+<!--                        <th>siid</th>-->
+                        <th>姓名</th>
+                        <th>介绍</th>
+                        <th>图片</th>
+                        <th>地区(1：其他、2：内地、3：港台)</th>
+                        <th>性别(1：男、2：女、3：组合、4：乐队)</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="s : ${singer.list}">
+                       <td th:text="${s.siid}" style="display: none">siid</td>
+                        <td th:text="${s.siname}">siname</td>
+                        <td th:text="${s.siintro}">siintro</td>
+                        <td><img th:src="${s.siimg}" style="width: 100px;height: 100px" /></td>
+                        <td th:text="${s.siarea}">siarea</td>
+                        <td th:text="${s.sitype}">sitype</td>
+                        <td>
+                            <div class="layui-table-cell laytable-cell-1-0-10">
+                                <a id="updatesinger" class="layui-btn layui-btn-normal layui-btn-xs" th:href="@{'/admin/updatesinger/'+${s.siid}}">修改</a>
+                                <a class="layui-btn  layui-btn-danger layui-btn-xs delete" onclick="javascript:return del()" th:href="@{'/admin/singer/del/'+${s.siid}}">删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--分页-->
+
+            <!--分页-->
+
+            <ul class="pagination">
+                <li><a href="1">首页</a></li>
+
+                <li><a  th:each="n : ${singer.navigatepageNums}"
+                                           th:href="${n}"
+                                           th:text="${n}"
+                                           th:class="${ n==singer.getPageNum ? 'active' : '' }"> 1 </a></li>
+
+                <li> <a th:href="${singer.pages}">尾页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+<script th:src="@{/assets/layui.all.js}"></script>
+<script>
+    var element = layui.element;
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+
+        //页码完整功能
+
+    });
+
+    //弹框
+    $('#fabu').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title: '添加',
+                fix: false,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['700px', '600px'],
+                content: '/admin/findaddsinger',
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+    })
+//修改
+    $('#updatesinger').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                fix: false,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['660px', '420px'],
+                content: '/admin/updatesinger',
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+    })
+
+    //判断弹框
+    function del()
+    {
+        var msg="确认删除吗？";
+        if(confirm(msg)==true)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+    });
+</script>
+
+</body>
+</html>
