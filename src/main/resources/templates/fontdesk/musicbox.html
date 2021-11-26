@@ -65,9 +65,9 @@
 
         $(function () {
 
-            var z=sessionStorage.getItem("i");
-            console.log(z);
-            location.href="#"+z;
+            // var z=sessionStorage.getItem("i");
+            // console.log(z);
+            // location.href="#"+z;
 
             // box.css("scrollTop",h);
             // box.scrollTop = targetLi.offsetTop;
@@ -210,17 +210,6 @@
                     audio.volume !== audio.duration ? audio.currentTime += time : 1;
                     return false;
                 }
-                // } else if (e && e.keyCode === 32) {
-                //     if (audio.paused === true) {
-                //         audio.play();
-                //         tp.classList.add("music_play2");
-                //         state = true;
-                //     } else {
-                //         audio.pause();
-                //         tp.classList.remove("music_play2");
-                //     }
-                //     return false;
-                // }
             };
         })
 
@@ -234,6 +223,7 @@
         }
 
         var p=true;//播放状态
+
 
 
         //播放
@@ -269,6 +259,40 @@
                 location.href = "/next/" + soid;
             }
         }
+
+        //删除一首
+        function del(soid) {
+            $.ajax({
+                url:'/dSong/'+soid,
+                type:'get',
+                darkmagenta: 'json',
+                success:function (data) {
+                    if (data.code==200){
+                        $("#l"+soid).remove();
+                        var li=$("#d_ul li");
+                        var p=$("#d_ul li div p");
+                        for (var i=0;i<p.length;i++){
+                            // console.log(p[i].innerText);
+                            p[i].innerText=(i+1);
+                        }
+                    }
+                }
+            })
+        }
+        
+        function dAll() {
+            $.ajax({
+                url:'/dAllSong/',
+                type:'get',
+                darkmagenta: 'json',
+                success:function (data) {
+                    if (data.code==200){
+                        location.href="/musicbox";
+                    }
+                }
+            })
+        }
+
 
     </script>
 </head>
@@ -503,7 +527,7 @@
                     <div class="box pr clearfix">
                         <div class="nav clearfix">
                             <div class="on btn"><span>播放列表</span></div>
-                            <div class=" btn"><span>我的收藏</span></div>
+                            <div class="title-piliang" style="display:;" onclick="dAll()"><span class="iconfont play"></span> <span>清空列表</span></div>
                         </div>
                         <div class="list-title" style="">
                             <div class="num">#</div>
@@ -512,8 +536,8 @@
                             <div class="album">专辑</div>
                             <div class="time">时长</div>
                         </div>
-                        <div class=" songlist-box clearfix fl">
-                            <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" >
+                        <div class=" songlist-box clearfix fl" id="d_bf">
+                            <ul th:if="${listInfo!=null}" class="songlist fl" style="height: 462px;" id="d_ul">
 
                                 <li  th:if="${playInfo!=null}" th:each="g,userStat:${listInfo}" class=" pr t clearfix " th:classappend="${g.soid==playInfo.soid}?'playing current':''" th:id="l+${g.soid}" >
                                     <div th:id="${userStat.count}" class="num"><p th:text="${userStat.count}"></p></div>
@@ -536,12 +560,13 @@
                                     <div class="album ellipsis">
                                         <a href="#" class th:text="${g.soname}"></a>
                                     </div>
-                                    <div class="time"><p th:text="${g.sotime}"></p></div>
+                                    <div class="time"><span th:text="${g.sotime}"></span></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span th:id="${'ax'+g.soid}" th:onclick="ax([[${g.soid}]])" ></span>
+                                        <span th:if="${session.user!=null}" th:onclick="del([[${g.soid}]])"  class="iconfont delete"></span>
                                     </div>
                                 </li>
 
@@ -566,17 +591,19 @@
                                     <div class="album ellipsis">
                                         <a href="#" class th:text="${g.soname}"></a>
                                     </div>
-                                    <div class="time"><p th:text="${g.sotime}"></p></div>
+                                    <div class="time"><span th:text="${g.sotime}"></span></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                         <!--播放-->
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user==null}" th:onclick="plays(0,[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span class="iconfont play" data-v-3a201fd6="" th:if="${session.user!=null}" th:onclick="plays([[${session.user.isvip}]],[[${g.sovip}]],[[${g.soid}]]);"></span>
                                         <span th:id="${'ax'+g.soid}" th:onclick="ax([[${g.soid}]])" ></span>
+                                        <span th:if="${session.user!=null}" th:onclick="del([[${g.soid}]])" class="iconfont delete"></span>
                                     </div>
                                 </li>
                             </ul>
                             <!---->
                         </div>
+<!--                        <div class=" songlist-box clearfix fl" id="d_sc" style="display: none;"></div>-->
                         <div class="cover-lrc fr" data-v-fa28038c="">
                             <div class="cover" data-v-fa28038c="">
                                 <img th:if="${playInfo==null}" alt="" class="default-cover" data-v-fa28038c="">
@@ -867,6 +894,8 @@
             }
         }
     }
+
+
 
 
 </script>

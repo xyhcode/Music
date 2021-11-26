@@ -30,4 +30,13 @@ public interface PlayListDao {
     //查歌手的所有歌曲
     public List findSingerSong(int siid);
 
+    //根据用户id和类型查收藏表
+    public List getCollectList(int uid,int type);
+
+    //根据歌曲id删除播放表的某首歌曲
+    public int delSong(UserSong us);
+
+    //根据用户id删除播放表中所有歌曲
+    public int delAllSong(int uis);
+
 }

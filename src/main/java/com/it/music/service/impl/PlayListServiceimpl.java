@@ -71,4 +71,19 @@ public class PlayListServiceimpl implements PlayListService {
         }
         return str;
     }
+
+    @Override
+    public List getCollectList(int uid) {
+        return playListDao.getCollectList(uid,1);
+    }
+
+    @Override
+    public int delSong(UserSong us) {
+        return playListDao.delSong(us);
+    }
+
+    @Override
+    public int delAllSong(int uid) {
+        return playListDao.delAllSong(uid);
+    }
 }

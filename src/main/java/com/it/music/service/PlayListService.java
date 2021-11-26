@@ -20,4 +20,10 @@ public interface PlayListService {
     public int insertSongs(int uid,String[] str);
 
     public String[] getSingerSoid(int siid);
+
+    public List getCollectList(int uid);
+
+    public int delSong(UserSong us);
+
+    public int delAllSong(int uid);
 }

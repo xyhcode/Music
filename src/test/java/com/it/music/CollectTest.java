@@ -67,9 +67,8 @@ public class CollectTest {
 
     @Test
     public void t2(){
-
-
-
+        List list=collectDao.showxx(new Collect(1004,1));
+        System.out.println(list);
     }
 
 }

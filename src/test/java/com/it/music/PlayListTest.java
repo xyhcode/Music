@@ -56,4 +56,10 @@ public class PlayListTest {
         }
         System.out.println(Arrays.toString(str));
     }
+
+    @Test
+    public void z(){
+        int n=playListDao.delAllSong(1004);
+        System.out.println(n);
+    }
 }

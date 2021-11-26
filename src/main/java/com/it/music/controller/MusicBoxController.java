@@ -381,4 +381,59 @@ public class MusicBoxController {
         return jr;
     }
 
+
+    @ResponseBody
+    @RequestMapping("/bflist")
+    public JsonResult bflist(ModelMap map){//ajax播放列表
+        JsonResult jr=null;
+        int uid=getUid();//得到用户id
+        if (uid!=0){//登录了
+            List list=playListService.getSongList(uid);//用户的播放表
+            jr=new JsonResult(200,"用户播放表",list);
+        }else{//没登录
+            List list=playListService.getSongs();//所有歌曲
+            jr=new JsonResult(500,"所有歌曲",list);
+        }
+        return jr;
+    }
+
+    @ResponseBody
+    @RequestMapping("/sclist")
+    public JsonResult sclist(ModelMap map){//ajax播放列表
+        JsonResult jr=null;
+        int uid=getUid();
+        List list=playListService.getCollectList(uid);
+        System.out.println(list);
+        jr=new JsonResult(200,"用户收藏表",list);
+        return jr;
+    }
+
+    @ResponseBody
+    @RequestMapping("/dSong/{soid}")
+    public JsonResult delSong(@PathVariable("soid") int soid,ModelMap map){//ajax播放列表
+        JsonResult jr=null;
+        int uid=getUid();
+        if (uid!=0 && soid!=0){
+            int n=playListService.delSong(new UserSong(uid,soid));
+            jr=new JsonResult(200,"删除单首成功！",n);
+        }else{
+            jr=new JsonResult(500,"删除失败！");
+        }
+        return jr;
+    }
+
+    @ResponseBody
+    @RequestMapping("/dAllSong")
+    public JsonResult delAllSong(ModelMap map){//ajax播放列表
+        JsonResult jr=null;
+        int uid=getUid();
+        if (uid!=0){
+            int n=playListService.delAllSong(uid);
+            jr=new JsonResult(200,"删除所有成功！",n);
+        }else{
+            jr=new JsonResult(500,"删除失败！");
+        }
+        return jr;
+    }
+
 }

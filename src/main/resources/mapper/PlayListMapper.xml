@@ -28,6 +28,10 @@
         select * from song as a inner join singer as b on a.siid=b.siid inner join playlist c on a.soid=c.soid  where c.usid=#{uid};
     </select>
 
+    <select id="getCollectList" resultMap="songse" parameterType="int">
+        select * from song as a inner join singer as b on a.siid=b.siid inner join collect c on a.soid=c.allid  where c.usid=#{uid} and c.cotype=#{type};
+    </select>
+
     <select id="getSong" resultMap="songse" parameterType="int">
         select * from song as a inner join singer as b on a.siid=b.siid where a.soid=#{sid};
     </select>
@@ -47,5 +51,13 @@
     <insert id="addSong" parameterType="UserSong">
         insert into playlist value (#{usid},#{soid})
     </insert>
+
+    <delete id="delSong" parameterType="UserSong">
+        delete from playlist where usid=#{usid} and soid=#{soid}
+    </delete>
+
+    <delete id="delAllSong" parameterType="int">
+        delete from playlist where usid=#{usid}
+    </delete>
 
 </mapper>
