@@ -101,117 +101,24 @@
                     <div class="group" data-v-a5fd420e="">
                         <div class="group-title" data-v-a5fd420e="">-会员歌单-</div>
                         <div class=" tracklist-box clearfix" data-v-1e40aea8="" data-v-a5fd420e="">
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
+
+                            <div class="tracklist-item fl" data-v-1e40aea8="" th:each="sol:${vipgd}" th:onclick="gdxx([[${sol.solid}]])">
                                 <div class="poster" data-v-1e40aea8="">
                                     <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
+                                        <img th:src="@{${sol.solimg}}" class="el-image__inner" style="object-fit: cover;">
                                         <!---->
                                     </div>
                                     <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
                                                                                    data-v-1e40aea8=""></span></div>
                                 </div>
-                                <div class="name" data-v-1e40aea8="">日语 | 炎炎夏日，来一颗清新薄荷糖</div>
+                                <div class="name" data-v-1e40aea8="" th:text="${sol.soltitle}">薛之谦综艺歌曲全收录</div>
                                 <!---->
                             </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">古风 | 你是我的一缕执念</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">华语乐坛不能没有这些唱将！</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">怀旧 | 陪伴90后长大的那些歌</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">影视原声 | 感动你的银幕时光</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">电音梦游记</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">流行 | 每天一首，你最流行</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">摇滚不止，生生不息</div>
-                                <!---->
-                            </div>
-                            <div class="tracklist-item fl" data-v-1e40aea8="">
-                                <div class="poster" data-v-1e40aea8="">
-                                    <div class="el-image" data-v-1e40aea8="">
-                                        <div class="el-image__placeholder"></div>
-                                        <!---->
-                                    </div>
-                                    <div class="play-bar" data-v-1e40aea8=""><span class="iconfont"
-                                                                                   data-v-1e40aea8=""></span></div>
-                                </div>
-                                <div class="name" data-v-1e40aea8="">热爱嘻哈的你一定要了解下日语说唱</div>
-                                <!---->
-                            </div>
+
                         </div>
                     </div>
                 </div>
+
             </div>
             <footer th:replace="fontdesk/foot::footer-fragment"></footer>
         </div>
@@ -219,6 +126,12 @@
 </div>
 
 <script>
+
+    //歌单详情
+    function gdxx(gid){
+        location.href="/songdeta/"+gid;
+    }
+
     //搜索输入框回车事件
     $("#seav").keyup(function () {
         if (event.keyCode == 13) {

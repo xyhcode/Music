@@ -2,11 +2,16 @@ package com.it.music.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.it.music.dao.SongDao;
 import com.it.music.dao.SongListDao;
+import com.it.music.entity.Song;
 import com.it.music.entity.SongList;
 import com.it.music.service.SongListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,6 +23,9 @@ public class SongListServiceimpl implements SongListService {
 
     @Autowired
     SongListDao solidao;
+
+    @Autowired
+    SongDao songDao;
 
     @Override
     public List seind() {
@@ -62,5 +70,34 @@ public class SongListServiceimpl implements SongListService {
     public int solicount() {
         int coun=solidao.solicount();
         return coun;
+    }
+
+    @Override
+    public List vipall() {
+        //所有歌单
+        List list = solidao.seall();
+        List viplist = new ArrayList();
+        for(int i=0;i<list.size();i++){
+            boolean is = true;
+            SongList sol = (SongList)list.get(i);
+            String[] strAry = sol.getSoid().split(",");
+//            System.out.println(Arrays.toString(strAry));
+            List son = songDao.getSongAll(strAry);
+            if(son.size()==0){
+                is = false;
+            }else{
+                for(int j=0;j<son.size();j++){
+                    Song so = (Song)son.get(j);
+                    if(so.getSovip()==0){
+                        is = false;
+                    }
+                }
+            }
+            if(is){
+                viplist.add(sol);
+            }
+        }
+
+        return viplist;
     }
 }

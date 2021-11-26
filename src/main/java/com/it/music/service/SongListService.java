@@ -49,4 +49,12 @@ public interface SongListService {
      * @return
      */
     public int solicount();
+
+    /**
+     * 查询所有歌曲是VIP的歌单
+     * @return
+     */
+    public List vipall();
+
+
 }

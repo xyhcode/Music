@@ -306,9 +306,10 @@ public class MusicController {
      * @return
      */
     @RequestMapping(path="/Reinface",method = RequestMethod.GET)
-    public String govip(HttpServletRequest request,ModelMap map){
+    public String govip(HttpServletRequest request,ModelMap map,@RequestParam(defaultValue = "1") int p){
         User reuse= (User) request.getSession().getAttribute("user");
         map.put("us",reuse);
+        map.put("vipgd",solise.vipall());
         return "fontdesk/vip";
     }
 }
