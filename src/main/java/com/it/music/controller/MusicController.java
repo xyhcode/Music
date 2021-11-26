@@ -270,6 +270,7 @@ public class MusicController {
                 System.out.println("order:250"+" "+order);
             }
         }else {
+            CosFileupload.delfile("music/payimg/"+order+".jpg");
             js=new JsonResult(500,"支付失败！");
         }
         return js;
