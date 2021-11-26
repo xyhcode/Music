@@ -248,21 +248,25 @@ public class MusicBoxController {
             SongSing s=playListService.getSong(soid);//得到歌单的第一首歌的信息
             if (s.sovip==1 && vip==0){//第一首歌是vip歌曲，而且用户不是vip
                 while (true){
+                    i+=1;
                     if (i>=strAry.length){//歌单所有歌都是vip歌曲
                         map.put("playInfo",null);
                         break;
                     }
-                    s=playListService.getSong(soid);//得到下一首的歌曲
-                    if (s!=null && s.sovip==0){//判断下一首歌是不是vip歌曲
+                    SongSing z=playListService.getSong(Integer.parseInt(strAry[i]));//得到下一首的歌曲
+                    if (z!=null && z.sovip==0){//判断下一首歌是不是vip歌曲
                         s=playListService.getSong(soid);
-                        map.put("playInfo",s);
+                        map.put("playInfo",z);
+                        map.put("soid",z.soid);
+                        break;
                     }
-                    i+=1;
                 }
             }else{//允许播放
                 ss=playListService.getSong(soid);
                 map.put("playInfo",ss);
+                map.put("soid",ss.soid);
             }
+
 
         }else{
             List list=playListService.getSongs();
@@ -274,13 +278,37 @@ public class MusicBoxController {
     //歌手歌单播放全部
     @GetMapping("/singerlists/{siid}")
     public String singerlist(@PathVariable("siid") int siid,ModelMap map){
+        int i=0;
         uid=getUid();
+        vip=getVip();
+        SongSing ss=null;
         String[] strAry = playListService.getSingerSoid(siid);
-        System.out.println(Arrays.toString(strAry));
-        if (uid!=0){
+        if (uid!=0){//登录了
             int n=playListService.insertSongs(uid,strAry);
             List list=playListService.getSongList(uid);
             map.put("listInfo",list);
+            int soid=Integer.parseInt(strAry[i]);
+            SongSing s=playListService.getSong(soid);
+            if (s.sovip==1 && vip==0){//第一首歌是vip歌曲，而且用户不是vip
+                while (true){
+                    i+=1;
+                    if (i>=strAry.length){//歌单所有歌都是vip歌曲
+                        map.put("playInfo",null);
+                        break;
+                    }
+                    SongSing z=playListService.getSong(Integer.parseInt(strAry[i]));//得到下一首的歌曲
+                    if (z!=null && z.sovip==0){//判断下一首歌是不是vip歌曲
+                        s=playListService.getSong(soid);
+                        map.put("playInfo",z);
+                        map.put("soid",z.soid);
+                        break;
+                    }
+                }
+            }else{//允许播放
+                ss=playListService.getSong(soid);
+                map.put("playInfo",ss);
+                map.put("soid",s.soid);
+            }
         }else{
             List list=playListService.getSongs();
             map.put("listInfo",list);
