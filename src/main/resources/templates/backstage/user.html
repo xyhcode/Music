@@ -14,10 +14,7 @@
     <div class="mianb">
         <div class="mblf layui-col-xs6 layui-col-md6">
             <i class="layui-icon">&#xe656;</i>
-            <p>用户管理</p>
-        </div>
-        <div class="mbrt layui-col-xs6 layui-col-md6">
-            <a href="javascript:;" class="layui-btn layui-btn-normal" id="fabu">发布任务</a>
+            <p>首页管理 > <span>用户管理</span></p>
         </div>
     </div>
     <!--面包屑导航-->
@@ -27,37 +24,26 @@
                 <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
                     <thead>
                     <tr>
-                        <th>任务名</th>
-                        <th>描述</th>
-                        <th>悬赏积分</th>
-                        <th>发布时间</th>
-                        <th>操作</th>
+                        <th>用户名称</th>
+                        <th>用户性别</th>
+                        <th>用户年龄</th>
+                        <th>用户电话</th>
+                        <th>用户简介</th>
+                        <th>用户头像</th>
+                        <th>是否VIP</th>
+                        <th>到期时间</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>每日登录</td>
-                        <td>每天登录可得1积分</td>
-                        <td>10</td>
-                        <td>2019-11-29</td>
-                        <td>
-                            <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a class="layui-btn layui-btn-normal layui-btn-xs update">修改</a>
-                                <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>连续登录5天</td>
-                        <td>连续登录5天，中间间隔重新开始</td>
-                        <td>70</td>
-                        <td>2019-11-29</td>
-                        <td>
-                            <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a class="layui-btn layui-btn-normal layui-btn-xs">修改</a>
-                                <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a>
-                            </div>
-                        </td>
+                    <tr th:each="us:${um.list}">
+                        <td th:text="${us.usname}"></td>
+                        <td th:text="${us.sex==1 ? '男':'女'}">每天登录可得1积分</td>
+                        <td th:text="${us.age}">10</td>
+                        <td th:text="${us.phone}">2019-11-29</td>
+                        <td th:text="${us.usintro}"></td>
+                        <td><img th:src="${us.usimg}"></td>
+                        <td th:text="${us.isvip==0 ? '否':'是'}"></td>
+                        <td th:text="${us.viptime}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -81,10 +67,16 @@
         //页码完整功能
         laypage.render({
             elem: 'page'
-            , count: 100
-            , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
-            , jump: function (obj) {
-                console.log(obj)
+            , count: [[${um.getTotal()}]]
+            ,hash:true
+            ,limit:4
+            ,hash: 'fenye' //自定义hash值
+            ,curr:[[${um.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next']
+            , jump: function (obj,first) {
+                if(!first){
+                    location.href="/userma/"+obj.curr;
+                }
             }
         });
     });

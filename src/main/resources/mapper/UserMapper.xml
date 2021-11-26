@@ -39,4 +39,9 @@
     <select id="uscount" resultType="int">
         select count(*) from user;
     </select>
+
+
+    <select id="seall" resultType="User">
+        select * from user
+    </select>
 </mapper>

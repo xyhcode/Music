@@ -7,6 +7,7 @@ import com.it.music.tools.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -38,6 +39,16 @@ public class UserServiceimpl implements UserService {
     public int uscou() {
         int yh=usdao.uscount();
         return yh;
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Override
+    public List sauseall() {
+        List lis=usdao.seall();
+        return lis;
     }
 
     /**

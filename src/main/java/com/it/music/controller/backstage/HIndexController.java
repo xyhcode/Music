@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.it.music.entity.Singer;
 import com.it.music.entity.Song;
 import com.it.music.entity.SongType;
-import com.it.music.service.PayLogService;
-import com.it.music.service.SingerService;
-import com.it.music.service.SongService;
-import com.it.music.service.SongTypeService;
+import com.it.music.service.*;
 import com.it.music.tools.CosFileupload;
 import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,9 @@ public class HIndexController {
     SongService songService;
 
     @Autowired
+    UserService use;
+
+    @Autowired
     SongTypeService songTypeService;
     /**首页页面*/
     @RequestMapping({"/admin","/admin/index"})
@@ -49,12 +49,7 @@ public class HIndexController {
         return "/backstage/index";
     }
 
-    /**用户管理页面*/
-    @RequestMapping("/admin/user")
-    public String user(){
-        System.out.println("admin user");
-        return "/backstage/user";
-    }
+
 
     /**用户添加页面*/
     @RequestMapping("/admin/adduser")
@@ -138,6 +133,36 @@ public class HIndexController {
        return js;
     }
 
+    /**
+     * 用户管理
+     * @param map
+     * @return
+     */
+    @RequestMapping("/admin/user")
+    public String usman(ModelMap map){
+        PageHelper.startPage(1,4);
+        List lis=use.sauseall();
+        PageInfo pa=new PageInfo(lis,10);
+        map.put("um",pa);
+        return "/backstage/user";
+    }
+
+    /**
+     * 用户分页
+     * @param map
+     * @param curr
+     * @return
+     */
+    @RequestMapping("/userma/{curr}")
+    public String userpa(ModelMap map, @PathVariable int curr){
+        PageHelper.startPage(curr,4);
+        List lis=use.sauseall();
+        PageInfo pa=new PageInfo(lis,10);
+        map.put("um",pa);
+        return "/backstage/user";
+    }
+
+    /***************************************************************/
 
     /**歌手管理页面*/
     @RequestMapping("/admin/singer/{page}")

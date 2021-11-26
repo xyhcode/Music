@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class UserTest {
 
@@ -55,5 +57,11 @@ public class UserTest {
     public void rea(){
         int usco=us.uscount();
         System.out.println(usco);
+    }
+
+    @Test
+    public void tesseall(){
+        List lis=us.seall();
+        System.out.println(lis);
     }
 }

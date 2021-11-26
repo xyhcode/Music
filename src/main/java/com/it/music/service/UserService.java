@@ -2,6 +2,8 @@ package com.it.music.service;
 
 import com.it.music.entity.User;
 
+import java.util.List;
+
 /**
  * @author 羡羡
  *
@@ -47,4 +49,10 @@ public interface UserService {
      */
     public int uscou();
 
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    public List sauseall();
 }
