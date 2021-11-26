@@ -1,9 +1,11 @@
 package com.it.music.service;
 
 import com.it.music.entity.Collect;
+import com.it.music.entity.CollectCount;
 import com.it.music.entity.SongSing;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lingjing
@@ -55,5 +57,21 @@ public interface CollectService {
      * @return
      */
     public String[] findColl(int uid);
+
+    /**
+     * 统计收藏
+     * @param usid
+     * @return
+     */
+    public CollectCount count(int usid);
+
+    /**
+     * 根据用户id 查询 收藏
+     * @param usid
+     * @return
+     */
+    public List show1(int usid);
+    public List show2(int usid);
+    public List show3(int usid);
 
 }

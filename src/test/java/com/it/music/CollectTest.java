@@ -3,10 +3,7 @@ package com.it.music;
 import com.it.music.dao.CollectDao;
 import com.it.music.dao.SingerDao;
 import com.it.music.dao.SongDao;
-import com.it.music.entity.Collect;
-import com.it.music.entity.Singer;
-import com.it.music.entity.Song;
-import com.it.music.entity.Songs;
+import com.it.music.entity.*;
 import com.it.music.service.CollectService;
 import com.it.music.service.SingerService;
 import com.it.music.service.SongService;
@@ -14,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @SpringBootTest
 public class CollectTest {
@@ -67,8 +63,18 @@ public class CollectTest {
 
     @Test
     public void t2(){
-        List list=collectDao.showxx(new Collect(1004,1));
+
+        CollectCount cc = collectDao.count(1001);
+        System.out.println(cc);
+
+    }
+
+    @Test
+    public void t3(){
+
+        List list = collectDao.show1(1001);
         System.out.println(list);
+
     }
 
 }

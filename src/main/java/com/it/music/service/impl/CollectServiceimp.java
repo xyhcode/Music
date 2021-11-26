@@ -1,10 +1,7 @@
 package com.it.music.service.impl;
 
 import com.it.music.dao.*;
-import com.it.music.entity.Collect;
-import com.it.music.entity.Singer;
-import com.it.music.entity.Song;
-import com.it.music.entity.Songs;
+import com.it.music.entity.*;
 import com.it.music.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,6 +109,26 @@ public class CollectServiceimp implements CollectService {
             str[i]=""+z.getAllid();
         }
         return str;
+    }
+
+    @Override
+    public CollectCount count(int usid) {
+        return collectDao.count(usid);
+    }
+
+    @Override
+    public List show1(int usid) {
+        return collectDao.show1(usid);
+    }
+
+    @Override
+    public List show2(int usid) {
+        return collectDao.show2(usid);
+    }
+
+    @Override
+    public List show3(int usid) {
+        return collectDao.show3(usid);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.it.music.controller;
 
 import com.it.music.entity.Collect;
+import com.it.music.entity.CollectCount;
 import com.it.music.entity.User;
 import com.it.music.service.*;
 import com.it.music.tools.CosFileupload;
@@ -44,50 +45,7 @@ public class UserController {
     FeatureService featureService;
 
     @RequestMapping("")
-    public String user(HttpServletRequest request,ModelMap mm,@RequestParam(defaultValue = "1") int type){
-        User us = (User) request.getSession().getAttribute("user");
-
-        int count1 = collectService.showxx(us.getUsid(),1).size();
-        int count2 = collectService.showxx(us.getUsid(),2).size();
-        int count3 = collectService.showxx(us.getUsid(),3).size();
-        mm.put("count1",count1);
-        mm.put("count2",count2);
-        mm.put("count3",count3);
-        mm.put("type",type);
-
-        List ls = collectService.showxx(us.getUsid(),type);
-        List list= new ArrayList();
-
-        List gs = singerService.seall();
-        mm.put("gs",gs);
-
-        switch(type){
-            //歌曲
-            case 1:{
-                for(int i=0;i<ls.size();i++){
-                    Collect col = (Collect) ls.get(i);
-                    list.add(songService.getSong(col.getAllid()));
-                }
-                mm.put("show1",list);
-            }break;
-            //歌单
-            case 2:{
-                for(int i=0;i<ls.size();i++){
-                    Collect col = (Collect) ls.get(i);
-                    list.add(songListService.getSongList(col.getAllid()));
-                }
-                mm.put("show2",list);
-            }break;
-            //视频
-            case 3:{
-                for(int i=0;i<ls.size();i++){
-                    Collect col = (Collect) ls.get(i);
-                    list.add(featureService.findidvoid(col.getAllid()));
-                }
-                mm.put("show3",list);
-            }break;
-            default: System.out.println("type:"+type);
-        }
+    public String user(){
 
         return "fontdesk/user";
     }
@@ -181,16 +139,19 @@ public class UserController {
     public JsonResult show(HttpServletRequest request ,@PathVariable int type){
         User us = (User) request.getSession().getAttribute("user");
 
-        int count1 = collectService.showxx(us.getUsid(),1).size();
-        int count2 = collectService.showxx(us.getUsid(),2).size();
-        int count3 = collectService.showxx(us.getUsid(),3).size();
-        List list = collectService.showdata(us.getUsid(),type);
+        CollectCount cc = collectService.count(us.getUsid());
         HashMap<String,Object> data = new HashMap<String,Object>();
-        data.put("count1",count1);
-        data.put("count2",count2);
-        data.put("count3",count3);
+        data.put("count1",cc.getCount1());
+        data.put("count2",cc.getCount2());
+        data.put("count3",cc.getCount3());
         data.put("type",type);
-        data.put("collect",list);
+        if(type==1){
+            data.put("collect",collectService.show1(us.getUsid()));
+        }else if(type==2){
+            data.put("collect",collectService.show2(us.getUsid()));
+        }else if(type==3){
+            data.put("collect",collectService.show3(us.getUsid()));
+        }
 
         JsonResult jr = new JsonResult(200,"查询成功！",data);
         return jr;

@@ -89,6 +89,8 @@
 </body>
 <script>
 
+    show(1);
+
     /*单个播放*/
     function tyy2(id) {
         window.open("/addplaylist/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
@@ -144,10 +146,6 @@
             location.href = "/search/" + serval;
         }
     }
-
-    $(function(){
-        show(1);
-    })
 
     function show(type) {
         $.ajax({

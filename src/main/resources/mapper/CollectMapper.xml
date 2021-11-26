@@ -6,6 +6,19 @@
         select * from collect where usid=#{usid} and cotype=#{cotype}
     </select>
 
+    <select id="show1" resultType="Songs">
+        select * from collect as a
+        inner join song as b on a.allid=b.soid
+        inner join singer as c on b.siid=c.siid
+        where a.usid=#{usid} and a.cotype=1
+    </select>
+    <select id="show2" resultType="SongList">
+        select * from collect as a inner join songlist as b on a.allid=b.solid  where a.usid=#{usid} and a.cotype=2
+    </select>
+    <select id="show3" resultType="Feature">
+        select * from collect as a inner join feature as b on a.allid=b.feid  where a.usid=#{usid} and a.cotype=3
+    </select>
+
     <select id="zao" resultType="Collect">
         select * from collect where usid=#{usid} and allid=#{allid}
     </select>
@@ -18,5 +31,13 @@
         insert into collect(usid,allid,cotype,cotime)
         value(#{usid},#{allid},#{cotype},#{cotime})
     </insert>
+
+    <select id="count" resultType="CollectCount">
+        select
+        count(case when cotype=1 then 0 end) as 'count1',
+        count(case when cotype=2 then 0 end) as 'count2',
+        count(case when cotype=3 then 0 end) as 'count3'
+        from collect where usid=#{usid}
+    </select>
 
 </mapper>
