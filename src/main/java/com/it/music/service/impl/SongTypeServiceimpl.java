@@ -43,4 +43,24 @@ public class SongTypeServiceimpl implements SongTypeService {
         }
         return obj;
     }
+
+    @Override
+    public int addclass(SongType stype) {
+        int i=sot.addclass(stype);
+        return i;
+    }
+
+    @Override
+    public int delclass(int sotid) {
+        int i=sot.delclass(sotid);
+        return i;
+    }
+
+    @Override
+    public int updateclass(SongType stype) {
+        int i=sot.updateclass(stype);
+        return i;
+    }
+
+
 }

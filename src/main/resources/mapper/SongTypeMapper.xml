@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.it.music.dao.SongTypeDao">
     <select id="sein" resultType="SongType">
-        select * from songtype order by rand() limit 11
+        select * from songtype
     </select>
 
     <select id="seall" resultType="SongType">
@@ -14,5 +14,24 @@
     <select id="getSongType" resultType="SongType">
         select * from songtype where sotid=#{sotid}
     </select>
+
+    <insert id="addclass" parameterType="SongType">
+       insert into songtype(sotname,sottype) values (#{sotname},#{sottype});
+    </insert>
+
+    <delete id="delclass" parameterType="int" >
+            delete  from songtype   where sotid=#{sotid}
+    </delete>
+
+    <update id="updateclass" parameterType="SongType">
+        update songtype
+        <set>
+            <if test="sotname!=null">sotname=#{sotname},</if>
+            <if test="sottype!=null">sottype=#{sottype},</if>
+
+        </set>
+        where sotid=#{sotid}
+
+    </update>
 
 </mapper>

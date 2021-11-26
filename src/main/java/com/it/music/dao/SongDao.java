@@ -64,6 +64,21 @@ public interface SongDao {
     public List searchdong(String soname);
 
     /**
+     * 删除歌
+     * @return
+     */
+    public int del(int soid);
+    /**
+     * 根据歌曲id查询歌曲
+     */
+    public Song find(int soid);
+
+    /**
+     * 修改
+     */
+    public int update(Song song);
+
+    /**
      * 统计所有的歌曲的数量
      * @return
      */

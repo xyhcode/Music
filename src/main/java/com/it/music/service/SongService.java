@@ -16,13 +16,6 @@ public interface SongService {
     public List seall();
 
     /**
-     * 根据歌曲ID查询歌曲
-     * @param soid
-     * @return
-     */
-    public Song getSong(int soid);
-
-    /**
      * 添加
      * @param son
      * @return
@@ -34,6 +27,13 @@ public interface SongService {
      * @return
      */
     public List seind();
+
+    /**
+     * 根据歌曲ID查询歌曲
+     * @param soid
+     * @return
+     */
+    public Song getSong(int soid);
 
     /**
      * 所有查询歌对应的歌手
@@ -60,6 +60,24 @@ public interface SongService {
      * @return
      */
     public List searchdong(String soname);
+
+    /**
+     * 删除歌
+     * @return
+     */
+    public int del(int soid);
+    /**
+     * 根据歌曲id查询
+     * @return
+     */
+    public Song find(int soid);
+
+    /**
+     * 修改
+     * @param song
+     * @return
+     */
+    public int  update(Song song);
 
 
     /**

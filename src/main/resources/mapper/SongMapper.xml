@@ -80,4 +80,29 @@
         select count(*) from song;
     </select>
 
+    <delete id="del" parameterType="int" >
+            delete  from song   where soid=#{soid}
+    </delete>
+
+    <select id="find" resultType="Song">
+       select * from song where soid=#{soid}
+    </select>
+
+  <update id="update" parameterType="Song">
+          update song
+          <set>
+              <if test="siid!=null">siid=#{siid},</if>
+              <if test="soname!=null">soname=#{soname},</if>
+              <if test="solink!=null">solink=#{solink},</if>
+              <if test="lyrics!=null">lyrics=#{lyrics},</if>
+              <if test="soimg!=null">soimg=#{soimg},</if>
+              <if test="sotime!=null">sotime=#{sotime},</if>
+              <if test="publish!=null">publish=#{publish},</if>
+              <if test="sovip!=null">sovip=#{sovip},</if>
+
+          </set>
+          where soid=#{soid}
+
+  </update>
+
 </mapper>

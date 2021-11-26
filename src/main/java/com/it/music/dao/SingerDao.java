@@ -43,4 +43,10 @@ public interface SingerDao {
     public List sety(int sitype);
 
     public List sedqty(Singer se);
+
+    public int singerupdate(Singer s);
+
+    public int update(Singer s);
+
+    public int singerdel(int siid);
 }

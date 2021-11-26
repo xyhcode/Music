@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+</head>
+<body class="layui-tank">
+<div class="layui-card">
+
+    <form action="/admin/addsinger" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+        歌手姓名：<input type="text" name="siname" lay-verify="title" autocomplete="off" placeholder="" class="layui-input"  /><br/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+             <label class="layui-form-label">介绍</label>
+             <div class="layui-input-block">
+        歌手介绍(随便复制几行)：<br><textarea style="min-height: 80px;min-width:400px;resize: none;" name="siintro" class="layui-textarea" ></textarea><br/>
+             </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">图片</label>
+            <div class="layui-input-block">
+        歌手图片：<input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><br/>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">地区</label>
+            <div class="layui-input-block">
+        歌手地区(填数字)：<input type="text" name="siarea" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><span style="color: red">1：其他、2：内地、3：港台、4：欧美、5：韩国、6：日本</span><br/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+        歌手类型(填数字)：<input type="text" name="sitype" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><span style="color: red">1：男、2：女、3：组合、4：乐队</span><br>
+            </div>
+            </div>
+        <button type="submit" class="layui-btn  layui-btn-normal float-right" >添加</button>
+        <a href="/admin/singer/1" class="layui-btn layui-btn-primary float-right"  id="quxiao"  >取消</a>
+    </form>
+</div>
+
+
+<script th:src="@{/assets/layui.all.js}"></script>
+
+</body>
+</html>

@@ -66,4 +66,9 @@ public interface SingerService {
 
     public List seallsing();
 
+    public int singerupdate(Singer s);
+
+    public int singerdel(int siid);
+
+    public int update(Singer s);
 }

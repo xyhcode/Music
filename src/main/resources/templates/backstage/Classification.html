@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>歌曲管理</title>
+    <title>分类管理</title>
     <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
     <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
@@ -38,15 +38,15 @@
     <div class="mianb">
         <div class="mblf layui-col-xs6 layui-col-md6">
             <i class="layui-icon">&#xe656;</i>
-            <p>首页管理 > <span> <a th:href="@{/admin/song/1}">
-                            <em>歌曲管理</em>
+            <p>首页管理 > <span> <a th:href="@{/admin/class/1}">
+                            <i class="layui-icon">&#xe631;</i>
+                            <em>分类管理</em>
                         </a></span></p>
         </div>
         <div class="mbrt layui-col-xs6 layui-col-md6">
-            <a href="/admin/add" class="layui-btn layui-btn-normal" id="fabu">添加歌曲</a>
+            <a href="/admin/class/add" class="layui-btn layui-btn-normal" id="fabu">添加类别</a>
         </div>
     </div>
-
     <!--面包屑导航-->
     <div class="layui-row">
         <div class="layui-card">
@@ -54,27 +54,20 @@
                 <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
                     <thead>
                     <tr>
-                        <th>歌曲名</th>
-                        <th>歌曲音频</th>
-                        <th>歌曲封面</th>
-                        <th>歌曲时长</th>
-                        <th>发布日期</th>
-                        <th>是否vip</th>
-                        <th>操作</th>
+
+                        <th>类名</th>
+                        <th>类型</th>
+                        <td>操作</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="song : ${song.list}">
-                        <td th:text="${song.soname}">soname</td>
-                        <td style="padding: 0px 15px 0px 0px;width: 300px"><audio th:src="${song.solink}" controls></audio></td>
-                        <td style="padding: 0px 0px 0px 0px"><img th:src="${song.soimg}" style="width: 100px;height: 100px"> </td>
-                        <td th:text="${song.sotime}">sotime</td>
-                        <td th:text="${song.publish}">publish</td>
-                        <td th:text="${song.sovip==0 ? '否':'是'}">sovip</td>
+                        <td th:text="${song.sotname}">sotname</td>
+                        <td th:text="${song.sottype}">sottype</td>
                         <td>
                             <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update" th:href="@{'/admin/update/song/'+${song.soid}}">修改</a>
-                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:onclick="sodel([[${song.soid}]])" >删除</a>
+                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update"  th:href="@{'/admin/update/class/'+${song.sotid}}">修改</a>
+                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:href="@{'/admin/class/del/'+${song.sotid}}" onclick="javascript:return del()">删除</a>
                             </div>
                         </td>
                     </tr>
@@ -82,55 +75,69 @@
                     </tbody>
                 </table>
             </div>
-            <div id="page"></div>
+
+            <!--分页  -->
+            <ul class="pagination">
+                <li><a href="1">首页</a></a></li>
+                <li><a  th:each="n : ${song.navigatepageNums}"
+                       th:href="${n}"
+                       th:text="${n}"
+                       th:class="${ n==song.getPageNum ? 'active' : '' }"> 1 </a> </li>
+                <li><a th:href="${song.pages}">尾页</a></li>
+            </ul>
+            <!--分页-->
+
         </div>
     </div>
 </div>
 <script th:src="@{/js/jquery-1.10.2.js}"></script>
 <script th:src="@{/assets/layui.all.js}"></script>
-<script th:inline="javascript">
+<script>
+    function del() {
+        var msg = "您确认要删除吗？";
+        if (confirm(msg)==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
     var element = layui.element;
     layui.use(['laypage', 'layer'], function () {
         var laypage = layui.laypage
             , layer = layui.layer;
+
         //页码完整功能
         laypage.render({
             elem: 'page'
-            ,hash:true
-            ,limit:5
-            ,hash: 'fenye' //自定义hash值
-            , count: [[${song.getTotal()}]]
-            ,curr:[[${song.pageNum}]]
-            , layout: ['count', 'prev', 'page', 'next']
-            , jump: function (obj,first) {
-                if(!first){
-                    location.href="/songma/"+obj.curr;
-                }
+            , count: 1000
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+            , jump: function (obj) {
+                console.log(obj)
             }
         });
     });
 
-    //删除
-    function sodel(id){
-        layer.confirm('确定要删除此歌曲？', {
-            btn: ['是', '否'] //按钮
-        }, function () {
-            $.ajax({
-                url:'/songma/songdel/'+id,
-                success: function(da){
-                    if(da.code==200){
-                        location.reload();
-                        layer.msg("删除成功！");
-                    }else{
-                        layer.msg("删除失败！");
-                    }
-                }
-            })
-        }, function () {
-            layer.msg('已取消！');
-        });
-    }
-
+    // //弹框
+    // $('#fabu').on('click', function () {
+    //     layui.use('layer', function () {
+    //         var layer = layui.layer;
+    //         layer.open({
+    //             type: 2,
+    //             title: '发布任务',
+    //             fix: false,
+    //             shadeClose: true,
+    //             shade: 0.8,
+    //             area: ['660px', '420px'],
+    //             content: '/admin/addsong',
+    //             end: function () {
+    //                 location.reload();
+    //             }
+    //         });
+    //     });
+    // })
 
     //弹框
     $('#update').on('click', function () {
@@ -151,6 +158,17 @@
         });
     })
 
+
+    // //判断弹框
+    // $(".delete").click(function () {
+    //     layer.confirm('确定要删除此任务？', {
+    //         btn: ['是', '否'] //按钮
+    //     }, function () {
+    //         layer.msg('已删除', {icon: 1});
+    //     }, function () {
+    //         layer.msg('已取消', {icon: 2});
+    //     });
+    // })
 
     layui.use('form', function () {
         var form = layui.form;

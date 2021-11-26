@@ -79,6 +79,35 @@ public class SongServiceimpl implements SongService {
     }
 
     /**
+     * 删除
+     * @param soid
+     * @return
+     */
+    @Override
+    public int del(int soid) {
+        int i=sodao.del(soid);
+        return i;
+    }
+    /**
+     * 根据歌曲id查询
+     * @param soid
+     * @return
+     */
+    @Override
+    public Song find(int soid) {
+        Song song= sodao.find(soid);
+        return song;
+    }
+
+    @Override
+    public int update(Song song) {
+        int i=sodao.update(song);
+        return i;
+    }
+
+
+
+    /**
      * 统计所有歌曲的总数
      * @return
      */

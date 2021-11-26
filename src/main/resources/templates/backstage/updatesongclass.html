@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+</head>
+<body class="layui-tank">
+<div class="layui-card">
+    <form class="layui-form" action="/admin/update/updatesong" method="post" enctype="multipart/form-data">
+        <div class="layui-form-item">
+
+            <div class="layui-input-block">
+                <input type="hidden" name="sotid" readonly="readonly" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" th:value="${song.sotid}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类名</label>
+            <div class="layui-input-block">
+                <input type="text" name="sotname" lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" th:value="${song.sotname}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <input type="text" name="sottype" id="st"  lay-verify="title" autocomplete="off" placeholder=""
+                       class="layui-input" th:value="${song.sottype}">
+            </div>
+        </div>
+        <div class=" tkbtnfxd">
+            <input type="submit" class="layui-btn  layui-btn-normal float-right" />
+            <a href="/admin/class/1" class="layui-btn layui-btn-primary float-right"  id="quxiao" >取消</a>
+        </div>
+
+    </form>
+    <audio id="audio" controls="" style="display: none;"></audio>
+
+</div>
+
+
+
+
+<script th:src="@{/assets/layui.all.js}"></script>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+<script>
+    // 音频加载完成后的一系列操作
+    function duration(){
+        var myVid = document.getElementById("audio");
+        // console.log("duration  ",myVid);
+        if(myVid != null){
+            myVid.load();
+            myVid.oncanplay = function () {
+                $("#st").val(timeToMinute(myVid.duration));
+            }
+        }
+    }
+
+    // 秒转换分钟00:00:00格式
+    function timeToMinute(times){
+        var t='';
+        if(times > -1){
+            var hour = Math.floor(times/3600);
+            var min = Math.floor(times/60) % 60;
+            var sec = times % 60;
+            if(min < 10){t += "0";}
+            t += min + ":";
+            if(sec < 10){t += "0";}
+            t += sec.toFixed(2);
+        }
+        t=t.substring(0,t.length-3);
+        return t;
+
+    }
+
+    //附件展示
+    $(function () {
+        $("#smp3").change(function () {
+            var objUrl = getObjectURL(this.files[0]);
+            $("#audio").attr("src", objUrl);
+            duration();
+        });
+
+    });
+
+    //获取上传图片路径
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>
+
+</body>
+</html>

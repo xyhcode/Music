@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>歌曲管理</title>
+    <title>歌手管理</title>
     <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
     <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
@@ -21,6 +21,7 @@
             float: left;
             padding: 8px 16px;
             text-decoration: none;
+            transition: background-color .3s;
         }
 
         ul.pagination li a.active {
@@ -30,7 +31,6 @@
 
         ul.pagination li a:hover:not(.active) {background-color: #ddd;}
     </style>
-
 </head>
 <body class="layui-view-body">
 <div class="layui-content">
@@ -38,15 +38,12 @@
     <div class="mianb">
         <div class="mblf layui-col-xs6 layui-col-md6">
             <i class="layui-icon">&#xe656;</i>
-            <p>首页管理 > <span> <a th:href="@{/admin/song/1}">
-                            <em>歌曲管理</em>
-                        </a></span></p>
+            <p>首页管理 > <span>添加歌手</span></p>
         </div>
         <div class="mbrt layui-col-xs6 layui-col-md6">
-            <a href="/admin/add" class="layui-btn layui-btn-normal" id="fabu">添加歌曲</a>
+            <a href="/admin/findaddsinger" class="layui-btn layui-btn-normal" id="fabu">添加歌手</a>
         </div>
     </div>
-
     <!--面包屑导航-->
     <div class="layui-row">
         <div class="layui-card">
@@ -54,96 +51,92 @@
                 <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
                     <thead>
                     <tr>
-                        <th>歌曲名</th>
-                        <th>歌曲音频</th>
-                        <th>歌曲封面</th>
-                        <th>歌曲时长</th>
-                        <th>发布日期</th>
-                        <th>是否vip</th>
+<!--                        <th>siid</th>-->
+                        <th>姓名</th>
+                        <th>介绍</th>
+                        <th>图片</th>
+                        <th>地区(1：其他、2：内地、3：港台)</th>
+                        <th>性别(1：男、2：女、3：组合、4：乐队)</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="song : ${song.list}">
-                        <td th:text="${song.soname}">soname</td>
-                        <td style="padding: 0px 15px 0px 0px;width: 300px"><audio th:src="${song.solink}" controls></audio></td>
-                        <td style="padding: 0px 0px 0px 0px"><img th:src="${song.soimg}" style="width: 100px;height: 100px"> </td>
-                        <td th:text="${song.sotime}">sotime</td>
-                        <td th:text="${song.publish}">publish</td>
-                        <td th:text="${song.sovip==0 ? '否':'是'}">sovip</td>
+                    <tr th:each="s : ${singer.list}">
+                       <td th:text="${s.siid}" style="display: none">siid</td>
+                        <td th:text="${s.siname}">siname</td>
+                        <td th:text="${s.siintro}">siintro</td>
+                        <td><img th:src="${s.siimg}" style="width: 100px;height: 100px" /></td>
+                        <td th:text="${s.siarea}">siarea</td>
+                        <td th:text="${s.sitype}">sitype</td>
                         <td>
                             <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update" th:href="@{'/admin/update/song/'+${song.soid}}">修改</a>
-                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:onclick="sodel([[${song.soid}]])" >删除</a>
+                                <a id="updatesinger" class="layui-btn layui-btn-normal layui-btn-xs" th:href="@{'/admin/updatesinger/'+${s.siid}}">修改</a>
+                                <a class="layui-btn  layui-btn-danger layui-btn-xs delete" onclick="javascript:return del()" th:href="@{'/admin/singer/del/'+${s.siid}}">删除</a>
                             </div>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>
-            <div id="page"></div>
+
+            <!--分页-->
+
+            <!--分页-->
+
+            <ul class="pagination">
+                <li><a href="1">首页</a></li>
+
+                <li><a  th:each="n : ${singer.navigatepageNums}"
+                                           th:href="${n}"
+                                           th:text="${n}"
+                                           th:class="${ n==singer.getPageNum ? 'active' : '' }"> 1 </a></li>
+
+                <li> <a th:href="${singer.pages}">尾页</a></li>
+            </ul>
         </div>
     </div>
 </div>
 <script th:src="@{/js/jquery-1.10.2.js}"></script>
 <script th:src="@{/assets/layui.all.js}"></script>
-<script th:inline="javascript">
+<script>
     var element = layui.element;
     layui.use(['laypage', 'layer'], function () {
         var laypage = layui.laypage
             , layer = layui.layer;
+
         //页码完整功能
-        laypage.render({
-            elem: 'page'
-            ,hash:true
-            ,limit:5
-            ,hash: 'fenye' //自定义hash值
-            , count: [[${song.getTotal()}]]
-            ,curr:[[${song.pageNum}]]
-            , layout: ['count', 'prev', 'page', 'next']
-            , jump: function (obj,first) {
-                if(!first){
-                    location.href="/songma/"+obj.curr;
-                }
-            }
-        });
+
     });
 
-    //删除
-    function sodel(id){
-        layer.confirm('确定要删除此歌曲？', {
-            btn: ['是', '否'] //按钮
-        }, function () {
-            $.ajax({
-                url:'/songma/songdel/'+id,
-                success: function(da){
-                    if(da.code==200){
-                        location.reload();
-                        layer.msg("删除成功！");
-                    }else{
-                        layer.msg("删除失败！");
-                    }
-                }
-            })
-        }, function () {
-            layer.msg('已取消！');
-        });
-    }
-
-
     //弹框
-    $('#update').on('click', function () {
+    $('#fabu').on('click', function () {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 type: 2,
-                title: '发布任务',
+                title: '添加',
+                fix: false,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['700px', '600px'],
+                content: '/admin/findaddsinger',
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+    })
+//修改
+    $('#updatesinger').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
                 fix: false,
                 shadeClose: true,
                 shade: 0.8,
                 area: ['660px', '420px'],
-                content: '/admin/update/song',
+                content: '/admin/updatesinger',
                 end: function () {
                     location.reload();
                 }
@@ -151,18 +144,23 @@
         });
     })
 
+    //判断弹框
+    function del()
+    {
+        var msg="确认删除吗？";
+        if(confirm(msg)==true)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     layui.use('form', function () {
         var form = layui.form;
         form.render();
     });
-
-
 </script>
-
-
-
-
 
 </body>
 </html>
