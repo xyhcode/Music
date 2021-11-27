@@ -317,20 +317,36 @@ public class MusicBoxController {
     }
 
 
-    @GetMapping("/collectList/{usid}")
-    public String collectList(@PathVariable("usid") int usid,ModelMap map){
-        if (usid!=0){
-            String[] str=collectService.findColl(uid);
-            List list=new ArrayList();
-            for (int i=0;i<str.length;i++){
-                SongSing s=playListService.getSong(Integer.parseInt(str[i]));
-                System.out.println(s);
-                list.add(s);
+    //收藏播放全部
+    @GetMapping("/collectList")
+    public String collectList(ModelMap map){
+        int i=0;
+        uid=getUid();
+        vip=getVip();
+        SongSing ss=null;
+        String[] str=collectService.findColl(uid);//得到收藏表中所有歌曲的id
+        int n=playListService.insertSongs(uid,str);//将收藏表歌去全部添加到播放表
+        List list=playListService.getSongList(uid);//查询播放表
+        map.put("listInfo",list);
+        int soid=Integer.parseInt(str[i]);//得到收藏表第一首歌的id
+        SongSing s=playListService.getSong(soid);//得到收藏表第一首歌的信息
+        if (s.sovip==1 && vip==0 ){//第一首歌是vip
+            while(true){
+                i+=1;
+                if (i>=str.length){//收藏表里面全是vip歌曲
+                    map.put("playInfo",null);
+                    break;
+                }
+                SongSing z=playListService.getSong(Integer.parseInt(str[i]));//得到下一首歌的信息
+                if (z!=null && z.sovip==0){//下一首歌不是vip
+                    map.put("playInfo",z);
+                    map.put("soid",z.soid);
+                    break;
+                }
             }
-            System.out.println(list);
-            map.put("listInfo",list);
-        }else{
-            map.put("listInfo",null);
+        }else{//第一首歌不是vip
+            map.put("playInfo",s);
+            map.put("soid",s.soid);
         }
         return "fontdesk/musicbox";
     }
@@ -347,7 +363,7 @@ public class MusicBoxController {
             if (vip==0 && isvip==1){//不允许播放
                 jr=new JsonResult(510,"该歌曲是VIP专享，你不是VIP！");
             }else{//允许播放
-                UserSong s=playListService.selectSong(new UserSong(uid,soid));//查这首歌在收藏表是否存在
+                UserSong s=playListService.selectSong(new UserSong(uid,soid));//查这首歌在播放表是否存在
                 if (s==null){//不存在就添加
                     int n=playListService.addSong(new UserSong(uid,soid));
                     if (n!=0){

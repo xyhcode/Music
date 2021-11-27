@@ -139,9 +139,9 @@
                                             </div>
                                             <div class="time" data-v-7385b91b="" th:text="${cf.sotime}">04:28</div>
                                             <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
-                                                <span class="iconfont play" data-v-3a201fd6=""></span>
+                                                <span class="iconfont play" data-v-3a201fd6="" th:onclick="tyy2([[${cf.sovip}]],[[${cf.soid}]])"></span>
                                                 <span th:id="${'ax'+cf.soid}" th:onclick="ax([[${cf.soid}]])"></span>
-                                                <span class="iconfont share" id="sharge" th:data-clipboard-text="${'http://localhost:8090/search/'+seval}" data-v-3a201fd6=""></span>
+<!--                                                <span class="iconfont share" id="sharge" th:data-clipboard-text="${'http://localhost:8090/search/'+seval}" data-v-3a201fd6=""></span>-->
                                             </div>
                                         </li>
 
@@ -365,6 +365,25 @@
                 scsong(id,i,sis);
             }
         }
+    }
+
+    /*单个播放*/
+    function tyy2(isvip,soid) {
+        $.ajax({
+            url:'/addsong/'+soid+'/'+isvip,
+            type:'get',
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                if (data.code==512){//跳登录
+                    window.open("/login.html","scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }else if (data.code==510){//跳VIP
+                    window.open("/Reinface","scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }else if (data.code==200 || data.code==511){//跳播放
+                    window.open("/play/"+soid+"#l"+soid,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }
+            }
+        })
     }
 
 </script>

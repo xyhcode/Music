@@ -63,6 +63,24 @@
     <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
     <script>
 
+        //搜索输入框回车事件
+        $("#seav").keyup(function () {
+            if (event.keyCode == 13) {
+                srea();
+            }
+        });
+
+        //搜索
+        function srea() {
+            console.log("进了搜索。。。");
+            const serval = $("#seav").val();
+            if (serval == "") {
+
+            } else {
+                location.href = "/search/" + serval;
+            }
+        }
+
         //歌曲收藏------------------------------------------------------------------------------
 
         var issong = [];
@@ -877,24 +895,6 @@
     </div>
 </div>
 <script>
-
-
-    //搜索输入框回车事件
-    $("#seav").keyup(function () {
-        if (event.keyCode == 13) {
-            srea();
-        }
-    });
-
-    //搜索
-    function srea() {
-        const serval = $("#seav").val();
-        if (serval == "") {
-
-        } else {
-            location.href = "/search/" + serval;
-        }
-    }
 
     location.href = "/play/" +[[${soid}]]+"#l"+[[${soid}]];
 

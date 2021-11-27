@@ -72,6 +72,7 @@ public class PlayListServiceimpl implements PlayListService {
         return str;
     }
 
+
     @Override
     public List getCollectList(int uid) {
         return playListDao.getCollectList(uid,1);

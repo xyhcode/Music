@@ -91,9 +91,28 @@
 
     show(1);
 
+    /*播放全部*/
+    function tyy() {
+        window.open("/collectList","scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    }
+
     /*单个播放*/
-    function tyy2(id) {
-        window.open("/addplaylist/"+id,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+    function tyy2(isvip,soid) {
+        $.ajax({
+            url:'/addsong/'+soid+'/'+isvip,
+            type:'get',
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                if (data.code==512){//跳登录
+                    window.open("/login.html","scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }else if (data.code==510){//跳VIP
+                    window.open("/Reinface","scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }else if (data.code==200 || data.code==511){//跳播放
+                    window.open("/play/"+soid+"#l"+soid,"scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes");
+                }
+            }
+        })
     }
 
     //点击爱心
@@ -253,7 +272,7 @@
                 '\t\t\tdata-v-7385b91b="" >《'+data[i].soname+'》</a></div>\n' +
                 '\t<div class="time" data-v-7385b91b="" >'+data[i].sotime+'</div>\n' +
                 '\t<div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">\n' +
-                '\t\t<span class="iconfont play" data-v-3a201fd6="" onclick="tyy2('+data[i].soid+')"></span>\n' +
+                '\t\t<span class="iconfont play" data-v-3a201fd6="" onclick="tyy2('+data[i].sovip+','+data[i].soid+')"></span>\n' +
                 '\t\t<span id="ax'+data[i].soid+'" onclick="ax('+data[i].soid+')" >\n' +
                 '\t\t\t<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>\n' +
                 '\t\t</span>\n' +
@@ -262,7 +281,7 @@
         }
 
         var t = '<div data-v-3859e69a="" class="song-box" id="show1_ok">\n' +
-            '                                        <button data-v-3859e69a="" type="button" class="el-button el-button--primary is-round" style="margin-bottom: 20px;padding: 12px 31px;">\n' +
+            '                                        <button data-v-3859e69a="" type="button" class="el-button el-button--primary is-round" style="margin-bottom: 20px;padding: 12px 31px;" onclick="tyy()">\n' +
             '                                            <span><span data-v-3859e69a="" class="iconfont"></span> 播放全部</span></button>\n' +
             '                                        <div data-v-7385b91b="" data-v-3859e69a="" class="">\n' +
             '                                            <ul data-v-7385b91b="">'+t1+'</ul>\n' +
