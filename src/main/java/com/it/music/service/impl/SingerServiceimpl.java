@@ -194,6 +194,7 @@ public class SingerServiceimpl implements SingerService {
         return n;
     }
 
+    @Override
     public int singerdel(int siid)
     {
         int n = sing.singerdel(siid);

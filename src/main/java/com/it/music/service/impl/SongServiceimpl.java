@@ -56,6 +56,11 @@ public class SongServiceimpl implements SongService {
     }
 
     @Override
+    public List issinger(int siid) {
+        return sodao.issinger(siid);
+    }
+
+    @Override
     public List songseing() {
         List lis=sodao.songseing();
         return lis;

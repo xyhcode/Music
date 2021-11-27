@@ -7,43 +7,99 @@
     <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
     <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+    <style>
+
+        .a-upload {
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+    </style>
 </head>
 <body class="layui-tank">
 <div class="layui-card">
 
-    <form action="/admin/addsinger" method="post" enctype="multipart/form-data">
+    <form action="/admin/addsinger" method="post" enctype="multipart/form-data" class="layui-form">
+        <br>
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
-            <div class="layui-input-block">
-        歌手姓名：<input type="text" name="siname" lay-verify="title" autocomplete="off" placeholder="" class="layui-input"  /><br/>
+            <div class="layui-input-block" style="width:200px;">
+                <input type="text" name="siname" lay-verify="title" autocomplete="off" placeholder="" class="layui-input"  /><br/>
             </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-             <label class="layui-form-label">介绍</label>
-             <div class="layui-input-block">
-        歌手介绍(随便复制几行)：<br><textarea style="min-height: 80px;min-width:400px;resize: none;" name="siintro" class="layui-textarea" ></textarea><br/>
-             </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
+
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="sitype" value="1" title="男" checked="">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="sitype" value="2" title="女">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="sitype" value="3" title="组合">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="sitype" value="4" title="乐队">
+            </div>
+            <br />
+
             <label class="layui-form-label">图片</label>
-            <div class="layui-input-block">
-        歌手图片：<input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><br/>
+            <div class="layui-input-block ">
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder=""  />点击这里上传图片
+                </a>
             </div>
+            <br />
+            <div>
+                <label class="layui-form-label">地区</label>
+                <div class="layui-input-inline">
+                    <select name="siarea" lay-filter="aihao">
+                        <option value="1" selected="">其他</option>
+                        <option value="2">内地</option>
+                        <option value="3">港台</option>
+                        <option value="4">欧美</option>
+                        <option value="5">韩国</option>
+                        <option value="6">日本</option>
+                    </select>
+                </div>
+            </div>
+            <br /><br />
+            <div>
+                <label class="layui-form-label" style="position: relative;left:-310px;top:30px;">介绍</label>
+                <div class="layui-input-block">
+                    <textarea style="min-height: 80px;min-width:400px;resize: none;" name="siintro" class="layui-textarea" ></textarea><br/>
+                </div>
+            </div>
+
         </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">地区</label>
-            <div class="layui-input-block">
-        歌手地区(填数字)：<input type="text" name="siarea" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><span style="color: red">1：其他、2：内地、3：港台、4：欧美、5：韩国、6：日本</span><br/>
-            </div>
+        <div style="margin: 0px auto; width: 300px;" >
+            <button type="submit" class="layui-btn  layui-btn-normal float-right" >添加</button>
+            <a href="/admin/singer/1" class="layui-btn layui-btn-primary float-right"  id="quxiao"  >取消</a>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-        歌手类型(填数字)：<input type="text" name="sitype" lay-verify="title" autocomplete="off" placeholder="" class="layui-input" /><span style="color: red">1：男、2：女、3：组合、4：乐队</span><br>
-            </div>
-            </div>
-        <button type="submit" class="layui-btn  layui-btn-normal float-right" >添加</button>
-        <a href="/admin/singer/1" class="layui-btn layui-btn-primary float-right"  id="quxiao"  >取消</a>
     </form>
 </div>
 

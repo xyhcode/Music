@@ -29,6 +29,12 @@ public interface SongService {
     public List seind();
 
     /**
+     * 根据歌手ID查询歌曲
+     * @return
+     */
+    public List issinger(int siid);
+
+    /**
      * 根据歌曲ID查询歌曲
      * @param soid
      * @return

@@ -270,11 +270,10 @@ public class HIndexController {
     }
 
     @RequestMapping("/admin/update/singer")
-    public String file(int siid, String siname, String siintro,int siarea,int sitype,MultipartFile[] multipart) throws IOException {
+    public String file(ModelMap mm,int siid, String siname, String siintro,int siarea,int sitype,MultipartFile[] multipart) throws IOException {
         String siimg = "";
         Singer si = new Singer();
-        ModelAndView mv = new ModelAndView();
-            for (MultipartFile file : multipart) {
+        for (MultipartFile file : multipart) {
                 //文件name
                 String fname = file.getOriginalFilename();
                 //得到时间戳
@@ -298,24 +297,33 @@ public class HIndexController {
             si.setSitype(sitype);
             si.setSiid(siid);
             int n = singerService.singerupdate(si);
+            mm.put("addis",n);
             return "redirect:/admin/singer/1";
 
     }
 
     /**歌手删除管理
      * @return*/
+    @ResponseBody
     @RequestMapping("/admin/singer/del/{siid}")
-    public ModelAndView singerdel(@PathVariable("siid") int siid) {
+    public JsonResult singerdel(@PathVariable("siid") int siid) {
         System.out.println(siid);
-        int i=singerService.singerdel(siid);
-        ModelAndView mv=new ModelAndView();
-        if(i>0){
-            System.out.println("删除成功");
-        }else{
-            System.out.println("删除失败");
+        JsonResult js = null;
+        List solist = songService.issinger(siid);
+        if(solist.size()!=0){
+            return new JsonResult(501,"删除失败！，该歌手还有歌曲没删除！");
         }
-        mv.setViewName("redirect:/admin/singer/1");
-        return mv;
+        Singer sig = singerService.getSinger(siid);
+        int i=singerService.singerdel(siid);
+        if(i>0){
+            String del = sig.getSiimg().substring(sig.getSiimg().indexOf("music/img/"), sig.getSiimg().length());
+            //删除图片
+            CosFileupload.delfile(del);
+            js=new JsonResult(200,"删除成功！");
+        }else{
+            js=new JsonResult(500,"删除失败！");
+        }
+        return js;
     }
 
     /**歌手添加页面

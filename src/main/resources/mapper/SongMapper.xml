@@ -88,6 +88,10 @@
        select * from song where soid=#{soid}
     </select>
 
+    <select id="issinger" resultType="Song">
+        select * from song where siid=#{siid}
+    </select>
+
   <update id="update" parameterType="Song">
           update song
           <set>
