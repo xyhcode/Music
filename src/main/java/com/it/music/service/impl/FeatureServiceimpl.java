@@ -47,4 +47,16 @@ public class FeatureServiceimpl implements FeatureService {
         int fcount=fdao.fecount();
         return fcount;
     }
+
+    @Override
+    public List seall() {
+        List lis=fdao.seall();
+        return lis;
+    }
+
+    @Override
+    public int defeid(int feid) {
+       int vid= fdao.defeid(feid);
+        return vid;
+    }
 }

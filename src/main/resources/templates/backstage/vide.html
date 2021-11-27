@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>用户管理</title>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+</head>
+<body class="layui-view-body">
+<div class="layui-content">
+    <!--面包屑导航-->
+    <div class="mianb">
+        <div class="mblf layui-col-xs6 layui-col-md6">
+            <i class="layui-icon">&#xe656;</i>
+            <p>首页管理 > <span>视频管理</span></p>
+        </div>
+    </div>
+    <!--面包屑导航-->
+    <div class="layui-row">
+        <div class="layui-card">
+            <div class="table-responsive">
+                <table class="layui-table" lay-skin="line" lay-size="lg" id="table">
+                    <thead>
+                    <tr>
+                        <th>视频标题</th>
+                        <th>视频地址</th>
+                        <th>视频封面</th>
+                        <th>视频播放数</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vi:${vide.list}">
+                        <td th:text="${vi.fetitle}"></td>
+                        <td><video controls style="width: 270px; height:150px" th:src="${vi.feurl}"></video></td>
+                        <td><img th:src="${vi.cover}"></td>
+                        <td th:text="${vi.feplays}">2019-11-29</td>
+                        <td>
+                            <div class="layui-table-cell laytable-cell-1-0-10">
+                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:onclick="vodel([[${vi.feid}]])" >删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--分页-->
+            <div id="page"></div>
+            <!--分页-->
+        </div>
+
+    </div>
+</div>
+<script th:src="@{/js/jquery-1.10.2.js}"></script>
+<script th:src="@{/assets/layui.all.js}"></script>
+<script>
+    var element = layui.element;
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+
+        //页码完整功能
+        laypage.render({
+            elem: 'page'
+            , count: [[${vide.getTotal()}]]
+            ,hash:true
+            ,limit:3
+            ,hash: 'fenye' //自定义hash值
+            ,curr:[[${vide.pageNum}]]
+            , layout: ['count', 'prev', 'page', 'next']
+            , jump: function (obj,first) {
+                if(!first){
+                    location.href="/video/"+obj.curr;
+                }
+            }
+        });
+    });
+
+    //删除
+    function  vodel(vid){
+        layer.confirm('确定要删除此任务？', {
+            btn: ['是', '否'] //按钮
+        }, function () {
+            $.ajax({
+                url: '/admin/vide/'+vid,
+                success: function (da){
+                    if(da.code==200){
+                        location.href="/video/1";
+                        layer.msg("删除成功！");
+                    }else {
+                        layer.msg("删除失败！");
+                    }
+                }
+            })
+        }, function () {
+            layer.msg('已取消');
+        });
+    }
+
+
+    //弹框
+    $('#fabu').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                type: 2,
+                title: '发布任务',
+                fix: false,
+                shadeClose: true,
+                shade: 0.8,
+                area: ['660px', '420px'],
+                content: '/admin/adduser',
+                end: function () {
+                    location.reload();
+                }
+            });
+        });
+    })
+
+ /*   //判断弹框
+    $(".delete").click(function () {
+        layer.confirm('确定要删除此任务？', {
+            btn: ['是', '否'] //按钮
+        }, function () {
+            layer.msg('已删除', {icon: 1});
+        }, function () {
+            layer.msg('已取消', {icon: 2});
+        });
+    })*/
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+    });
+</script>
+
+</body>
+</html>

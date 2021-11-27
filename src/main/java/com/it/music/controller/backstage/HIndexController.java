@@ -2,11 +2,13 @@ package com.it.music.controller.backstage;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.it.music.entity.Feature;
 import com.it.music.entity.Singer;
 import com.it.music.entity.Song;
 import com.it.music.entity.SongType;
 import com.it.music.service.*;
 import com.it.music.tools.CosFileupload;
+import com.it.music.tools.CosfileDel;
 import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +44,10 @@ public class HIndexController {
 
     @Autowired
     SongTypeService songTypeService;
+
+    @Autowired
+    FeatureService fese;
+
     /**首页页面*/
     @RequestMapping({"/admin","/admin/index"})
     public String index(){
@@ -123,9 +129,19 @@ public class HIndexController {
     @ResponseBody
     public JsonResult songdel(@PathVariable int soid){
         System.out.println(soid);
-        JsonResult js=new JsonResult();
+        JsonResult js;
+        Song so=songService.getSong(soid);
         int cf=songService.del(soid);
         if(cf>0){
+            if(so.getSoimg()!=null){
+                CosfileDel.returndeurl(so.getSoimg());
+            }
+            if(so.getLyrics()!=null){
+                CosfileDel.returndeurl(so.getLyrics());
+            }
+            if(so.getSolink()!=null){
+                CosfileDel.returndeurl(so.getSolink());
+            }
             js=new JsonResult(200,"删除成功！");
         }else{
             js=new JsonResult(500,"删除失败！");
@@ -160,6 +176,62 @@ public class HIndexController {
         PageInfo pa=new PageInfo(lis,10);
         map.put("um",pa);
         return "/backstage/user";
+    }
+
+    /**
+     * 视频管理
+     * @param map
+     * @return
+     */
+    @RequestMapping("/admin/video")
+    public String videall(ModelMap map){
+        PageHelper.startPage(1,3);
+        List lis=fese.seall();
+        PageInfo pa=new PageInfo(lis,10);
+        map.put("vide",pa);
+        return "/backstage/vide";
+    }
+
+    /**
+     * 视频管理分页
+     * @param mp
+     * @param curr
+     * @return
+     */
+    @RequestMapping("/video/{curr}")
+    public String vipa(ModelMap mp, @PathVariable int curr){
+        PageHelper.startPage(curr,3);
+        List lis=fese.seall();
+        PageInfo pa=new PageInfo(lis,10);
+        mp.put("vide",pa);
+        return "/backstage/vide";
+    }
+
+    /**
+     * 视频管理删除
+     * @param feid
+     * @return
+     */
+    @RequestMapping("/admin/vide/{feid}")
+    @ResponseBody
+    public JsonResult devid(@PathVariable int feid){
+        System.out.println("feid："+feid);
+        JsonResult js;
+        Feature fe=fese.findidvoid(feid);
+        int desu=fese.defeid(feid);
+        if(desu>0){
+            if(fe.getFeurl()!=null){
+                CosfileDel.returndeurl(fe.getFeurl());
+            }
+            if(fe.getCover()!=null){
+                CosfileDel.returndeurl(fe.getCover());
+            }
+            js=new JsonResult(200,"删除成功！");
+        }else{
+            js=new JsonResult(500,"删除失败！");
+        }
+        System.out.println(js);
+        return  js;
     }
 
     /***************************************************************/

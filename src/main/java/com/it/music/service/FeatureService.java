@@ -45,4 +45,17 @@ public interface FeatureService {
      * @return
      */
     public int fecount();
+
+    /**
+     * 查询所有视频
+     * @return
+     */
+    public List seall();
+
+    /**
+     * 删除视频
+     * @param feid
+     * @return
+     */
+    public int defeid(int feid);
 }

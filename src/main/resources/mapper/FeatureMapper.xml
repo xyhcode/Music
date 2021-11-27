@@ -27,4 +27,11 @@
         update feature set feplays=feplays+1 where feid=#{feid}
     </update>
 
+    <select id="seall" resultType="Feature">
+        select * from feature
+    </select>
+
+    <delete id="defeid" parameterType="int">
+        delete  from feature where feid =#{feid}
+    </delete>
 </mapper>

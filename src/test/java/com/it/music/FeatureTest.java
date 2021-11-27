@@ -52,5 +52,26 @@ public class FeatureTest {
         int is =fe.browse(1002);
         System.out.println(is);
     }
+    
+    @Test
+    public void norandseall(){
+        List lis=fe.seall();
+        System.out.println(lis);
+    }
+
+
+    @Test
+    public void devo(){
+        int cf=fe.defeid(1043);
+        System.out.println(cf);
+    }
+
+    @Test
+    public void tessub(){
+        String cf="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/1637152599258.mp4";
+        String vf=cf.substring(cf.indexOf("music"),cf.length());
+        System.out.println(vf);
+
+    }
 
 }

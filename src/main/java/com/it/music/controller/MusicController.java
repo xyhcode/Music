@@ -183,14 +183,6 @@ public class MusicController {
         return jr;
     }
 
-    /**
-     * 进入二维码界面
-     * @return
-     */
-    @RequestMapping("/ewm")
-    public String em(){
-        return "fontdesk/QrCode";
-    }
 
     String je="";
 
