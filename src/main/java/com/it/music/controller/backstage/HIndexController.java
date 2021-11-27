@@ -234,6 +234,52 @@ public class HIndexController {
         return  js;
     }
 
+    /**
+     * 视频添加
+     * @param fetitle
+     * @param multipart
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/voide/add")
+    public ModelAndView vad(String fetitle,MultipartFile[] multipart) throws IOException {
+        ModelAndView mv=new ModelAndView();
+        String mpurl = null;
+        String imurl = null;
+        for(MultipartFile file : multipart) {
+            //文件name
+            String fname = file.getOriginalFilename();
+            //得到时间戳
+            Long time = System.currentTimeMillis();
+            //找到.
+            int wz = fname.lastIndexOf(".");
+            //后缀名
+            String filna = fname.substring(wz + 1);
+            System.out.println("后缀名：" + filna);
+            //图片名字设置时间戳
+            String pna = time + "." + filna;
+            System.out.println("图片名：" + pna);
+
+            if(file.getOriginalFilename().endsWith(".mp4")){
+                CosFileupload.upfile(file.getInputStream(),"music/voide/"+pna);
+                mpurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/voide/"+pna;
+            }else {
+                CosFileupload.upfile(file.getInputStream(),"music/img/"+pna);
+                imurl="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/"+pna;
+            }
+        }
+        Feature fe=new Feature(fetitle,mpurl,0,imurl);
+        System.out.println("Fe:"+fe);
+        int fesu=fese.inadd(fe);
+        if(fesu>0){
+            mv.setViewName("redirect:/admin/video");
+        }else{
+            System.out.println("视频添加错误！");
+        }
+        return mv;
+    }
+
+
     /***************************************************************/
 
     /**歌手管理页面*/

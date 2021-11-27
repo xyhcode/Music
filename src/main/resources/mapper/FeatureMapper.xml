@@ -8,7 +8,7 @@
     </select>
 
     <insert id="inadd" parameterType="Feature">
-        insert into feature(fetitle,feurl,feplays) values (#{fetitle},#{feurl},#{feplays});
+        insert into feature(fetitle,feurl,feplays,cover) values (#{fetitle},#{feurl},#{feplays},#{cover});
     </insert>
 
     <select id="seindex" resultType="Feature">

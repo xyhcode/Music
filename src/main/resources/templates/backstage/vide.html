@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>用户管理</title>
-    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
     <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
+    <script th:src="@{/assets/layui.all.js}"></script>
 </head>
 <body class="layui-view-body">
 <div class="layui-content">
@@ -15,6 +17,9 @@
         <div class="mblf layui-col-xs6 layui-col-md6">
             <i class="layui-icon">&#xe656;</i>
             <p>首页管理 > <span>视频管理</span></p>
+        </div>
+        <div class="mbrt layui-col-xs6 layui-col-md6">
+            <a class="layui-btn layui-btn-normal" onclick="addfev()">添加视频</a>
         </div>
     </div>
     <!--面包屑导航-->
@@ -54,8 +59,6 @@
 
     </div>
 </div>
-<script th:src="@{/js/jquery-1.10.2.js}"></script>
-<script th:src="@{/assets/layui.all.js}"></script>
 <script>
     var element = layui.element;
     layui.use(['laypage', 'layer'], function () {
@@ -135,7 +138,94 @@
         var form = layui.form;
         form.render();
     });
+
+
+    //添加点击图片
+    function infils(){
+        $("#infinp").click();
+    }
+
+    //编辑点击图片预览
+    function inwj(ev){
+        var sr=document.getElementById("intp");
+        //获取文件对象
+        let file = ev.files[0];
+        //获取文件阅读器
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            //给img的src设置图片url
+            sr.setAttribute("src", this.result);
+        }
+    }
+
+    function addfev(){
+        layer.open({
+            type : 1,
+            title : '添加英雄信息',
+            area : [ '600px', '480px' ],//宽高
+            shadeClose : true, //点击遮罩关闭
+            content : $('#df2'),
+            success: function(){
+                //layui富文本渲染
+                index=layedit.build('demo', {
+                    height: 180, //设置编辑器高度
+                    //设置富文本工具栏
+                    tool:['strong','italic','underline','del','|','left','center','right']
+                });
+            },
+            end: function (res) {
+                $("#df2").css("display",'none');
+            }
+        });
+    }
+
+    //富文本
+    var index="";
+    var layedit="";
+    layui.use('layedit', function(){
+        layedit = layui.layedit
+        //此时不要去build
+    });
+
+
+    //关闭
+    function tclos(){
+        layer.closeAll();
+    }
 </script>
 
 </body>
+<div style="padding: 20px; display: none" id="df2">
+    <form action="/voide/add" method="post" enctype="multipart/form-data">
+
+        <div class="layui-form-item" style="display: table-cell; width: 50%;margin-bottom: 20px" >
+            <label class="layui-form-label">视频封面：</label>
+            <div class="layui-input-block">
+                <input type="file" name="multipart" accept="image/png"  id="infinp" required/>
+            </div>
+        </div>
+        <br>
+        <div class="layui-form-item" style="display: table-cell; width: 50%;margin-bottom: 20px" >
+            <label class="layui-form-label">视频：</label>
+            <div class="layui-input-block">
+                <input type="file" name="multipart" accept="audio/mp4" required/>
+            </div>
+        </div>
+        <br>
+        <div class="layui-form-item" style="display: table-cell; width: 50%">
+            <label class="layui-form-label">视频标题：</label>
+            <div class="layui-input-block">
+                <textarea id="demo" name="fetitle" style="display: none;"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="layui-form-item" id="inbu3" style="margin-left: 210px;">
+            <div class="layui-btn-group">
+                <button class="layui-btn" lay-submit="" lay-filter="update_submit">添&ensp;加</button>
+                <button type="reset" class="layui-btn layui-btn-primary" onclick="tclos()">关&ensp;闭</button>
+            </div>
+        </div>
+    </form>
+</div>
 </html>

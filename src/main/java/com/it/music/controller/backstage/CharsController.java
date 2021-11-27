@@ -60,6 +60,7 @@ public class CharsController {
     @RequestMapping("/charsnumber")
     @ResponseBody
     public JsonResult chaarr(){
+        //得到播放图表的数据
         List lis=sonum.sedat();
         JsonResult js=new JsonResult(200,"成功！",lis);
         return js;
@@ -72,6 +73,7 @@ public class CharsController {
     @RequestMapping("/charpaynum")
     @ResponseBody
     public JsonResult chapa(){
+        //得到会员收益图表数据
         List lis=palog.pacount();
         JsonResult js=new JsonResult(200,"成功！",lis);
         return js;

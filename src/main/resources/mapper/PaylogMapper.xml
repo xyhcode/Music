@@ -10,6 +10,6 @@
     </select>
 
     <select id="sepaylog" resultType="PayLogAll">
-        select * from paylog as a inner join user as b on a.usid=b.usid
+        select * from paylog as a inner join user as b on a.usid=b.usid ORDER BY tradingtime DESC
     </select>
 </mapper>
