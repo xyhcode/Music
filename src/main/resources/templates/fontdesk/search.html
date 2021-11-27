@@ -52,7 +52,7 @@
                                             <!---->
                                         </div>
                                         <div role="region" class="el-autocomplete-suggestion el-popper"
-                                            style="width:;display:none;">
+                                            style="display:none;">
                                             <div class="el-scrollbar">
                                                 <div
                                                     class="el-autocomplete-suggestion__wrap el-scrollbar__wrap el-scrollbar__wrap--hidden-default">
@@ -103,12 +103,13 @@
                             </div>
                         </div>
                         <div class="content" data-v-3675b332="">
-                            <div class="song-box" style="display:;" data-v-3675b332=""><button type="button"
-                                    class="el-button el-button--primary is-round" data-v-3675b332="">
-                                    <!---->
-                                    <!----><span><span class="iconfont" data-v-3675b332=""></span> 播放全部
-                                    </span>
-                                </button>
+                            <div class="song-box" data-v-3675b332="">
+<!--                                <button type="button"-->
+<!--                                    class="el-button el-button&#45;&#45;primary is-round" data-v-3675b332="">-->
+<!--                                    &lt;!&ndash;&ndash;&gt;-->
+<!--                                    &lt;!&ndash;&ndash;&gt;<span><span class="iconfont" data-v-3675b332=""></span> 播放全部-->
+<!--                                    </span>-->
+<!--                                </button>-->
                                 <div data-v-7385b91b="" data-v-3675b332="">
                                     <ul data-v-7385b91b="">
                                         <li class="list-title" data-v-7385b91b="">
@@ -139,9 +140,7 @@
                                             <div class="time" data-v-7385b91b="" th:text="${cf.sotime}">04:28</div>
                                             <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
                                                 <span class="iconfont play" data-v-3a201fd6=""></span>
-                                                <span th:id="${'ax'+cf.soid}" th:onclick="ax([[${cf.soid}]])">
-                                                <span class="iconfont favorite"  data-v-3a201fd6=""></span>
-                                            </span>
+                                                <span th:id="${'ax'+cf.soid}" th:onclick="ax([[${cf.soid}]])"></span>
                                                 <span class="iconfont share" id="sharge" th:data-clipboard-text="${'http://localhost:8090/search/'+seval}" data-v-3a201fd6=""></span>
                                             </div>
                                         </li>
@@ -230,17 +229,144 @@
     });
 
 
-    //点击爱心
-    var is = true;
-    function ax(id){
-        if(is){
+    //歌曲收藏------------------------------------------------------------------------------
+
+    var issong = [];
+    $(function(){
+        $.ajax({
+            url: "/scsearch/"+$("#seavbig").val(),
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                for (var i=0;i<da.data.length;i++){
+                    var soid = da.data[i].soid;
+
+                    var obj = new Object();
+                    obj.sid = soid;
+                    obj.sis = true;
+                    issong.push(obj);
+
+                    //是否收藏歌曲
+                    issc2(soid,i);
+                }
+            }
+        });
+    });
+
+
+    //是否收藏歌曲
+    function  issc2(id,i) {
+        $.ajax({
+            url: '/user/isadd/'+id,
+            type: 'post',
+            dataType: "json",
+            complete: function (xhr, status) {
+                //拦截器拦截没有权限跳转
+                // 通过xhr取得响应头
+                var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                if (REDIRECT == "REDIRECT") {
+                    document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                }
+            },
+            success: function (da) {
+                // console.log(da);
+                var isong = true;
+                if(da.code==200){
+                    isong = false;
+                }
+                issong[i].sis = isong;
+                showax(isong,id);
+            }
+        });
+    }
+
+    //显示爱心
+    function showax(n,id){
+        if(n){
             $("#ax"+id).html('<span class="iconfont favorite isFavorite" data-v-3a201fd6=""></span>');
-            is = false;
         }else{
             $("#ax"+id).html('<span class="iconfont favorite" data-v-3a201fd6="" ></span>');
-            is = true;
         }
     }
+
+    //收藏
+    function scsong(id,i,is) {
+        if(is){
+            // alert(1)
+            $.ajax({
+                url: '/user/del/'+id,
+                type: 'post',
+                dataType: "json",
+                complete: function (xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success: function (da) {
+                    // console.log(da);
+                    issc2(id,i);
+                }
+            });
+        }else{
+            // alert(2)
+            var d = new Date();
+            var date = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+            $.ajax({
+                url: '/user/add',
+                type:"post",
+                // contentType:'application/json',  //发送数据类型
+                data:{
+                    "allid":id,
+                    "cotype":1,
+                    "cotime":date
+                },
+                dataType : "json",  //接受数据格式
+                complete : function(xhr, status) {
+                    //拦截器拦截没有权限跳转
+                    // 通过xhr取得响应头
+                    var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                    //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                    if (REDIRECT == "REDIRECT") {
+                        document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                    }
+                },
+                success:function(da){
+                    // console.log(da);
+                    issc2(id,i);
+                }
+            });
+        }
+    }
+
+    //点击爱心
+    function ax(id){
+        var dd = JSON.parse(JSON.stringify(issong));
+        for(var i=0;i<dd.length;i++){
+            var sid = dd[i].sid;
+            var sis = dd[i].sis;
+            // console.log(sid);
+            // console.log(sis);
+            if(id==sid){
+                scsong(id,i,sis);
+            }
+        }
+    }
+
 </script>
 </body>
 </html>

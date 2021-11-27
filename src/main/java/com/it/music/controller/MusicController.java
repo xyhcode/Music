@@ -163,10 +163,24 @@ public class MusicController {
      */
     @RequestMapping(path = "/search/{srval}")
     public String sreach(ModelMap map,@PathVariable("srval") String srval){
-       List lis=songse.searchdong(srval);
-       map.put("seval",srval);
-       map.put("sr",lis);
+        List lis=songse.searchdong(srval);
+        map.put("seval",srval);
+        map.put("sr",lis);
         return "fontdesk/search";
+    }
+
+    /**
+     * 搜索收藏
+     * @param map
+     * @param srval
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(path = "/scsearch/{srval}")
+    public JsonResult scsreach(ModelMap map,@PathVariable("srval") String srval){
+        List lis=songse.searchdong(srval);
+        JsonResult jr = new JsonResult(200,"查询成功！",lis);
+        return jr;
     }
 
     /**
