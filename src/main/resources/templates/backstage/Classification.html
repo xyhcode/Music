@@ -37,9 +37,9 @@
     <!--面包屑导航-->
     <div class="mianb">
         <div class="mblf layui-col-xs6 layui-col-md6">
-            <i class="layui-icon">&#xe656;</i>
+            <i class="layui-icon"></i>
             <p>首页管理 > <span> <a th:href="@{/admin/class/1}">
-                            <i class="layui-icon">&#xe631;</i>
+
                             <em>分类管理</em>
                         </a></span></p>
         </div>
@@ -63,11 +63,17 @@
                     <tbody>
                     <tr th:each="song : ${song.list}">
                         <td th:text="${song.sotname}">sotname</td>
-                        <td th:text="${song.sottype}">sottype</td>
+                        <td th:switch="${song.sottype}">
+                            <span th:case="1">语种</span>
+                            <span th:case="2">流派</span>
+                            <span th:case="3">主题</span>
+                            <span th:case="4">情感</span>
+                            <span th:case="5">场景</span>
+                        </td>
                         <td>
                             <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update"  th:href="@{'/admin/update/class/'+${song.sotid}}">修改</a>
-                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:href="@{'/admin/class/del/'+${song.sotid}}" onclick="javascript:return del()">删除</a>
+<!--                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update"  th:href="@{'/admin/update/class/'+${song.sotid}}">修改</a>-->
+                                <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:onclick="del([[${song.sotid}]])">删除</a>
                             </div>
                         </td>
                     </tr>
@@ -157,6 +163,33 @@
             });
         });
     })
+
+    //删除
+    function del(id){
+        layer.confirm('确定要删除此歌手？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url:'/admin/class/del/'+id,
+                success: function(da){
+
+                    if(da.code==501){
+                        layer.msg(da.msg);
+                    }else if(da.code==200){
+                        layer.msg("删除成功！");
+                        setTimeout(function(){
+                            //刷新
+                            location.reload();
+                        },700);
+                    }else{
+                        layer.msg("删除失败！");
+                    }
+                }
+            })
+        }, function () {
+            // layer.msg('已取消！');
+        });
+    }
 
 
     // //判断弹框

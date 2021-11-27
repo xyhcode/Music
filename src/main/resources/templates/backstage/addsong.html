@@ -7,6 +7,42 @@
     <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
     <link rel="stylesheet" th:href="@{/assets/css/view.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}"/>
+
+    <style>
+
+        .a-upload {
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload  input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+    </style>
 </head>
 <body class="layui-tank">
 <div class="layui-card">
@@ -14,14 +50,15 @@
 
 
         <div class="layui-form-item">
-            <label class="layui-form-label">歌手ID：</label>
-            <div class="layui-input-block">
-                <input type="heid" name="siid"  lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input" >
+            <label class="layui-form-label">歌手：</label>
+            <div class="layui-input-block" style="width:200px;">
+                <select name="siid" lay-filter="aihao" >
+                    <option th:each="si:${siall}" th:value="${si.siid}" th:text="${si.siname}">请选择歌手</option>
+                </select>
             </div>
         </div>
 
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="width:300px;">
             <label class="layui-form-label">歌曲名称：</label>
             <div class="layui-input-block">
                 <input type="text" name="soname" lay-verify="title" autocomplete="off" placeholder=""
@@ -31,38 +68,35 @@
 
 
         <div class="layui-form-item">
-            <label class="layui-form-label">Mp3地址：</label>
+            <label class="layui-form-label">歌曲：</label>
             <div class="layui-input-block">
-                <input type="file" id="smp3" name="multipart" lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input" >
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" id="smp3" name="multipart" lay-verify="title" autocomplete="off" placeholder="">点击这里上传歌曲
+                </a>
+                &nbsp;&nbsp;
+                <input type="text" name="sotime" id="st" readonly="readonly" lay-verify="title" autocomplete="off" placeholder="" style="border: 0px;">
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">歌词地址：</label>
+            <label class="layui-form-label">歌词：</label>
             <div class="layui-input-block">
-                <input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input">
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder="">点击这里上传歌词
+                </a>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">图片地址：</label>
+            <label class="layui-form-label">图片：</label>
             <div class="layui-input-block">
-                <input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input" >
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" name="multipart" lay-verify="title" autocomplete="off" placeholder="">点击这里上传图片
+                </a>
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">时间：</label>
-            <div class="layui-input-block">
-                <input type="text" name="sotime" id="st" readonly="readonly" lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input" >
-            </div>
-        </div>
-
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="width:300px;">
             <label class="layui-form-label">出版时间：</label>
             <div class="layui-input-block">
                 <input type="date" name="publish" required="required"  lay-verify="title" autocomplete="off" placeholder=""
@@ -71,15 +105,17 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">是否是vip</label>
+            <label class="layui-form-label">是否是vip：</label>
             <div class="layui-input-block">
-                <input type="text" name="sovip" lay-verify="title" autocomplete="off" placeholder=""
-                       class="layui-input"><span style="color: red">0不是 1是</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="sovip" value="0" title="不是" checked="">
+                <input type="radio" name="sovip" value="2" title="是">
             </div>
         </div>
-        <div class=" tkbtnfxd">
+        <div class="layui-form-item"></div>
+        <div style="margin: 0px auto; width: 300px;position: relative;top:20px;" >
             <input type="submit" class="layui-btn  layui-btn-normal float-right" />
-            <a href="/admin/song/1" class="layui-btn layui-btn-primary float-right"  id="quxiao" >取消</a>
+            <a href="/admin/song" class="layui-btn layui-btn-primary float-right"  id="quxiao" >取消</a>
         </div>
     </form>
 </div>

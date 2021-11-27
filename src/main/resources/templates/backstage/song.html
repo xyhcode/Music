@@ -73,7 +73,7 @@
                         <td th:text="${song.sovip==0 ? '否':'是'}">sovip</td>
                         <td>
                             <div class="layui-table-cell laytable-cell-1-0-10">
-                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update" th:href="@{'/admin/update/song/'+${song.soid}}">修改</a>
+<!--                                <a  class="layui-btn layui-btn-normal layui-btn-xs " id="update" th:href="@{'/admin/update/song/'+${song.soid}}">修改</a>-->
                                 <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:onclick="sodel([[${song.soid}]])" >删除</a>
                             </div>
                         </td>

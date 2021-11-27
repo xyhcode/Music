@@ -488,8 +488,10 @@ public class HIndexController {
      * @return
      */
     @RequestMapping("/admin/add")
-    public String add(){
+    public String add(ModelMap mm){
         System.out.println("admin index");
+        List siall = singerService.seall();
+        mm.put("siall",siall);
         return "/backstage/addsong";
     }
 
@@ -547,7 +549,7 @@ public class HIndexController {
         }else{
             System.out.println("歌曲数据库存入错误！");
         }
-        return "redirect:/admin/song/1";
+        return "redirect:/admin/song";
     }
 
 
@@ -596,19 +598,20 @@ public class HIndexController {
     /**
      * 分类管理删除
      * */
+    @ResponseBody
     @RequestMapping("/admin/class/del/{sotid}")
-    public String delclass(@PathVariable("sotid") int sotid) {
+    public JsonResult delclass(@PathVariable("sotid") int sotid) {
         System.out.println(sotid);
+        JsonResult js = null;
         int i=songTypeService.delclass(sotid);
-        ModelAndView mv=new ModelAndView();
         if(i>0){
-            System.out.println("删除成功");
+            js=new JsonResult(200,"删除成功！");
         }else{
-            System.out.println("删除失败");
+            js=new JsonResult(500,"删除失败！");
         }
-
-        return "redirect:/admin/class/1";
+        return js;
     }
+
     /**
      * 分类管理修改
      * */
