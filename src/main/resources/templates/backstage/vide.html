@@ -64,13 +64,13 @@
     layui.use(['laypage', 'layer'], function () {
         var laypage = layui.laypage
             , layer = layui.layer;
-
         //页码完整功能
         laypage.render({
             elem: 'page'
             , count: [[${vide.getTotal()}]]
             ,hash:true
             ,limit:3
+            ,theme: '#1E9FFF'
             ,hash: 'fenye' //自定义hash值
             ,curr:[[${vide.pageNum}]]
             , layout: ['count', 'prev', 'page', 'next']
