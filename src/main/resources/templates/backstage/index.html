@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" th:href="@{/assets/css/layui.css}">
     <link rel="stylesheet" th:href="@{/assets/css/admin.css}">
-    <title>后台管理</title>
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <title>千千音乐后台</title>
+    <link rel="icon" type="image/x-icon" href="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/favicon.ico" />
+    <style>
+
+        .blue{background: rgb(40,169,227);color: white;}
+
+    </style>
 </head>
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
@@ -19,10 +26,10 @@
 			<p class="datexians"> </p>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">Admin</a>
+                    <a href="javascript:;" th:text="${session.admin.aname}">Admin</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">帮助中心</a></dd>
-                        <dd><a href="login.html">退出</a></dd>
+<!--                        <dd><a href="">帮助中心</a></dd>-->
+                        <dd><a th:href="@{/adminexit}">退出</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -31,7 +38,7 @@
         <div class="layui-side custom-admin">
             <div class="layui-side-scroll">
                 <div class="custom-logo">
-                    <img src="" alt=""/>
+                    <img src="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/img/1638074737349.png" alt=""/>
                     <h1>后台管理</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
@@ -125,6 +132,7 @@
     
     <script th:src="@{/assets/layui.js}"></script>
     <script>
+
         layui.define(['element','layer'],function(exports){
 
             var $ = layui.$, $body = $('body'),

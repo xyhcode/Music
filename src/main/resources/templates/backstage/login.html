@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     
 	<link rel="stylesheet" th:href="@{/css/hloginstyle.css}" type="text/css" />
-	
+
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
 </head>
 
 <body>
@@ -29,13 +32,13 @@
         </div>
     </div>
 
-
 <script type="text/javascript" th:src="@{/js/ribbon.js}"></script>
 <!-- 先引入 Vue -->
 <script type="text/javascript"  th:src="@{/js/vue.js}"></script>
 <!-- 引入组件库 -->
 <script type="text/javascript"  th:src="@{/js/hloginindex.js}"></script>
 <script type="text/javascript" >
+
     new Vue({
         el: '#app',
         data() {
@@ -62,17 +65,51 @@
                     });
                     return;
                 } else {
-                    this.$message({
-                        message: '恭喜你，通过了！',
-                        type: 'success'
+                    $.ajax({
+                        url:'/isadmin',
+                        type:'post',
+                        data:{
+                            "aname":username,
+                            "password":password,
+                        },
+                        dataType : "json",
+                        complete : function(xhr, status) {
+                            //拦截器拦截没有权限跳转
+                            // 通过xhr取得响应头
+                            var REDIRECT = xhr.getResponseHeader("REDIRECT");
+                            //如果响应头中包含 REDIRECT 则说明是拦截器返回的
+                            if (REDIRECT == "REDIRECT") {
+                                document.location.href = xhr.getResponseHeader("CONTEXTPATH");
+                            }
+                        },
+                        success:function(da){
+                            // console.log(da);
+                            if(da.code==500){
+                                that.$notify.error({
+                                    title: '错误',
+                                    message: '登录失败！'
+                                });
+                                that.UserName='';
+                                that.PassWord='';
+                            }
+                            if(da.code==200){
+                                // layer.msg(da.msg);
+                                // that.$message({
+                                //     message: '恭喜你，通过了！',
+                                //     type: 'success'
+                                // });
+                                location.href="/admin";
+                            }
+                        }
                     });
-                    setTimeout(() => {
-                        this.$notify({
-                            title: '没得办法就这一页',
-                            message: '自己点 “X” 吧！',
-                            position: 'top-left'
-                        });
-                    }, 2000)
+
+                    // setTimeout(() => {
+                    //     this.$notify({
+                    //         title: '没得办法就这一页',
+                    //         message: '自己点 “X” 吧！',
+                    //         position: 'top-left'
+                    //     });
+                    // }, 2000)
                 }
             }
         }
