@@ -5,11 +5,8 @@ import com.it.music.service.AdminService;
 import com.it.music.tools.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +22,7 @@ public class HLoginController {
     @RequestMapping({"/adminlogin"})
     public String lo(){
 
-        return "/backstage/login";
+        return "backstage/login";
     }
 
     @ResponseBody
