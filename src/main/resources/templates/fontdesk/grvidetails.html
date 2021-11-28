@@ -33,7 +33,7 @@
                         </div>
                         <div class="play-num" th:text="${features.feplays+'次播放'}"></div>
                         <div class="num-wrap">
-                            <span class="iconfont icon-new fr" id="sharbtn" th:data-clipboard-text="${'http://localhost:8090/videtail/'+features.feid}"></span>
+                            <span class="iconfont icon-new fr" id="sharbtn" th:data-clipboard-text="${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()+#httpServletRequest.getContextPath()+'/videtail/'+features.feid}"></span>
                             <span id="ccc" th:onclick="sc([[${features.feid}]])"></span>
                         </div>
                     </div>
