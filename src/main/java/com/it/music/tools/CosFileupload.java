@@ -1,5 +1,5 @@
 package com.it.music.tools;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -7,8 +7,8 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+
 import java.io.File;
 import java.io.InputStream;
 /**
@@ -19,11 +19,11 @@ public class CosFileupload {
     /**
      * SecretId 腾讯授权 ID
      */
-    public static String SECRET_ID="AKIDd4HEuJRIsBDzTgeLIyPaU6SXMuBCwPbW";
+    public static String SECRET_ID="AKIDZyMfx7dUcYlqCNxG4kGbr466zkJnDQZX";
     /**
      * SECRET_KEY 腾讯授权秘钥
      */
-    public static String SECRET_KEY="f4C4g15tSklVzC8nAH7gyzjDRP6XhbMq";
+    public static String SECRET_KEY="4xSmR0dGk3BB2lNURCmANBRekhT5VxN1";
     /**
      * BUCKETNAME 储存库的名字
      */
