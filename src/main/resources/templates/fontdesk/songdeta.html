@@ -45,7 +45,7 @@
                             </button>
                             <span id="ccc" th:onclick="sc([[${sol.solid}]])"></span>
                             <button id="fxx"  type="button" class="el-button el-button--info is-round"
-                                    data-v-bd7c371e="" th:data-clipboard-text="${'http://127.0.0.1:8090/songdeta/'+sol.solid}">
+                                    data-v-bd7c371e="" th:data-clipboard-text="${#httpServletRequest.getScheme()+'://'+#httpServletRequest.getServerName()+':'+#httpServletRequest.getServerPort()+#httpServletRequest.getContextPath()+'/songdeta/'+sol.solid}">
                                 <span><span class="iconfont" data-v-bd7c371e=""></span> 分享</span>
                             </button>
                         </div>
