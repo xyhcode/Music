@@ -226,7 +226,7 @@ $(function() {
 				type:'POST',
 				success: function (data){
 					if(data.code==200){
-						layer.msg("登入成功！");
+						layer.msg("注册成功！");
 						location.href ="/login.html";
 					}else{
 						layer.msg("注册失败！");

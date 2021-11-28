@@ -85,6 +85,9 @@ public class UserController {
 
         User user = new User();
         user.setUsid(us.getUsid());
+        user.setIsvip(us.getIsvip());
+        user.setAge(us.getAge());
+        user.setSex(us.getSex());
         user.setUsimg(img);
         int siad=userService.alter(user);
         if(siad>0){
@@ -119,6 +122,7 @@ public class UserController {
 
         JsonResult jr= null;
         us.setUsid(use.getUsid());
+        us.setIsvip(use.getIsvip());
         int siad=userService.alter(us);
         if(siad>0){
             jr = new JsonResult(200,"保存成功！");
