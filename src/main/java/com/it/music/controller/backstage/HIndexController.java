@@ -52,7 +52,7 @@ public class HIndexController {
     @RequestMapping({"/admin","/admin/index"})
     public String index(){
         System.out.println("admin index");
-        return "/backstage/index";
+        return "backstage/index";
     }
 
 
@@ -61,7 +61,7 @@ public class HIndexController {
     @RequestMapping("/admin/adduser")
     public String adduser(){
         System.out.println("admin adduser");
-        return "/backstage/adduser";
+        return "backstage/adduser";
     }
 
     /**
@@ -102,7 +102,7 @@ public class HIndexController {
         System.out.println(list);
         PageInfo pa=new PageInfo(list,10);
         map.put("song",pa);
-        return "/backstage/song";
+        return "backstage/song";
     }
 
     /**
@@ -117,7 +117,7 @@ public class HIndexController {
         List list=songService.seall();
         PageInfo pa=new PageInfo(list,10);
         map.put("song",pa);
-        return "/backstage/song";
+        return "backstage/song";
     }
 
     /**
@@ -160,7 +160,7 @@ public class HIndexController {
         List lis=use.sauseall();
         PageInfo pa=new PageInfo(lis,10);
         map.put("um",pa);
-        return "/backstage/user";
+        return "backstage/user";
     }
 
     /**
@@ -175,7 +175,7 @@ public class HIndexController {
         List lis=use.sauseall();
         PageInfo pa=new PageInfo(lis,10);
         map.put("um",pa);
-        return "/backstage/user";
+        return "backstage/user";
     }
 
     /**
@@ -189,7 +189,7 @@ public class HIndexController {
         List lis=fese.seall();
         PageInfo pa=new PageInfo(lis,10);
         map.put("vide",pa);
-        return "/backstage/vide";
+        return "backstage/vide";
     }
 
     /**
@@ -204,7 +204,7 @@ public class HIndexController {
         List lis=fese.seall();
         PageInfo pa=new PageInfo(lis,10);
         mp.put("vide",pa);
-        return "/backstage/vide";
+        return "backstage/vide";
     }
 
     /**
@@ -301,7 +301,7 @@ public class HIndexController {
         //System.out.println(list);
         m.put("singer",info);
 
-        return "/backstage/singer";
+        return "backstage/singer";
     }
 
     /**歌手修改页面*/
@@ -311,7 +311,7 @@ public class HIndexController {
         m.put("singer",singer);
         System.out.println(singer);
         System.out.println("admin updatesinger");
-        return "/backstage/updatesinger";
+        return "backstage/updatesinger";
     }
 
     @RequestMapping("/admin/update/singer")
@@ -375,7 +375,7 @@ public class HIndexController {
      * @return*/
     @RequestMapping("/admin/findaddsinger")
     public String findaddsinger() {
-        return "/backstage/addsinger";
+        return "backstage/addsinger";
     }
     /**歌手添加管理
      * @return*/
@@ -421,7 +421,7 @@ public class HIndexController {
         System.out.println("admin "+soid);
         Song song=songService.find(soid);
         map.put("song",song);
-        return "/backstage/updatesong";
+        return "backstage/updatesong";
     }
 
     /**
@@ -492,7 +492,7 @@ public class HIndexController {
         System.out.println("admin index");
         List siall = singerService.seall();
         mm.put("siall",siall);
-        return "/backstage/addsong";
+        return "backstage/addsong";
     }
 
     /**
@@ -568,7 +568,7 @@ public class HIndexController {
         int sz[]=info.getNavigatepageNums(); //得到导航页页码
         System.out.println("导航"+ Arrays.toString(sz));
         map.put("song",info);
-        return "/backstage/Classification";
+        return "backstage/Classification";
     }
 
     /**
@@ -576,7 +576,7 @@ public class HIndexController {
      */
     @RequestMapping("/admin/class/add")
     public String Classification() {
-        return "/backstage/addsongclass";
+        return "backstage/addsongclass";
     }
     /**
      * 分类管理增加
@@ -621,7 +621,7 @@ public class HIndexController {
         SongType stype=songTypeService.getSongType(sotid);
         System.out.println(stype);
         map.put("song",stype);
-        return "/backstage/updatesongclass";
+        return "backstage/updatesongclass";
     }
 
     /**
