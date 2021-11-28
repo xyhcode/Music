@@ -685,7 +685,7 @@
                     <div class="box pr clearfix">
                         <div class="nav clearfix">
                             <div class="on btn"><span>播放列表</span></div>
-                            <div class="title-piliang" style="display:;" onclick="dAll()"><span class="iconfont play"></span> <span>清空列表</span></div>
+                            <div class="title-piliang" th:if="${session.user!=null}" onclick="dAll()"><span class="iconfont play"></span> <span>清空列表</span></div>
                         </div>
                         <div class="list-title" style="">
                             <div class="num">#</div>
@@ -706,17 +706,17 @@
                                     </div>
                                     <div class="song ellipsis">
                                         <div class="song-box">
-                                            <a href="#" class target="_blank" tsid="T100" th:text="${g.soname}"></a>
+                                            <a class target="_blank" tsid="T100" th:text="${g.soname}"></a>
                                             <span class="vip" th:if="${g.sovip==1}" th:onclick="vip()">VIP</span>
                                         </div>
                                     </div>
                                     <div class="artist ellipsis">
                                             <span>
-                                                <a href="#" class target="_blank" th:text="${g.sing.siname}">1</a>
+                                                <a class target="_blank" th:text="${g.sing.siname}">1</a>
                                             </span>
                                     </div>
                                     <div class="album ellipsis">
-                                        <a href="#" class th:text="${g.soname}"></a>
+                                        <a class th:text="${g.soname}"></a>
                                     </div>
                                     <div class="time"><span th:text="${g.sotime}"></span></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">
@@ -737,17 +737,17 @@
                                     </div>
                                     <div class="song ellipsis">
                                         <div class="song-box">
-                                            <a href="#" class target="_blank" tsid="T100" th:text="${g.soname}"></a>
+                                            <a class target="_blank" tsid="T100" th:text="${g.soname}"></a>
                                             <span class="vip" th:if="${g.sovip==1}" th:onclick="vip()">VIP</span>
                                         </div>
                                     </div>
                                     <div class="artist ellipsis">
                                             <span>
-                                                <a href="#" class target="_blank" th:text="${g.sing.siname}"></a>
+                                                <a class target="_blank" th:text="${g.sing.siname}"></a>
                                             </span>
                                     </div>
                                     <div class="album ellipsis">
-                                        <a href="#" class th:text="${g.soname}"></a>
+                                        <a class th:text="${g.soname}"></a>
                                     </div>
                                     <div class="time"><span th:text="${g.sotime}"></span></div>
                                     <div class=" tools pa" data-v-3a201fd6="" data-v-7385b91b="">

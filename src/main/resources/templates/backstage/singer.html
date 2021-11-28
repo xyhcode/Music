@@ -67,12 +67,12 @@
                         <td th:text="${s.siintro}">siintro</td>
                         <td><img th:src="${s.siimg}" style="width: 100px;height: 100px" /></td>
                         <td th:switch="${s.siarea}">
-                            <span th:case="1">其他</span>
-                            <span th:case="2">内地</span>
-                            <span th:case="3">港台</span>
-                            <span th:case="4">欧美</span>
-                            <span th:case="5">韩国</span>
-                            <span th:case="6">日本</span>
+                            <span th:case="1">内地</span>
+                            <span th:case="2">港台</span>
+                            <span th:case="3">欧美</span>
+                            <span th:case="4">韩国</span>
+                            <span th:case="5">日本</span>
+                            <span th:case="6">其他</span>
                         </td>
                         <td th:switch="${s.sitype}">
                             <span th:case="1">男</span>
