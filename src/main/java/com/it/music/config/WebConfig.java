@@ -48,7 +48,8 @@ public class WebConfig implements WebMvcConfigurer {
         /*后端端登录拦截*/
         registry.addInterceptor(hLoginInterceptor)
                 .addPathPatterns("/charts")
-                .addPathPatterns("/admin/**");
+                .addPathPatterns("/admin/**")
+                .addPathPatterns("/charsnumber");
     }
 
 
