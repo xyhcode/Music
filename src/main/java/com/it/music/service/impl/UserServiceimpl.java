@@ -59,8 +59,8 @@ public class UserServiceimpl implements UserService {
     @Override
     public int vercode(String iphone) {
         int code;
-        String Uid="xxxx";
-        String Key="xxxxx";
+        String Uid="林沐xyh";
+        String Key="2oJXUAZhZAVaOuA9qGQJwIMAhY9TWIn1";
         String smsMob = iphone;
         Random rd = new Random();
         int numbercode = rd.nextInt(999999 - 100000 + 1) + 100000;
