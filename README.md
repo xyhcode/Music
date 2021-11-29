@@ -15,6 +15,9 @@ sprongboot mybatis layui jquery ajax mysql
 后台首页
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1129/164845_813bfa88_7956133.png "屏幕截图.png")
 
+#### lssues
+请前往 [lssues](https://gitee.com/OSCHIANA/music/issues) 页面添加问题
+
 #### 使用说明
 1. 下载数据库 导入数据库
 2. 更改 application.properties 配置下的数据库 url、密码、驱动（此项目驱动较高 若使用8.0一下数据库 请更改驱动）
