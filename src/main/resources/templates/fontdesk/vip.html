@@ -219,9 +219,9 @@
                 if(j.code==200){
                     $(".code img").css("display","block");
                     $(".code i").css("display","none");
+                    img="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/payimg/"+j.data+".jpg"
                     order=j.data;
                     console.log(j.data);
-                    img="https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/payimg/"+j.data+".jpg"
                     $(".code img").attr("src","https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/music/payimg/"+j.data+".jpg");
                     $(".price-box").html("<span class=\"price pr\">"+amt+"<i class=\"el pa\">元</i></span>");
                     var endtime=0;
@@ -233,6 +233,7 @@
                             success: function(da){
                                 if (da.code==200){
                                     clearInterval(timer);
+                                    clearInterval(timerf);
                                     layer.open({
                                         title: false,
                                         closeBtn:0
@@ -271,6 +272,7 @@
                             success: function(da){
                                 if (da.code==200){
                                     clearInterval(timer);
+                                    clearInterval(timerf);
                                     layer.open({
                                         title: false,
                                         closeBtn:0
@@ -319,7 +321,7 @@
                 </h4>
                 <div class="every-month-price">9元/月</div>
                 <div class="line"></div>
-                <h5 class="product-name">一个月</h5>
+                <h5 class="product-name">自动续费</h5>
             </li>
             <li class="item " onclick="payval(1)"><h4>
                 <span class="price pr">30<i class="el pa">元</i></span>

@@ -185,6 +185,7 @@ public class MusicController {
 
 
     String je="";
+    int cff=0;
 
     /**
      * 生成二维码
@@ -241,10 +242,11 @@ public class MusicController {
                     PayLog pa=new PayLog(us.usid,res.getTotalAmount(),res.getOutTradeNo(),res.getTradeNo(),now);
                     int panum=pase.paylogadd(pa);
                     if(panum>0){
-                        //更新session
-                        request.getSession().setAttribute("user",reus);
                         js=new JsonResult(200,"支付成功！");
+                        System.out.println("246:"+js);
                     }else{
+                        CosFileupload.delfile("music/payimg/"+order+".jpg");
+                        js=new JsonResult(500,"支付失败！");
                         System.out.println("支付成功！数据载入错误！");
                     }
                     request.getSession().setAttribute("user",reus);
@@ -266,7 +268,10 @@ public class MusicController {
                     int panum=pase.paylogadd(pa);
                     if(panum>0){
                         js=new JsonResult(200,"支付成功！");
+                        System.out.println("271:"+js);
                     }else{
+                        CosFileupload.delfile("music/payimg/"+order+".jpg");
+                        js=new JsonResult(500,"支付失败！");
                         System.out.println("支付成功！数据载入错误！");
                     }
                     request.getSession().setAttribute("user",reus);

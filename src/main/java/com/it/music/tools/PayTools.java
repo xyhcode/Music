@@ -150,6 +150,9 @@ public class PayTools {
         System.out.println("金额："+response.getTotalAmount());
         System.out.println("code:"+response.getCode());
         System.out.println("msg:"+response.getMsg());
+        if (!response.getCode().equals("10000") || !response.getMsg().equals("Success")) {
+            response.setCode("5000");
+        }
         return response;
     }
 
