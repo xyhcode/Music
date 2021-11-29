@@ -96,8 +96,7 @@ function Sendpwd(sender) {
 							id: 'captcha',
 							setSrc: function () {
 								//设置图片路径2
-								return 'https://sls-study-cloud-1301165591.cos.ap-guangzhou.myqcloud.com/Captcha/Pic' + Math.round(Math.random() * 45) + '.jpg';
-								/*return 'https://imgs.blazor.zone/images/Pic' + Math.round(Math.random() * 136) + '.jpg';*/
+								return 'xxxxxxx' + Math.round(Math.random() * 45) + '.jpg';
 							},
 							onSuccess: function () {
 								$("#captcha").html("");
