@@ -19,19 +19,19 @@ public class CosFileupload {
     /**
      * SecretId 腾讯授权 ID
      */
-    public static String SECRET_ID="AKIDZyMfx7dUcYlqCNxG4kGbr466zkJnDQZX";
+    public static String SECRET_ID="xxxxxxx";
     /**
      * SECRET_KEY 腾讯授权秘钥
      */
-    public static String SECRET_KEY="4xSmR0dGk3BB2lNURCmANBRekhT5VxN1";
+    public static String SECRET_KEY="xxxxxxxx";
     /**
      * BUCKETNAME 储存库的名字
      */
-    public static String BUCKETNAME="sls-study-cloud-1301165591";
+    public static String BUCKETNAME="xxxxxxxx";
     /**
      * REGIONID 储存库的区域编号  ap-guangzhou：地区广州储存库
      */
-    public static String REGIONID="ap-guangzhou";
+    public static String REGIONID="xxxxxxxxxxxx";
     /**
      * 初始化配置信息
      * @return
