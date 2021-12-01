@@ -16,7 +16,7 @@ sprongboot mybatis layui jquery ajax mysql
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1129/164845_813bfa88_7956133.png "屏幕截图.png")
 
 #### lssues
-请前往 [lssues](https://gitee.com/OSCHIANA/music/issues) 页面添加问题
+请前往 [lssues](https://github.com/xyhcode/Music/issues) 页面添加问题
 
 #### 使用说明
 1. 下载数据库 导入数据库
